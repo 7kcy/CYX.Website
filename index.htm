@@ -204,6 +204,21 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .showcase-title{font-size:clamp(32px,4.5vw,48px);font-weight:800;margin-bottom:12px;letter-spacing:-1px;text-shadow:0 0 40px rgba(255,255,255,.3)}
 .video-frame{position:relative;width:100%;padding-bottom:56.25%;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 120px rgba(0,0,0,.9),0 0 80px rgba(255,255,255,.12)}
 .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+.bootstrapper-section{padding:120px 40px;position:relative;z-index:2}
+.bootstrapper-container{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.bs-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:20px;width:fit-content}
+.bs-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.8);animation:pulse 2s ease-in-out infinite}
+.bootstrapper-content h2{font-size:clamp(34px,4.5vw,52px);font-weight:900;line-height:1.08;margin-bottom:20px;letter-spacing:-1.5px;text-shadow:0 0 40px rgba(255,255,255,.3)}
+.bootstrapper-content p{font-size:16px;color:var(--text-secondary);line-height:1.8;margin-bottom:32px}
+.bs-features{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
+.bs-feature{display:flex;align-items:center;gap:12px;font-size:14px;color:rgba(255,255,255,.7);font-weight:500}
+.bs-feature-icon{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0;text-align:center;line-height:22px}
+.bs-mockup{position:relative;border-radius:14px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.9),0 0 80px rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.1);transition:all .4s ease}
+.bs-mockup:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 50px 150px rgba(0,0,0,.9),0 0 100px rgba(255,255,255,.2)}
+.bs-mockup img{width:100%;display:block}
+@media(max-width:1024px){.bootstrapper-container{grid-template-columns:1fr;gap:50px}}
+@media(max-width:768px){.bootstrapper-section{padding-left:20px;padding-right:20px}}
 </style>
 </head>
 <body>
@@ -350,6 +365,27 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
         <div class="cl-header" onclick="toggleCl('cl-2-1-6')"><span class="cl-version">V 2.1.6</span><span class="cl-badge">Huge Update</span><span class="cl-arrow">▼</span></div>
         <div class="cl-body"><div class="cl-label">Huge Update!</div><ul><li>BRAND NEW UI</li><li>WORKING EVERYTHING!!!</li><li>not added api yet</li></ul></div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bootstrapper-section reveal" id="bootstrapper">
+  <div class="bootstrapper-container">
+    <div class="bootstrapper-content">
+      <div class="bs-tag">New</div>
+      <h2>Meet the<br>BootStrapper</h2>
+      <p>No manual setup, no confusion. The Cyclone X BootStrapper automatically downloads and installs everything you need in one click. Just run it and you're ready to execute — it handles the rest.</p>
+      <div class="bs-features">
+        <div class="bs-feature"><div class="bs-feature-icon">✓</div>One-click automatic install</div>
+        <div class="bs-feature"><div class="bs-feature-icon">✓</div>Always installs the latest version</div>
+        <div class="bs-feature"><div class="bs-feature-icon">✓</div>No Python or dependencies required</div>
+        <div class="bs-feature"><div class="bs-feature-icon">✓</div>Built-in update checker</div>
+      </div>
+      <a href="#" class="btn btn-primary" onclick="openPicker(event)" style="width:fit-content">⬇ Download BootStrapper</a>
+    </div>
+    <div class="bs-mockup">
+      <img src="BootstrapperUi.png" alt="Cyclone X BootStrapper Interface">
     </div>
   </div>
 </section>
