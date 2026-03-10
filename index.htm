@@ -180,6 +180,19 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 /* Number flip animation */
 @keyframes numFlip{0%{transform:translateY(-8px);opacity:0}100%{transform:translateY(0);opacity:1}}
 .num-flip{animation:numFlip .35s cubic-bezier(.4,0,.2,1) forwards}
+
+/* ── SHOWCASE ── */
+.showcase{padding:120px 40px;position:relative;z-index:2}
+.showcase-inner{max-width:960px;margin:0 auto}
+.showcase-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:6px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:20px}
+.showcase-label::before{content:'';width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.8);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.showcase-title{font-size:clamp(32px,4.5vw,48px);font-weight:800;margin-bottom:12px;letter-spacing:-1px;text-shadow:0 0 40px rgba(255,255,255,.3)}
+.showcase-sub{font-size:16px;color:var(--text-secondary);margin-bottom:44px;line-height:1.7}
+.video-frame{position:relative;width:100%;padding-bottom:56.25%;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 120px rgba(0,0,0,.9),0 0 80px rgba(255,255,255,.12);transition:box-shadow .4s ease}
+.video-frame:hover{box-shadow:0 50px 140px rgba(0,0,0,.9),0 0 100px rgba(255,255,255,.2)}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.video-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(0,0,0,.4));pointer-events:none;z-index:1;border-radius:14px}
 </style>
 </head>
 <body>
@@ -217,6 +230,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
       <li><a href="#home">Home</a></li>
       <li><a href="#executor">Executor</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#showcase">Showcase</a></li>
       <li><a href="#reviews-section">Reviews</a></li>
       <li><a href="#download">Download</a></li>
       <li><a href="https://discord.gg/KH7PBhVYr7" target="_blank" class="discord-btn">Join Discord</a></li>
@@ -271,10 +285,26 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="worldwide-content">
       <h2>Users Worldwide</h2>
       <p>Join our rapidly growing community of users who trust Cyclone X daily. Experience unparalleled execution backed by a global network of scripters.</p>
-      <div class="user-count">100</div>
+      <!-- This will be populated by the download counter, same number -->
+      <div class="user-count" id="active-users-count">—</div>
       <div class="user-count-label">Active Users</div>
     </div>
     <div class="globe-container"><canvas id="globe-canvas"></canvas></div>
+  </div>
+</section>
+
+<section class="showcase reveal" id="showcase">
+  <div class="showcase-inner">
+    <h2 class="showcase-title">Showcase on Cyclone X</h2>
+    <p class="showcase-sub">A full showcase on how to use, and get Cyclone X.</p>
+    <div class="video-frame">
+      <iframe
+        src="https://www.youtube.com/embed/y--_IEA8kVY?start=21&rel=0&modestbranding=1&color=white"
+        title="Cyclone X | Free | Keyless | 2026"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
   </div>
 </section>
 
@@ -322,18 +352,17 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <script>
 /* ════════════════════════════════════════════════════════
    DOWNLOAD TRACKER
-   Uses counterapi.dev — free, persistent, no auth needed.
+   Uses countapi.xyz — free, no auth, persistent.
    Namespace: cyclone-x-executor   Key: downloads
 
-   API docs: https://counterapi.dev/docs
-   GET  https://api.counterapi.dev/v1/{namespace}/{key}
-   UP   https://api.counterapi.dev/v1/{namespace}/{key}/up
+   GET   https://api.countapi.xyz/get/cyclone-x-executor/downloads
+   HIT   https://api.countapi.xyz/hit/cyclone-x-executor/downloads
    ════════════════════════════════════════════════════════ */
-const COUNT_NS  = 'cyclone-x-executor';
-const COUNT_KEY = 'downloads';
-const COUNT_BASE = 'https://api.counterapi.dev/v1';
-const COUNT_GET  = `${COUNT_BASE}/${COUNT_NS}/${COUNT_KEY}`;
-const COUNT_UP   = `${COUNT_BASE}/${COUNT_NS}/${COUNT_KEY}/up`;
+const COUNT_NS   = 'cyclone-x-executor';
+const COUNT_KEY  = 'downloads';
+const COUNT_BASE = 'https://api.countapi.xyz';
+const COUNT_GET  = `${COUNT_BASE}/get/${COUNT_NS}/${COUNT_KEY}`;
+const COUNT_UP   = `${COUNT_BASE}/hit/${COUNT_NS}/${COUNT_KEY}`;
 
 let cachedCount = null;
 let pollInterval = null;
@@ -349,6 +378,7 @@ function setCountEls(val, animate) {
   const els = [
     document.getElementById('dl-stat-value'),
     document.getElementById('footer-dl-count'),
+    document.getElementById('active-users-count'),   // ← Active Users now mirrors download count
   ];
   els.forEach(el => {
     if (!el) return;
@@ -368,7 +398,7 @@ async function fetchCount() {
     const res = await fetch(COUNT_GET);
     if (!res.ok) throw new Error('fetch failed');
     const data = await res.json();
-    // counterapi.dev returns { value: N, ... }
+    // countapi.xyz returns { value: N }
     const n = Number(data.value);
     if (!isNaN(n)) {
       const changed = cachedCount !== null && n !== cachedCount;
@@ -376,6 +406,7 @@ async function fetchCount() {
       setCountEls(n, changed);
     }
   } catch (e) {
+    console.warn('Count fetch failed:', e);
     if (cachedCount === null) setCountEls(0, false);
   }
 }
@@ -391,7 +422,8 @@ async function hitCount() {
       setCountEls(n, true);
     }
   } catch (e) {
-    // Fallback: optimistically increment locally for visual feedback
+    console.warn('Count hit failed:', e);
+    // Optimistic local increment for visual feedback
     if (cachedCount !== null) {
       cachedCount++;
       setCountEls(cachedCount, true);
@@ -400,9 +432,9 @@ async function hitCount() {
 }
 
 function startPolling() {
-  fetchCount(); // immediate fetch on load
+  fetchCount();
   clearInterval(pollInterval);
-  pollInterval = setInterval(fetchCount, 15000); // re-fetch every 15s
+  pollInterval = setInterval(fetchCount, 15000);
 }
 
 /* ══════════════════════════════
