@@ -162,6 +162,24 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .dl-footer{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);width:100%;font-size:12px;color:rgba(255,255,255,.28);line-height:1.7}
 .dl-footer a{color:rgba(255,255,255,.5);text-decoration:underline;text-underline-offset:2px}
 .dl-footer a:hover{color:#fff}
+
+/* ── DOWNLOAD COUNTER PILL ── */
+.dl-counter-pill{margin-top:16px}
+.dl-counter-inner{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:8px 20px;transition:all .3s ease}
+.dl-counter-inner:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
+.dl-counter-dot{display:none}
+.dl-counter-num{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.4px}
+.dl-counter-sep{color:rgba(255,255,255,.2);font-size:14px}
+.dl-counter-lbl{font-size:13px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.2px}
+
+/* Download count stat card special styling */
+.stat-card.downloads-card .stat-value{animation:cg 3s ease-in-out infinite}
+.stat-card.downloads-card .live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.25);border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;color:#4ade80;text-transform:uppercase;letter-spacing:.8px;margin-top:8px}
+.stat-card.downloads-card .live-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:livePulse 1.8s ease-in-out infinite}
+
+/* Number flip animation */
+@keyframes numFlip{0%{transform:translateY(-8px);opacity:0}100%{transform:translateY(0);opacity:1}}
+.num-flip{animation:numFlip .35s cubic-bezier(.4,0,.2,1) forwards}
 </style>
 </head>
 <body>
@@ -215,6 +233,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
         <a class="btn btn-primary" id="hero-download-btn" href="#">Download</a>
         <button class="btn btn-secondary" onclick="window.open('https://discord.gg/KH7PBhVYr7','_blank')">Join Community</button>
       </div>
+
     </div>
     <div class="executor-mockup"><img src="CyUI_png.png" alt="Cyclone X Executor Interface"></div>
   </div>
@@ -238,7 +257,13 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="stat-card"><div class="stat-icon">⚡</div><div class="stat-value">Fast</div><div class="stat-label">Execution Speed</div></div>
     <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-value">85% +</div><div class="stat-label">UNC Rate</div></div>
     <div class="stat-card"><div class="stat-icon">🛡️</div><div class="stat-value">100%</div><div class="stat-label">Secure</div></div>
-    <div class="stat-card"><div class="stat-icon">✓</div><div class="stat-value">5ms</div><div class="stat-label">Latency</div></div>
+    <!-- Downloads stat card — live -->
+    <div class="stat-card downloads-card" id="dl-stat-card">
+      <div class="stat-icon">⬇️</div>
+      <div class="stat-value" id="dl-stat-value">—</div>
+      <div class="stat-label">Total Downloads</div>
+      <div class="live-badge">Live</div>
+    </div>
   </div>
 </section>
 
@@ -281,13 +306,104 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
   <h2 class="section-title">Ready to Execute?</h2>
   <div style="text-align:center;margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:16px">
     <a id="main-download-btn" href="#" class="btn btn-primary" style="font-size:18px;padding:18px 40px">⬇ Download Latest Release</a>
-    <p style="color:var(--text-secondary);font-size:13px" id="release-info">v1.0 · Cyclone.X.zip</p>
+    <!-- Download counter -->
+    <div class="dl-counter-pill">
+      <div class="dl-counter-inner">
+        <div class="dl-counter-dot"></div>
+        <span class="dl-counter-num" id="footer-dl-count">—</span>
+        <span class="dl-counter-sep">·</span>
+        <span class="dl-counter-lbl">downloads</span>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer id="credits"><p>© 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 
 <script>
+/* ════════════════════════════════════════════════════════
+   DOWNLOAD TRACKER
+   Uses countapi.xyz — free, no auth, persistent globally.
+   Namespace: cyclone-x-executor   Key: downloads
+   GET  https://api.countapi.xyz/get/cyclone-x-executor/downloads
+   HIT  https://api.countapi.xyz/hit/cyclone-x-executor/downloads
+   ════════════════════════════════════════════════════════ */
+const COUNT_NS  = 'cyclone-x-executor';
+const COUNT_KEY = 'downloads';
+const COUNT_GET = `https://api.countapi.xyz/get/${COUNT_NS}/${COUNT_KEY}`;
+const COUNT_HIT = `https://api.countapi.xyz/hit/${COUNT_NS}/${COUNT_KEY}`;
+
+let cachedCount = null;
+let pollInterval = null;
+
+function fmtCount(n) {
+  if (n === null || isNaN(n)) return '—';
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000)    return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+  return n.toLocaleString();
+}
+
+function setCountEls(val, animate) {
+  const els = [
+    document.getElementById('dl-stat-value'),
+    document.getElementById('footer-dl-count'),
+  ];
+  els.forEach(el => {
+    if (!el) return;
+    const txt = fmtCount(val);
+    if (el.textContent === txt) return;
+    if (animate) {
+      el.classList.remove('num-flip');
+      void el.offsetWidth; // reflow
+      el.classList.add('num-flip');
+    }
+    el.textContent = txt;
+  });
+}
+
+async function fetchCount() {
+  try {
+    const res = await fetch(COUNT_GET);
+    const data = await res.json();
+    const n = Number(data.value);
+    if (!isNaN(n)) {
+      const changed = cachedCount !== null && n !== cachedCount;
+      cachedCount = n;
+      setCountEls(n, changed);
+    }
+  } catch (e) {
+    // silently fail — network may be blocked
+    if (cachedCount === null) setCountEls(0, false);
+  }
+}
+
+async function hitCount() {
+  try {
+    const res = await fetch(COUNT_HIT);
+    const data = await res.json();
+    const n = Number(data.value);
+    if (!isNaN(n)) {
+      cachedCount = n;
+      setCountEls(n, true);
+    }
+  } catch (e) {
+    // fallback: increment cached count locally for visual feedback
+    if (cachedCount !== null) {
+      cachedCount++;
+      setCountEls(cachedCount, true);
+    }
+  }
+}
+
+function startPolling() {
+  fetchCount(); // immediate
+  clearInterval(pollInterval);
+  pollInterval = setInterval(fetchCount, 15000); // refresh every 15s
+}
+
+/* ══════════════════════════════
+   DOWNLOAD OVERLAY + COUNT HIT
+   ══════════════════════════════ */
 const DOWNLOAD_URL='https://github.com/7kcy/CYX.Website/releases/download/Executor/Cyclone.X.zip';
 const STAGES=[
   {text:'Initializing...',pct:0},
@@ -305,6 +421,10 @@ function openDl(e){
   const bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus');
   bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Initializing...';
   document.getElementById('dlOverlay').classList.add('active');
+
+  // 🔢 Increment the download counter
+  hitCount();
+
   let cur=0,target=0;
   const ticker=setInterval(()=>{if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},18);
   dlTimers.push(ticker);
@@ -328,8 +448,10 @@ function closeDl(){
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('hero-download-btn').addEventListener('click',openDl);
   document.getElementById('main-download-btn').addEventListener('click',openDl);
+  startPolling();
 });
 
+/* ══════════════ STARS ══════════════ */
 (function(){
   const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');
   function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
@@ -350,6 +472,7 @@ document.querySelectorAll('.feature-card').forEach(card=>{
   card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--mouse-y',((e.clientY-r.top)/r.height*100)+'%');});
 });
 
+/* ══════════════ REVIEWS ══════════════ */
 const BW=['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
 function hasBanned(t){const l=t.toLowerCase().replace(/[^a-z0-9\s]/g,'');return BW.some(w=>l.includes(w.replace(/[^a-z0-9\s]/g,'')));}
 function isSpam(t){if(/(.)\1{6,}/.test(t))return true;if(t.length>10){const l=t.replace(/[^a-zA-Z]/g,'');if(l.length>6&&l.replace(/[a-z]/g,'').length/l.length>0.8)return true;}return(t.match(/[^a-zA-Z0-9\s.,!?'"-]/g)||[]).length/t.length>0.3;}
@@ -397,6 +520,7 @@ document.getElementById('submit-review-btn').addEventListener('click',()=>{
   shT('✓ Review submitted! Thanks for your feedback.');chkAR();
 });
 
+/* ══════════════ GLOBE ══════════════ */
 (function(){
   const cv=document.getElementById('globe-canvas'),sc=new THREE.Scene(),cm=new THREE.PerspectiveCamera(45,cv.offsetWidth/cv.offsetHeight,.1,1000),rd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
   rd.setSize(cv.offsetWidth,cv.offsetHeight);rd.setPixelRatio(Math.min(window.devicePixelRatio,2));cm.position.z=350;
