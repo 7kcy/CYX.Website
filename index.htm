@@ -233,7 +233,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
         <a class="btn btn-primary" id="hero-download-btn" href="#">Download</a>
         <button class="btn btn-secondary" onclick="window.open('https://discord.gg/KH7PBhVYr7','_blank')">Join Community</button>
       </div>
-
     </div>
     <div class="executor-mockup"><img src="CyUI_png.png" alt="Cyclone X Executor Interface"></div>
   </div>
@@ -323,15 +322,18 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <script>
 /* ════════════════════════════════════════════════════════
    DOWNLOAD TRACKER
-   Uses countapi.xyz — free, no auth, persistent globally.
+   Uses counterapi.dev — free, persistent, no auth needed.
    Namespace: cyclone-x-executor   Key: downloads
-   GET  https://api.countapi.xyz/get/cyclone-x-executor/downloads
-   HIT  https://api.countapi.xyz/hit/cyclone-x-executor/downloads
+
+   API docs: https://counterapi.dev/docs
+   GET  https://api.counterapi.dev/v1/{namespace}/{key}
+   UP   https://api.counterapi.dev/v1/{namespace}/{key}/up
    ════════════════════════════════════════════════════════ */
 const COUNT_NS  = 'cyclone-x-executor';
 const COUNT_KEY = 'downloads';
-const COUNT_GET = `https://api.countapi.xyz/get/${COUNT_NS}/${COUNT_KEY}`;
-const COUNT_HIT = `https://api.countapi.xyz/hit/${COUNT_NS}/${COUNT_KEY}`;
+const COUNT_BASE = 'https://api.counterapi.dev/v1';
+const COUNT_GET  = `${COUNT_BASE}/${COUNT_NS}/${COUNT_KEY}`;
+const COUNT_UP   = `${COUNT_BASE}/${COUNT_NS}/${COUNT_KEY}/up`;
 
 let cachedCount = null;
 let pollInterval = null;
@@ -364,7 +366,9 @@ function setCountEls(val, animate) {
 async function fetchCount() {
   try {
     const res = await fetch(COUNT_GET);
+    if (!res.ok) throw new Error('fetch failed');
     const data = await res.json();
+    // counterapi.dev returns { value: N, ... }
     const n = Number(data.value);
     if (!isNaN(n)) {
       const changed = cachedCount !== null && n !== cachedCount;
@@ -372,14 +376,14 @@ async function fetchCount() {
       setCountEls(n, changed);
     }
   } catch (e) {
-    // silently fail — network may be blocked
     if (cachedCount === null) setCountEls(0, false);
   }
 }
 
 async function hitCount() {
   try {
-    const res = await fetch(COUNT_HIT);
+    const res = await fetch(COUNT_UP);
+    if (!res.ok) throw new Error('hit failed');
     const data = await res.json();
     const n = Number(data.value);
     if (!isNaN(n)) {
@@ -387,7 +391,7 @@ async function hitCount() {
       setCountEls(n, true);
     }
   } catch (e) {
-    // fallback: increment cached count locally for visual feedback
+    // Fallback: optimistically increment locally for visual feedback
     if (cachedCount !== null) {
       cachedCount++;
       setCountEls(cachedCount, true);
@@ -396,9 +400,9 @@ async function hitCount() {
 }
 
 function startPolling() {
-  fetchCount(); // immediate
+  fetchCount(); // immediate fetch on load
   clearInterval(pollInterval);
-  pollInterval = setInterval(fetchCount, 15000); // refresh every 15s
+  pollInterval = setInterval(fetchCount, 15000); // re-fetch every 15s
 }
 
 /* ══════════════════════════════
