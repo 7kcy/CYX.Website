@@ -43,20 +43,20 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .radial-glow:nth-child(1){top:-300px;right:-300px}
 .radial-glow:nth-child(2){bottom:-400px;left:-400px;animation-delay:-7s}
 @keyframes floatGlow{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,50px) scale(1.1)}}
-nav{position:fixed;top:0;width:100%;height:70px;background:rgba(0,0,0,.55);backdrop-filter:blur(30px);border-bottom:1px solid var(--border);z-index:1000;transition:all .3s ease}
-nav.scrolled{background:rgba(0,0,0,.92);box-shadow:0 4px 50px rgba(255,255,255,.05)}
-.nav-container{max-width:1400px;margin:0 auto;height:100%;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:18px;text-decoration:none;color:var(--text);letter-spacing:-.5px;text-shadow:0 0 20px rgba(255,255,255,.3)}
-.nav-logo img{height:28px;filter:drop-shadow(0 0 10px rgba(255,255,255,.4));animation:lp 3s ease-in-out infinite}
+/* ── PILL NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:center;padding:18px 40px;pointer-events:none;background:transparent;border:none}
+.nav-pill{pointer-events:all;display:flex;align-items:center;gap:6px;background:rgba(10,10,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:8px 8px 8px 16px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04);transition:all .3s ease}
+nav.scrolled .nav-pill{background:rgba(5,5,5,.92);border-color:rgba(255,255,255,.15);box-shadow:0 12px 50px rgba(0,0,0,.8),0 0 30px rgba(255,255,255,.05)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;text-decoration:none;color:var(--text);letter-spacing:-.3px;text-shadow:0 0 20px rgba(255,255,255,.3);margin-right:6px}
+.nav-logo img{height:24px;filter:drop-shadow(0 0 10px rgba(255,255,255,.4));animation:lp 3s ease-in-out infinite}
 @keyframes lp{0%,100%{filter:drop-shadow(0 0 10px rgba(255,255,255,.4))}50%{filter:drop-shadow(0 0 20px rgba(255,255,255,.6))}}
-.nav-links{display:flex;gap:6px;list-style:none;align-items:center}
-.nav-links a{padding:10px 18px;text-decoration:none;color:var(--text-secondary);font-weight:600;font-size:14px;border-radius:8px;transition:all .3s ease;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:6px;left:18px;right:18px;height:2px;background:linear-gradient(90deg,transparent,var(--text),transparent);transform:scaleX(0);transition:transform .3s ease}
-.nav-links a:hover{color:var(--text);text-shadow:0 0 15px rgba(255,255,255,.5)}
-.nav-links a:hover::after{transform:scaleX(1)}
-.nav-links .discord-btn{background:rgba(255,255,255,.1);color:var(--text);padding:10px 22px;margin-left:12px;border:1px solid var(--border);box-shadow:0 0 20px rgba(255,255,255,.1)}
-.nav-links .discord-btn:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2);box-shadow:0 0 30px rgba(255,255,255,.2)}
-.hero{min-height:100vh;display:flex;align-items:center;padding:120px 40px 80px;position:relative;z-index:2}
+.nav-sep{width:1px;height:18px;background:rgba(255,255,255,.12);margin:0 4px}
+.nav-links{display:flex;gap:2px;list-style:none;align-items:center}
+.nav-links a{padding:8px 14px;text-decoration:none;color:rgba(255,255,255,.55);font-weight:600;font-size:13px;border-radius:999px;transition:all .3s ease}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.08);text-shadow:0 0 12px rgba(255,255,255,.4)}
+.nav-links .discord-btn{background:rgba(255,255,255,.12);color:#fff;padding:8px 18px;margin-left:4px;border:1px solid rgba(255,255,255,.15);border-radius:999px;box-shadow:0 0 16px rgba(255,255,255,.08)}
+.nav-links .discord-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.25);box-shadow:0 0 24px rgba(255,255,255,.18)}
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 40px 80px;position:relative;z-index:2}
 .hero-container{max-width:1400px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .hero-content{opacity:0;animation:fadeInUp 1s ease forwards}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
@@ -181,7 +181,28 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 @keyframes numFlip{0%{transform:translateY(-8px);opacity:0}100%{transform:translateY(0);opacity:1}}
 .num-flip{animation:numFlip .35s cubic-bezier(.4,0,.2,1) forwards}
 
-/* ── SHOWCASE ── */
+/* ── CHANGELOG ── */
+.changelog{padding:120px 40px;position:relative;z-index:2}
+.changelog-inner{max-width:720px;margin:0 auto}
+.changelog-scroll{max-height:520px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding-right:8px}
+.changelog-scroll::-webkit-scrollbar{width:4px}
+.changelog-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:99px}
+.changelog-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:99px}
+.changelog-scroll::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.3)}
+.cl-entry{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .3s ease}
+.cl-entry:hover{border-color:rgba(255,255,255,.18)}
+.cl-header{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none}
+.cl-version{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.cl-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1)}
+.cl-badge.latest{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
+.cl-arrow{margin-left:auto;font-size:11px;color:rgba(255,255,255,.3);transition:transform .3s ease}
+.cl-entry.open .cl-arrow{transform:rotate(180deg)}
+.cl-body{display:none;padding:0 20px 16px;border-top:1px solid rgba(255,255,255,.05)}
+.cl-entry.open .cl-body{display:block}
+.cl-body ul{list-style:none;padding:12px 0 0;display:flex;flex-direction:column;gap:7px}
+.cl-body ul li{font-size:13px;color:var(--text-secondary);display:flex;gap:10px;line-height:1.5}
+.cl-body ul li::before{content:'[+]';color:rgba(255,255,255,.25);font-family:monospace;font-size:12px;flex-shrink:0;margin-top:1px}
+.cl-body .cl-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;padding-top:12px}
 .showcase{padding:120px 40px;position:relative;z-index:2}
 .showcase-inner{max-width:960px;margin:0 auto}
 .showcase-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:6px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:20px}
@@ -222,16 +243,13 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 </div>
 
 <nav id="navbar">
-  <div class="nav-container">
+  <div class="nav-pill">
     <a href="#home" class="nav-logo">
       <img src="Cylogo_png.png" alt="Cyclone X"><span>Cyclone X</span>
     </a>
+    <div class="nav-sep"></div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="#executor">Executor</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#showcase">Showcase</a></li>
-      <li><a href="#reviews-section">Reviews</a></li>
       <li><a href="#download">Download</a></li>
       <li><a href="https://discord.gg/KH7PBhVYr7" target="_blank" class="discord-btn">Join Discord</a></li>
     </ul>
@@ -293,10 +311,129 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
   </div>
 </section>
 
+<section class="changelog reveal" id="changelog">
+  <div class="changelog-inner">
+    <h2 class="section-title" style="text-align:left;margin-bottom:32px">Changelog</h2>
+    <div class="changelog-scroll">
+
+      <!-- V2.2.1 — LATEST -->
+      <div class="cl-entry open" id="cl-2-2-1">
+        <div class="cl-header" onclick="toggleCl('cl-2-2-1')">
+          <span class="cl-version">V 2.2.1</span>
+          <span class="cl-badge latest">Latest</span>
+          <span class="cl-arrow">▼</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-label">Update</div>
+          <ul>
+            <li>FULLY coded</li>
+            <li>Every thing you do console prints</li>
+            <li>ADDED API IT WORKS!!!</li>
+            <li>85 Unc</li>
+            <li>Added a status panel aswell</li>
+            <li>fixed some bugs</li>
+            <li>Releasing pretty soon.. Stay tuned!</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- V2.2.0 -->
+      <div class="cl-entry" id="cl-2-2-0">
+        <div class="cl-header" onclick="toggleCl('cl-2-2-0')">
+          <span class="cl-version">V 2.2.0</span>
+          <span class="cl-badge">Update</span>
+          <span class="cl-arrow">▼</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-label">Update</div>
+          <ul>
+            <li>Added console</li>
+            <li>Fixed some settings</li>
+            <li>Made some small ui aligning changes</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- V2.1.9 -->
+      <div class="cl-entry" id="cl-2-1-9">
+        <div class="cl-header" onclick="toggleCl('cl-2-1-9')">
+          <span class="cl-version">V 2.1.9</span>
+          <span class="cl-badge">Update</span>
+          <span class="cl-arrow">▼</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-label">Update</div>
+          <ul>
+            <li>coded settings</li>
+            <li>added a loading screen toggle</li>
+            <li>ui updates</li>
+            <li>more modern animations</li>
+            <li>made ui slightly</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- V2.1.8 -->
+      <div class="cl-entry" id="cl-2-1-8">
+        <div class="cl-header" onclick="toggleCl('cl-2-1-8')">
+          <span class="cl-version">V 2.1.8</span>
+          <span class="cl-badge">Update</span>
+          <span class="cl-arrow">▼</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-label">Update</div>
+          <ul>
+            <li>New icons</li>
+            <li>New loading screen</li>
+            <li>Fixed opacity bugs</li>
+            <li>Fixed fullscreening</li>
+            <li>also added some new animations</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- V2.1.7 -->
+      <div class="cl-entry" id="cl-2-1-7">
+        <div class="cl-header" onclick="toggleCl('cl-2-1-7')">
+          <span class="cl-version">V 2.1.7</span>
+          <span class="cl-badge">Huge Update</span>
+          <span class="cl-arrow">▼</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-label">Huge Update</div>
+          <ul>
+            <li>Added brand new home screen</li>
+            <li>Brand new settings ui</li>
+            <li>lots of settings</li>
+            <li>scripthub works</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- V2.1.6 -->
+      <div class="cl-entry" id="cl-2-1-6">
+        <div class="cl-header" onclick="toggleCl('cl-2-1-6')">
+          <span class="cl-version">V 2.1.6</span>
+          <span class="cl-badge">Huge Update</span>
+          <span class="cl-arrow">▼</span>
+        </div>
+        <div class="cl-body">
+          <div class="cl-label">Huge Update!</div>
+          <ul>
+            <li>BRAND NEW UI</li>
+            <li>WORKING EVERYTHING!!!</li>
+            <li>not added api yet</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section class="showcase reveal" id="showcase">
   <div class="showcase-inner">
-    <h2 class="showcase-title">Showcase on Cyclone X</h2>
-    <p class="showcase-sub">A full showcase on how to use, and get Cyclone X.</p>
+    <h2 class="showcase-title">Cyclone X Showcase</h2>
     <div class="video-frame">
       <iframe
         src="https://www.youtube.com/embed/y--_IEA8kVY?start=21&rel=0&modestbranding=1&color=white"
@@ -351,24 +488,22 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 
 <script>
 /* ════════════════════════════════════════════════════════
-   DOWNLOAD TRACKER
-   Uses countapi.xyz — free, no auth, persistent.
-   Namespace: cyclone-x-executor   Key: downloads
-
-   GET   https://api.countapi.xyz/get/cyclone-x-executor/downloads
-   HIT   https://api.countapi.xyz/hit/cyclone-x-executor/downloads
+   DOWNLOAD TRACKER — localStorage, no external API
    ════════════════════════════════════════════════════════ */
-const COUNT_NS   = 'cyclone-x-executor';
-const COUNT_KEY  = 'downloads';
-const COUNT_BASE = 'https://api.countapi.xyz';
-const COUNT_GET  = `${COUNT_BASE}/get/${COUNT_NS}/${COUNT_KEY}`;
-const COUNT_UP   = `${COUNT_BASE}/hit/${COUNT_NS}/${COUNT_KEY}`;
+const DL_STORAGE_KEY = 'cyx_download_count';
 
-let cachedCount = null;
-let pollInterval = null;
+function getCount() {
+  return parseInt(localStorage.getItem(DL_STORAGE_KEY) || '0', 10);
+}
+
+function incrementCount() {
+  const n = getCount() + 1;
+  localStorage.setItem(DL_STORAGE_KEY, n);
+  setCountEls(n, true);
+}
 
 function fmtCount(n) {
-  if (n === null || isNaN(n)) return '—';
+  if (n === null || isNaN(n)) return '0';
   if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
   if (n >= 1000)    return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
   return n.toLocaleString();
@@ -378,7 +513,7 @@ function setCountEls(val, animate) {
   const els = [
     document.getElementById('dl-stat-value'),
     document.getElementById('footer-dl-count'),
-    document.getElementById('active-users-count'),   // ← Active Users now mirrors download count
+    document.getElementById('active-users-count'),
   ];
   els.forEach(el => {
     if (!el) return;
@@ -386,59 +521,15 @@ function setCountEls(val, animate) {
     if (el.textContent === txt) return;
     if (animate) {
       el.classList.remove('num-flip');
-      void el.offsetWidth; // reflow
+      void el.offsetWidth;
       el.classList.add('num-flip');
     }
     el.textContent = txt;
   });
 }
 
-async function fetchCount() {
-  try {
-    const res = await fetch(COUNT_GET);
-    if (!res.ok) throw new Error('fetch failed');
-    const data = await res.json();
-    // countapi.xyz returns { value: N }
-    const n = Number(data.value);
-    if (!isNaN(n)) {
-      const changed = cachedCount !== null && n !== cachedCount;
-      cachedCount = n;
-      setCountEls(n, changed);
-    }
-  } catch (e) {
-    console.warn('Count fetch failed:', e);
-    if (cachedCount === null) setCountEls(0, false);
-  }
-}
-
-async function hitCount() {
-  try {
-    const res = await fetch(COUNT_UP);
-    if (!res.ok) throw new Error('hit failed');
-    const data = await res.json();
-    const n = Number(data.value);
-    if (!isNaN(n)) {
-      cachedCount = n;
-      setCountEls(n, true);
-    }
-  } catch (e) {
-    console.warn('Count hit failed:', e);
-    // Optimistic local increment for visual feedback
-    if (cachedCount !== null) {
-      cachedCount++;
-      setCountEls(cachedCount, true);
-    }
-  }
-}
-
-function startPolling() {
-  fetchCount();
-  clearInterval(pollInterval);
-  pollInterval = setInterval(fetchCount, 15000);
-}
-
 /* ══════════════════════════════
-   DOWNLOAD OVERLAY + COUNT HIT
+   DOWNLOAD OVERLAY
    ══════════════════════════════ */
 const DOWNLOAD_URL='https://github.com/7kcy/CYX.Website/releases/download/Executor/Cyclone.X.zip';
 const STAGES=[
@@ -458,9 +549,6 @@ function openDl(e){
   bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Initializing...';
   document.getElementById('dlOverlay').classList.add('active');
 
-  // 🔢 Increment the download counter
-  hitCount();
-
   let cur=0,target=0;
   const ticker=setInterval(()=>{if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},18);
   dlTimers.push(ticker);
@@ -469,8 +557,13 @@ function openDl(e){
       statusEl.textContent=s.text;target=s.pct;
       if(i===STAGES.length-1){
         clearInterval(ticker);bar.style.width='100%';pctEl.textContent='100%';
+        // Trigger the actual file download
         const a=document.createElement('a');a.href=DOWNLOAD_URL;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a);
-        dlTimers.push(setTimeout(closeDl,4000));
+        // Wait 3 seconds, then close overlay and increment counter
+        dlTimers.push(setTimeout(()=>{
+          closeDl();
+          incrementCount();
+        },3000));
       }
     },i*800);
     dlTimers.push(t);
@@ -484,8 +577,16 @@ function closeDl(){
 document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('hero-download-btn').addEventListener('click',openDl);
   document.getElementById('main-download-btn').addEventListener('click',openDl);
-  startPolling();
+  // Load current count from localStorage on page load
+  setCountEls(getCount(), false);
 });
+
+/* ══════════════ CHANGELOG TOGGLE ══════════════ */
+function toggleCl(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.classList.toggle('open');
+}
 
 /* ══════════════ STARS ══════════════ */
 (function(){
