@@ -27,24 +27,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overf
 .shooting-stars{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
 .shooting-stars span{position:absolute;width:220px;height:2.5px;background:linear-gradient(90deg,#fff,#e0e0e0,transparent);border-radius:999px;box-shadow:0 0 40px rgba(255,255,255,.4),0 0 15px rgba(255,255,255,.6);opacity:0;animation:shoot var(--dur,5s) ease-in-out infinite var(--delay,0s)}
 @keyframes shoot{0%{transform:translateX(0) translateY(0) rotate(-45deg);opacity:1}25%{transform:translateX(-900px) translateY(900px) rotate(-45deg);opacity:0}100%{opacity:0}}
-.shooting-stars span:nth-child(1){top:0%;left:95%;--delay:0s;--dur:5s}
-.shooting-stars span:nth-child(2){top:0%;left:70%;--delay:1.5s;--dur:6s}
-.shooting-stars span:nth-child(3){top:10%;left:108%;--delay:3s;--dur:5.5s}
-.shooting-stars span:nth-child(4){top:0%;left:45%;--delay:4.5s;--dur:6.5s}
-.shooting-stars span:nth-child(5){top:25%;left:105%;--delay:1s;--dur:5.8s}
-.shooting-stars span:nth-child(6){top:0%;left:20%;--delay:6s;--dur:5.2s}
-.shooting-stars span:nth-child(7){top:40%;left:110%;--delay:2.5s;--dur:7s}
-.shooting-stars span:nth-child(8){top:5%;left:82%;--delay:5s;--dur:5.6s}
-.shooting-stars span:nth-child(9){top:55%;left:106%;--delay:.5s;--dur:6.2s}
-.shooting-stars span:nth-child(10){top:0%;left:58%;--delay:7s;--dur:5s}
-.shooting-stars span:nth-child(11){top:20%;left:92%;--delay:3.5s;--dur:6.8s}
-.shooting-stars span:nth-child(12){top:0%;left:33%;--delay:8s;--dur:5.4s}
+.shooting-stars span:nth-child(1){top:0%;left:95%;--delay:0s;--dur:5s}.shooting-stars span:nth-child(2){top:0%;left:70%;--delay:1.5s;--dur:6s}.shooting-stars span:nth-child(3){top:10%;left:108%;--delay:3s;--dur:5.5s}.shooting-stars span:nth-child(4){top:0%;left:45%;--delay:4.5s;--dur:6.5s}.shooting-stars span:nth-child(5){top:25%;left:105%;--delay:1s;--dur:5.8s}.shooting-stars span:nth-child(6){top:0%;left:20%;--delay:6s;--dur:5.2s}.shooting-stars span:nth-child(7){top:40%;left:110%;--delay:2.5s;--dur:7s}.shooting-stars span:nth-child(8){top:5%;left:82%;--delay:5s;--dur:5.6s}.shooting-stars span:nth-child(9){top:55%;left:106%;--delay:.5s;--dur:6.2s}.shooting-stars span:nth-child(10){top:0%;left:58%;--delay:7s;--dur:5s}.shooting-stars span:nth-child(11){top:20%;left:92%;--delay:3.5s;--dur:6.8s}.shooting-stars span:nth-child(12){top:0%;left:33%;--delay:8s;--dur:5.4s}
 .radial-glow{position:fixed;width:800px;height:800px;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);pointer-events:none;z-index:0;animation:floatGlow 15s ease-in-out infinite}
-.radial-glow:nth-child(1){top:-300px;right:-300px}
-.radial-glow:nth-child(2){bottom:-400px;left:-400px;animation-delay:-7s}
+.radial-glow:nth-child(1){top:-300px;right:-300px}.radial-glow:nth-child(2){bottom:-400px;left:-400px;animation-delay:-7s}
 @keyframes floatGlow{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,50px) scale(1.1)}}
-/* ── PILL NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:center;padding:18px 40px;pointer-events:none;background:transparent;border:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:center;padding:18px 40px;pointer-events:none}
 .nav-pill{pointer-events:all;display:flex;align-items:center;gap:6px;background:rgba(10,10,10,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:8px 8px 8px 16px;box-shadow:0 8px 40px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04);transition:all .3s ease}
 nav.scrolled .nav-pill{background:rgba(5,5,5,.92);border-color:rgba(255,255,255,.15);box-shadow:0 12px 50px rgba(0,0,0,.8),0 0 30px rgba(255,255,255,.05)}
 .nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;text-decoration:none;color:var(--text);letter-spacing:-.3px;text-shadow:0 0 20px rgba(255,255,255,.3);margin-right:6px}
@@ -118,7 +105,6 @@ nav.scrolled .nav-pill{background:rgba(5,5,5,.92);border-color:rgba(255,255,255,
 .review-dots{display:flex;justify-content:center;gap:10px;margin-top:32px}
 .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s ease}
 .dot.active{background:#fff;box-shadow:0 0 20px rgba(255,255,255,.6)}
-.review-dots:has(.dot:only-child){display:none}
 .review-submit-section{padding:0 40px 80px;position:relative;z-index:2}
 .review-submit-box{max-width:700px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:48px 44px;box-shadow:0 20px 60px rgba(0,0,0,.5);position:relative;overflow:hidden}
 .review-submit-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent)}
@@ -126,69 +112,79 @@ nav.scrolled .nav-pill{background:rgba(5,5,5,.92);border-color:rgba(255,255,255,
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
 .form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
 .form-group label{font-size:13px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px}
-.form-group input,.form-group textarea,.form-group select{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:all .3s ease;resize:none}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.07);box-shadow:0 0 20px rgba(255,255,255,.05)}
+.form-group input,.form-group textarea{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 16px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:all .3s ease;resize:none}
+.form-group input:focus,.form-group textarea:focus{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.07);box-shadow:0 0 20px rgba(255,255,255,.05)}
 .form-group textarea{min-height:100px}
-.form-group select option{background:#111;color:#fff}
 .star-picker{display:flex;gap:8px;align-items:center}
-.star-picker span{font-size:26px;cursor:pointer;transition:all .2s ease;opacity:.3;filter:drop-shadow(0 0 0 transparent);user-select:none}
+.star-picker span{font-size:26px;cursor:pointer;transition:all .2s ease;opacity:.3;user-select:none}
 .star-picker span.lit{opacity:1;filter:drop-shadow(0 0 8px rgba(255,215,0,.7))}
-.submit-review-btn{width:100%;padding:14px;border-radius:10px;background:#fff;color:#000;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s ease;margin-top:8px;letter-spacing:.3px;position:relative;overflow:hidden}
-.submit-review-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(45deg,transparent 30%,rgba(0,0,0,.15),transparent 70%);transform:translateX(-100%);transition:transform .5s ease}
-.submit-review-btn:hover::before{transform:translateX(100%)}
+.submit-review-btn{width:100%;padding:14px;border-radius:10px;background:#fff;color:#000;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .3s ease;margin-top:8px;position:relative;overflow:hidden}
 .submit-review-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,255,255,.25)}
 .submit-review-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-.submit-toast{display:none;margin-top:16px;padding:14px 20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;text-align:center;font-size:14px;font-weight:600;color:#fff;animation:toastIn .4s ease}
+.submit-toast{display:none;margin-top:16px;padding:14px 20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:10px;text-align:center;font-size:14px;font-weight:600;color:#fff}
 .submit-toast.visible{display:block}
 .submit-toast.error{background:rgba(220,60,60,.1);border-color:rgba(220,60,60,.3);color:#ff8080}
-@keyframes toastIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .already-reviewed-msg{text-align:center;color:var(--text-secondary);font-size:14px;font-weight:600;padding:16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;margin-top:16px}
 footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:14px;font-weight:600;position:relative;z-index:2}
 .reveal{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.4,0,.2,1)}
 .reveal.active{opacity:1;transform:translateY(0)}
 @media(max-width:1024px){.hero-container,.worldwide-container{grid-template-columns:1fr;gap:60px}.executor-mockup{max-width:600px;margin:0 auto}.globe-container{height:450px}}
-@media(max-width:768px){.nav-links a:not(.discord-btn){display:none}.features-grid,.stats-grid{grid-template-columns:1fr}.nav-container,.hero,.features,.stats-section,.worldwide,.reviews,.review-submit-section{padding-left:20px;padding-right:20px}.review-card{padding:28px}.form-row{grid-template-columns:1fr}.review-submit-box{padding:32px 24px}}
+@media(max-width:768px){.nav-links a:not(.discord-btn){display:none}.features-grid,.stats-grid{grid-template-columns:1fr}.hero,.features,.stats-section,.worldwide,.reviews,.review-submit-section{padding-left:20px;padding-right:20px}.review-card{padding:28px}.form-row{grid-template-columns:1fr}.review-submit-box{padding:32px 24px}}
 
-/* DOWNLOAD OVERLAY */
+/* ══ DOWNLOAD OVERLAY ══ */
 #dlOverlay{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center}
 #dlOverlay.active{display:flex}
 .dl-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.dl-card{position:relative;z-index:1;width:min(320px,calc(100vw - 40px));border-radius:14px;background:#0d0d0d;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 70px rgba(0,0,0,.85);padding:32px 24px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;animation:dlIn .25s cubic-bezier(.16,1,.3,1) forwards}
-@keyframes dlIn{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-.dl-logo{width:56px;height:56px;border-radius:12px;margin-bottom:18px;filter:drop-shadow(0 0 10px rgba(255,255,255,.12))}
-#dlStatus{font-size:16px;font-weight:700;color:#fff;margin-bottom:16px}
+@keyframes dlIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* Picker */
+.dl-picker{position:relative;z-index:1;width:min(420px,calc(100vw - 40px));border-radius:16px;background:#0d0d0d;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 80px rgba(0,0,0,.9);padding:32px 28px;animation:dlIn .25s cubic-bezier(.16,1,.3,1) forwards}
+.dl-picker-header{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.dl-picker-header img{width:38px;height:38px;border-radius:9px;filter:drop-shadow(0 0 10px rgba(255,255,255,.15))}
+.dl-picker-header h3{font-size:17px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.dl-picker-sub{font-size:12px;color:rgba(255,255,255,.3);margin-bottom:22px;font-weight:500;padding-left:52px}
+.dl-options{display:flex;flex-direction:column;gap:10px}
+.dl-option{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:15px 18px;cursor:pointer;transition:all .25s ease;text-align:left;width:100%}
+.dl-option:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.5)}
+.dl-option-icon{width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.dl-option-text{display:flex;flex-direction:column;gap:3px}
+.dl-option-name{font-size:14px;font-weight:700;color:#fff}
+.dl-option-desc{font-size:11px;color:rgba(255,255,255,.35);font-weight:500}
+.dl-picker-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:6px;color:rgba(255,255,255,.4);font-size:14px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;line-height:1}
+.dl-picker-close:hover{background:rgba(255,255,255,.12);color:#fff}
+
+/* Progress card */
+.dl-card{position:relative;z-index:1;width:min(320px,calc(100vw - 40px));border-radius:14px;background:#0d0d0d;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 70px rgba(0,0,0,.85);padding:32px 24px 24px;display:none;flex-direction:column;align-items:center;text-align:center;animation:dlIn .25s cubic-bezier(.16,1,.3,1) forwards}
+.dl-card.visible{display:flex}
+.dl-logo{width:52px;height:52px;border-radius:12px;margin-bottom:16px;filter:drop-shadow(0 0 10px rgba(255,255,255,.12))}
+#dlStatus{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
+#dlFileName{font-size:11px;color:rgba(255,255,255,.25);font-weight:600;margin-bottom:14px;letter-spacing:.3px}
 .dl-bar-wrap{width:100%;height:2px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin-bottom:10px}
 .dl-bar-fill{height:100%;width:0%;border-radius:99px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.4);transition:width .1s linear}
 #dlPct{font-size:12px;font-weight:600;color:rgba(255,255,255,.35)}
-.dl-footer{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);width:100%;font-size:12px;color:rgba(255,255,255,.28);line-height:1.7}
+.dl-footer{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);width:100%;font-size:12px;color:rgba(255,255,255,.28);line-height:1.7}
 .dl-footer a{color:rgba(255,255,255,.5);text-decoration:underline;text-underline-offset:2px}
 .dl-footer a:hover{color:#fff}
 
-/* ── DOWNLOAD COUNTER PILL ── */
+/* counter */
 .dl-counter-pill{margin-top:16px}
 .dl-counter-inner{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:8px 20px;transition:all .3s ease}
 .dl-counter-inner:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
-.dl-counter-dot{display:none}
 .dl-counter-num{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.4px}
 .dl-counter-sep{color:rgba(255,255,255,.2);font-size:14px}
-.dl-counter-lbl{font-size:13px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.2px}
-
-/* Download count stat card special styling */
+.dl-counter-lbl{font-size:13px;font-weight:500;color:rgba(255,255,255,.45)}
 .stat-card.downloads-card .stat-value{animation:cg 3s ease-in-out infinite}
 .stat-card.downloads-card .live-badge{display:inline-flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:3px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-top:8px}
-
-/* Number flip animation */
 @keyframes numFlip{0%{transform:translateY(-8px);opacity:0}100%{transform:translateY(0);opacity:1}}
 .num-flip{animation:numFlip .35s cubic-bezier(.4,0,.2,1) forwards}
 
-/* ── CHANGELOG ── */
+/* changelog */
 .changelog{padding:120px 40px;position:relative;z-index:2}
 .changelog-inner{max-width:720px;margin:0 auto}
 .changelog-scroll{max-height:520px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding-right:8px}
 .changelog-scroll::-webkit-scrollbar{width:4px}
 .changelog-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:99px}
 .changelog-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:99px}
-.changelog-scroll::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.3)}
 .cl-entry{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .3s ease}
 .cl-entry:hover{border-color:rgba(255,255,255,.18)}
 .cl-header{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none}
@@ -205,34 +201,53 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .cl-body .cl-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;padding-top:12px}
 .showcase{padding:120px 40px;position:relative;z-index:2}
 .showcase-inner{max-width:960px;margin:0 auto}
-.showcase-label{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:6px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:20px}
-.showcase-label::before{content:'';width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.8);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 .showcase-title{font-size:clamp(32px,4.5vw,48px);font-weight:800;margin-bottom:12px;letter-spacing:-1px;text-shadow:0 0 40px rgba(255,255,255,.3)}
-.showcase-sub{font-size:16px;color:var(--text-secondary);margin-bottom:44px;line-height:1.7}
-.video-frame{position:relative;width:100%;padding-bottom:56.25%;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 120px rgba(0,0,0,.9),0 0 80px rgba(255,255,255,.12);transition:box-shadow .4s ease}
-.video-frame:hover{box-shadow:0 50px 140px rgba(0,0,0,.9),0 0 100px rgba(255,255,255,.2)}
+.video-frame{position:relative;width:100%;padding-bottom:56.25%;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 120px rgba(0,0,0,.9),0 0 80px rgba(255,255,255,.12)}
 .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-.video-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(0,0,0,.4));pointer-events:none;z-index:1;border-radius:14px}
 </style>
 </head>
 <body>
 
 <canvas id="stars-canvas"></canvas>
-<div class="shooting-stars">
-  <span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span>
-</div>
+<div class="shooting-stars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <div class="radial-glow"></div>
 <div class="radial-glow"></div>
 
-<!-- DOWNLOAD OVERLAY -->
+<!-- ══ DOWNLOAD OVERLAY ══ -->
 <div id="dlOverlay">
   <div class="dl-backdrop" onclick="closeDl()"></div>
-  <div class="dl-card">
+
+  <!-- Step 1: Picker -->
+  <div class="dl-picker" id="dlPicker">
+    <button class="dl-picker-close" onclick="closeDl()">✕</button>
+    <div class="dl-picker-header">
+      <img src="Cylogo_png.png" alt="Cyclone X">
+      <h3>Choose your download</h3>
+    </div>
+    <p class="dl-picker-sub">Select the version you want</p>
+    <div class="dl-options">
+      <button class="dl-option" onclick="startDl('executor')">
+        <div class="dl-option-icon">⚡</div>
+        <div class="dl-option-text">
+          <span class="dl-option-name">Cyclone X Executor</span>
+          <span class="dl-option-desc">The full executor — run scripts instantly</span>
+        </div>
+      </button>
+      <button class="dl-option" onclick="startDl('bootstrapper')">
+        <div class="dl-option-icon">🚀</div>
+        <div class="dl-option-text">
+          <span class="dl-option-name">Cyclone X Bootstrapper</span>
+          <span class="dl-option-desc">Auto-installer that sets everything up for you</span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 2: Progress -->
+  <div class="dl-card" id="dlCard">
     <img src="Cylogo_png.png" alt="Cyclone X" class="dl-logo">
     <div id="dlStatus">Initializing...</div>
+    <div id="dlFileName"></div>
     <div class="dl-bar-wrap"><div class="dl-bar-fill" id="dlBar"></div></div>
     <div id="dlPct">0%</div>
     <div class="dl-footer">
@@ -244,9 +259,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 
 <nav id="navbar">
   <div class="nav-pill">
-    <a href="#home" class="nav-logo">
-      <img src="Cylogo_png.png" alt="Cyclone X"><span>Cyclone X</span>
-    </a>
+    <a href="#home" class="nav-logo"><img src="Cylogo_png.png" alt="Cyclone X"><span>Cyclone X</span></a>
     <div class="nav-sep"></div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
@@ -288,7 +301,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="stat-card"><div class="stat-icon">⚡</div><div class="stat-value">Fast</div><div class="stat-label">Execution Speed</div></div>
     <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-value">85% +</div><div class="stat-label">UNC Rate</div></div>
     <div class="stat-card"><div class="stat-icon">🛡️</div><div class="stat-value">100%</div><div class="stat-label">Secure</div></div>
-    <!-- Downloads stat card — live -->
     <div class="stat-card downloads-card" id="dl-stat-card">
       <div class="stat-icon">⬇️</div>
       <div class="stat-value" id="dl-stat-value">—</div>
@@ -303,7 +315,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="worldwide-content">
       <h2>Users Worldwide</h2>
       <p>Join our rapidly growing community of users who trust Cyclone X daily. Experience unparalleled execution backed by a global network of scripters.</p>
-      <!-- This will be populated by the download counter, same number -->
       <div class="user-count" id="active-users-count">—</div>
       <div class="user-count-label">Active Users</div>
     </div>
@@ -315,118 +326,30 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
   <div class="changelog-inner">
     <h2 class="section-title" style="text-align:left;margin-bottom:32px">Changelog</h2>
     <div class="changelog-scroll">
-
-      <!-- V2.2.1 — LATEST -->
       <div class="cl-entry open" id="cl-2-2-1">
-        <div class="cl-header" onclick="toggleCl('cl-2-2-1')">
-          <span class="cl-version">V 2.2.1</span>
-          <span class="cl-badge latest">Latest</span>
-          <span class="cl-arrow">▼</span>
-        </div>
-        <div class="cl-body">
-          <div class="cl-label">Update</div>
-          <ul>
-            <li>FULLY coded</li>
-            <li>Every thing you do console prints</li>
-            <li>ADDED API IT WORKS!!!</li>
-            <li>85 Unc</li>
-            <li>Added a status panel aswell</li>
-            <li>fixed some bugs</li>
-            <li>Releasing pretty soon.. Stay tuned!</li>
-          </ul>
-        </div>
+        <div class="cl-header" onclick="toggleCl('cl-2-2-1')"><span class="cl-version">V 2.2.1</span><span class="cl-badge latest">Latest</span><span class="cl-arrow">▼</span></div>
+        <div class="cl-body"><div class="cl-label">Update</div><ul><li>FULLY coded</li><li>Every thing you do console prints</li><li>ADDED API IT WORKS!!!</li><li>85 Unc</li><li>Added a status panel aswell</li><li>fixed some bugs</li><li>Releasing pretty soon.. Stay tuned!</li></ul></div>
       </div>
-
-      <!-- V2.2.0 -->
       <div class="cl-entry" id="cl-2-2-0">
-        <div class="cl-header" onclick="toggleCl('cl-2-2-0')">
-          <span class="cl-version">V 2.2.0</span>
-          <span class="cl-badge">Update</span>
-          <span class="cl-arrow">▼</span>
-        </div>
-        <div class="cl-body">
-          <div class="cl-label">Update</div>
-          <ul>
-            <li>Added console</li>
-            <li>Fixed some settings</li>
-            <li>Made some small ui aligning changes</li>
-          </ul>
-        </div>
+        <div class="cl-header" onclick="toggleCl('cl-2-2-0')"><span class="cl-version">V 2.2.0</span><span class="cl-badge">Update</span><span class="cl-arrow">▼</span></div>
+        <div class="cl-body"><div class="cl-label">Update</div><ul><li>Added console</li><li>Fixed some settings</li><li>Made some small ui aligning changes</li></ul></div>
       </div>
-
-      <!-- V2.1.9 -->
       <div class="cl-entry" id="cl-2-1-9">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-9')">
-          <span class="cl-version">V 2.1.9</span>
-          <span class="cl-badge">Update</span>
-          <span class="cl-arrow">▼</span>
-        </div>
-        <div class="cl-body">
-          <div class="cl-label">Update</div>
-          <ul>
-            <li>coded settings</li>
-            <li>added a loading screen toggle</li>
-            <li>ui updates</li>
-            <li>more modern animations</li>
-            <li>made ui slightly</li>
-          </ul>
-        </div>
+        <div class="cl-header" onclick="toggleCl('cl-2-1-9')"><span class="cl-version">V 2.1.9</span><span class="cl-badge">Update</span><span class="cl-arrow">▼</span></div>
+        <div class="cl-body"><div class="cl-label">Update</div><ul><li>coded settings</li><li>added a loading screen toggle</li><li>ui updates</li><li>more modern animations</li><li>made ui slightly</li></ul></div>
       </div>
-
-      <!-- V2.1.8 -->
       <div class="cl-entry" id="cl-2-1-8">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-8')">
-          <span class="cl-version">V 2.1.8</span>
-          <span class="cl-badge">Update</span>
-          <span class="cl-arrow">▼</span>
-        </div>
-        <div class="cl-body">
-          <div class="cl-label">Update</div>
-          <ul>
-            <li>New icons</li>
-            <li>New loading screen</li>
-            <li>Fixed opacity bugs</li>
-            <li>Fixed fullscreening</li>
-            <li>also added some new animations</li>
-          </ul>
-        </div>
+        <div class="cl-header" onclick="toggleCl('cl-2-1-8')"><span class="cl-version">V 2.1.8</span><span class="cl-badge">Update</span><span class="cl-arrow">▼</span></div>
+        <div class="cl-body"><div class="cl-label">Update</div><ul><li>New icons</li><li>New loading screen</li><li>Fixed opacity bugs</li><li>Fixed fullscreening</li><li>also added some new animations</li></ul></div>
       </div>
-
-      <!-- V2.1.7 -->
       <div class="cl-entry" id="cl-2-1-7">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-7')">
-          <span class="cl-version">V 2.1.7</span>
-          <span class="cl-badge">Huge Update</span>
-          <span class="cl-arrow">▼</span>
-        </div>
-        <div class="cl-body">
-          <div class="cl-label">Huge Update</div>
-          <ul>
-            <li>Added brand new home screen</li>
-            <li>Brand new settings ui</li>
-            <li>lots of settings</li>
-            <li>scripthub works</li>
-          </ul>
-        </div>
+        <div class="cl-header" onclick="toggleCl('cl-2-1-7')"><span class="cl-version">V 2.1.7</span><span class="cl-badge">Huge Update</span><span class="cl-arrow">▼</span></div>
+        <div class="cl-body"><div class="cl-label">Huge Update</div><ul><li>Added brand new home screen</li><li>Brand new settings ui</li><li>lots of settings</li><li>scripthub works</li></ul></div>
       </div>
-
-      <!-- V2.1.6 -->
       <div class="cl-entry" id="cl-2-1-6">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-6')">
-          <span class="cl-version">V 2.1.6</span>
-          <span class="cl-badge">Huge Update</span>
-          <span class="cl-arrow">▼</span>
-        </div>
-        <div class="cl-body">
-          <div class="cl-label">Huge Update!</div>
-          <ul>
-            <li>BRAND NEW UI</li>
-            <li>WORKING EVERYTHING!!!</li>
-            <li>not added api yet</li>
-          </ul>
-        </div>
+        <div class="cl-header" onclick="toggleCl('cl-2-1-6')"><span class="cl-version">V 2.1.6</span><span class="cl-badge">Huge Update</span><span class="cl-arrow">▼</span></div>
+        <div class="cl-body"><div class="cl-label">Huge Update!</div><ul><li>BRAND NEW UI</li><li>WORKING EVERYTHING!!!</li><li>not added api yet</li></ul></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -435,12 +358,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
   <div class="showcase-inner">
     <h2 class="showcase-title">Cyclone X Showcase</h2>
     <div class="video-frame">
-      <iframe
-        src="https://www.youtube.com/embed/y--_IEA8kVY?start=21&rel=0&modestbranding=1&color=white"
-        title="Cyclone X | Free | Keyless | 2026"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+      <iframe src="https://www.youtube.com/embed/y--_IEA8kVY?start=21&rel=0&modestbranding=1&color=white" title="Cyclone X | Free | Keyless | 2026" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
 </section>
@@ -472,10 +390,8 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
   <h2 class="section-title">Ready to Execute?</h2>
   <div style="text-align:center;margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:16px">
     <a id="main-download-btn" href="#" class="btn btn-primary" style="font-size:18px;padding:18px 40px">⬇ Download Latest Release</a>
-    <!-- Download counter -->
     <div class="dl-counter-pill">
       <div class="dl-counter-inner">
-        <div class="dl-counter-dot"></div>
         <span class="dl-counter-num" id="footer-dl-count">—</span>
         <span class="dl-counter-sep">·</span>
         <span class="dl-counter-lbl">downloads</span>
@@ -487,68 +403,37 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <footer id="credits"><p>© 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 
 <script>
-/* ════════════════════════════════════════════════════════
-   DOWNLOAD TRACKER — localStorage, no external API
-   ════════════════════════════════════════════════════════ */
-const DL_STORAGE_KEY = 'cyx_download_count';
+const DOWNLOADS={
+  executor:{url:'https://github.com/user-attachments/files/25885831/CycloneX.zip',label:'Cyclone X Executor',file:'CycloneX.zip'},
+  bootstrapper:{url:'https://github.com/7kcy/CYX.Website/releases/download/Executor/Cyclone.X.zip',label:'Cyclone X Bootstrapper',file:'BootStrapper.exe'}
+};
 
-function getCount() {
-  return parseInt(localStorage.getItem(DL_STORAGE_KEY) || '0', 10);
-}
-
-function incrementCount() {
-  const n = getCount() + 1;
-  localStorage.setItem(DL_STORAGE_KEY, n);
-  setCountEls(n, true);
-}
-
-function fmtCount(n) {
-  if (n === null || isNaN(n)) return '0';
-  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-  if (n >= 1000)    return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-  return n.toLocaleString();
-}
-
-function setCountEls(val, animate) {
-  const els = [
-    document.getElementById('dl-stat-value'),
-    document.getElementById('footer-dl-count'),
-    document.getElementById('active-users-count'),
-  ];
-  els.forEach(el => {
-    if (!el) return;
-    const txt = fmtCount(val);
-    if (el.textContent === txt) return;
-    if (animate) {
-      el.classList.remove('num-flip');
-      void el.offsetWidth;
-      el.classList.add('num-flip');
-    }
-    el.textContent = txt;
+/* counter */
+const DL_KEY='cyx_download_count';
+function getCount(){return parseInt(localStorage.getItem(DL_KEY)||'0',10);}
+function incrementCount(){const n=getCount()+1;localStorage.setItem(DL_KEY,n);setCountEls(n,true);}
+function fmtCount(n){if(!n||isNaN(n))return'0';if(n>=1e6)return(n/1e6).toFixed(1).replace(/\.0$/,'')+'M';if(n>=1000)return(n/1000).toFixed(1).replace(/\.0$/,'')+'K';return n.toLocaleString();}
+function setCountEls(v,animate){
+  ['dl-stat-value','footer-dl-count','active-users-count'].forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const txt=fmtCount(v);if(el.textContent===txt)return;
+    if(animate){el.classList.remove('num-flip');void el.offsetWidth;el.classList.add('num-flip');}
+    el.textContent=txt;
   });
 }
 
-/* ══════════════════════════════
-   DOWNLOAD OVERLAY
-   ══════════════════════════════ */
-const DOWNLOAD_URL='https://github.com/7kcy/CYX.Website/releases/download/Executor/Cyclone.X.zip';
-const STAGES=[
-  {text:'Initializing...',pct:0},
-  {text:'Fetching files...',pct:30},
-  {text:'Validating package...',pct:65},
-  {text:'Starting download...',pct:88},
-  {text:'Done!',pct:100}
-];
+/* overlay */
 let dlActive=false,dlTimers=[];
-function openDl(e){
-  if(e)e.preventDefault();
-  if(dlActive)return;
-  dlActive=true;
+function openPicker(e){if(e)e.preventDefault();document.getElementById('dlPicker').style.display='';document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlOverlay').classList.add('active');}
+function startDl(type){
+  const info=DOWNLOADS[type];if(!info)return;
+  document.getElementById('dlPicker').style.display='none';
+  const card=document.getElementById('dlCard');card.classList.add('visible');
+  if(dlActive)return;dlActive=true;
   dlTimers.forEach(clearTimeout);dlTimers=[];
-  const bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus');
-  bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Initializing...';
-  document.getElementById('dlOverlay').classList.add('active');
-
+  const bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus'),fileEl=document.getElementById('dlFileName');
+  bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Initializing...';fileEl.textContent=info.file;
+  const STAGES=[{text:'Initializing...',pct:0},{text:'Fetching files...',pct:30},{text:'Validating package...',pct:65},{text:'Downloading '+info.label+'...',pct:88},{text:'Done!',pct:100}];
   let cur=0,target=0;
   const ticker=setInterval(()=>{if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},18);
   dlTimers.push(ticker);
@@ -557,13 +442,8 @@ function openDl(e){
       statusEl.textContent=s.text;target=s.pct;
       if(i===STAGES.length-1){
         clearInterval(ticker);bar.style.width='100%';pctEl.textContent='100%';
-        // Trigger the actual file download
-        const a=document.createElement('a');a.href=DOWNLOAD_URL;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a);
-        // Wait 3 seconds, then close overlay and increment counter
-        dlTimers.push(setTimeout(()=>{
-          closeDl();
-          incrementCount();
-        },3000));
+        const a=document.createElement('a');a.href=info.url;a.download='';document.body.appendChild(a);a.click();document.body.removeChild(a);
+        dlTimers.push(setTimeout(()=>{closeDl();incrementCount();},3000));
       }
     },i*800);
     dlTimers.push(t);
@@ -572,48 +452,29 @@ function openDl(e){
 function closeDl(){
   document.getElementById('dlOverlay').classList.remove('active');
   dlTimers.forEach(clearTimeout);dlTimers=[];
-  setTimeout(()=>{dlActive=false;},300);
+  setTimeout(()=>{dlActive=false;document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlPicker').style.display='';},300);
 }
+
 document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('hero-download-btn').addEventListener('click',openDl);
-  document.getElementById('main-download-btn').addEventListener('click',openDl);
-  // Load current count from localStorage on page load
-  setCountEls(getCount(), false);
+  document.getElementById('hero-download-btn').addEventListener('click',openPicker);
+  document.getElementById('main-download-btn').addEventListener('click',openPicker);
+  setCountEls(getCount(),false);
 });
 
-/* ══════════════ CHANGELOG TOGGLE ══════════════ */
-function toggleCl(id){
-  const el=document.getElementById(id);
-  if(!el)return;
-  el.classList.toggle('open');
-}
+function toggleCl(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
 
-/* ══════════════ STARS ══════════════ */
-(function(){
-  const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');
-  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-  resize();window.addEventListener('resize',resize);
-  function rng(s){let v=s>>>0;return()=>{v^=v<<13;v^=v>>17;v^=v<<5;return(v>>>0)/0xffffffff};}
-  const r=rng(99999),dots=[];
-  for(let i=0;i<40;i++)dots.push({x:r()*window.innerWidth,y:r()*window.innerHeight,rad:0.7+r()*1.1,o:0.3+r()*0.5,sp:0.2+r()*0.5});
-  function tick(){const W=canvas.width,H=canvas.height;ctx.clearRect(0,0,W,H);for(const d of dots){d.y-=d.sp;if(d.y<-5){d.y=H+5;d.x=r()*W;}ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${d.o})`;ctx.fill();}requestAnimationFrame(tick);}
-  tick();
-})();
+/* stars */
+(function(){const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function rng(s){let v=s>>>0;return()=>{v^=v<<13;v^=v>>17;v^=v<<5;return(v>>>0)/0xffffffff};}const r=rng(99999),dots=[];for(let i=0;i<40;i++)dots.push({x:r()*window.innerWidth,y:r()*window.innerHeight,rad:0.7+r()*1.1,o:0.3+r()*0.5,sp:0.2+r()*0.5});function tick(){const W=canvas.width,H=canvas.height;ctx.clearRect(0,0,W,H);for(const d of dots){d.y-=d.sp;if(d.y<-5){d.y=H+5;d.x=r()*W;}ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${d.o})`;ctx.fill();}requestAnimationFrame(tick);}tick();})();
 
 window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
-
 const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('active');});},{threshold:0.1,rootMargin:'0px 0px -100px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.querySelectorAll('.feature-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--mouse-y',((e.clientY-r.top)/r.height*100)+'%');});});
 
-document.querySelectorAll('.feature-card').forEach(card=>{
-  card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--mouse-y',((e.clientY-r.top)/r.height*100)+'%');});
-});
-
-/* ══════════════ REVIEWS ══════════════ */
+/* reviews */
 const BW=['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
 function hasBanned(t){const l=t.toLowerCase().replace(/[^a-z0-9\s]/g,'');return BW.some(w=>l.includes(w.replace(/[^a-z0-9\s]/g,'')));}
 function isSpam(t){if(/(.)\1{6,}/.test(t))return true;if(t.length>10){const l=t.replace(/[^a-zA-Z]/g,'');if(l.length>6&&l.replace(/[a-z]/g,'').length/l.length>0.8)return true;}return(t.match(/[^a-zA-Z0-9\s.,!?'"-]/g)||[]).length/t.length>0.3;}
-
 const SR=[{name:'Cyclone',initial:'C',rating:5,text:'Leave your review here! No trolls please...',seed:true}];
 function lUR(){try{return JSON.parse(localStorage.getItem('cyx_reviews')||'[]');}catch{return[];}}
 function sUR(a){try{localStorage.setItem('cyx_reviews',JSON.stringify(a));}catch{}}
@@ -621,16 +482,7 @@ function hAR(){return localStorage.getItem('cyx_has_reviewed')==='1';}
 function mR(){localStorage.setItem('cyx_has_reviewed','1');}
 let allR=[...SR,...lUR()],curR=0,aR;
 const rSlider=document.getElementById('reviews-slider'),rDots=document.getElementById('review-dots');
-function bRUI(){
-  rSlider.innerHTML='';rDots.innerHTML='';
-  allR.forEach((rv,i)=>{
-    const c=document.createElement('div');c.className='review-card'+(i===curR?' active':'');
-    c.innerHTML=`<div class="review-header"><div class="review-avatar">${rv.initial.toUpperCase()}</div><div class="review-info"><h4>${rv.name}</h4><div class="review-stars">${'★'.repeat(rv.rating)}${'☆'.repeat(5-rv.rating)}</div></div></div><p class="review-text">"${rv.text}"</p>`;
-    rSlider.appendChild(c);
-    const d=document.createElement('div');d.className='dot'+(i===curR?' active':'');
-    d.addEventListener('click',()=>{clearInterval(aR);sRv(i);stAR();});rDots.appendChild(d);
-  });
-}
+function bRUI(){rSlider.innerHTML='';rDots.innerHTML='';allR.forEach((rv,i)=>{const c=document.createElement('div');c.className='review-card'+(i===curR?' active':'');c.innerHTML=`<div class="review-header"><div class="review-avatar">${rv.initial.toUpperCase()}</div><div class="review-info"><h4>${rv.name}</h4><div class="review-stars">${'★'.repeat(rv.rating)}${'☆'.repeat(5-rv.rating)}</div></div></div><p class="review-text">"${rv.text}"</p>`;rSlider.appendChild(c);const d=document.createElement('div');d.className='dot'+(i===curR?' active':'');d.addEventListener('click',()=>{clearInterval(aR);sRv(i);stAR();});rDots.appendChild(d);});}
 function sRv(i){const cs=rSlider.querySelectorAll('.review-card'),ds=rDots.querySelectorAll('.dot');if(!cs[curR])return;cs[curR].classList.remove('active');ds[curR].classList.remove('active');curR=i;cs[curR].classList.add('active');ds[curR].classList.add('active');}
 function stAR(){clearInterval(aR);aR=setInterval(()=>sRv((curR+1)%allR.length),3000);}
 bRUI();stAR();
@@ -643,34 +495,14 @@ function shT(m,e=false){const t=document.getElementById('submit-toast');t.textCo
 document.getElementById('submit-review-btn').addEventListener('click',()=>{
   if(hAR())return;
   const n=document.getElementById('review-name').value.trim(),t=document.getElementById('review-text').value.trim();
-  if(!n)return shT('Please enter your name.',true);
-  if(n.length<2)return shT('Name must be at least 2 characters.',true);
-  if(selSt===0)return shT('Please select a star rating.',true);
-  if(!t)return shT('Please write a review.',true);
-  if(t.length<10)return shT('Review must be at least 10 characters.',true);
-  if(hasBanned(n)||hasBanned(t))return shT('⚠ Your review contains inappropriate content.',true);
-  if(isSpam(t)||isSpam(n))return shT('⚠ Your review looks like spam.',true);
-  const nR={name:n,initial:n.charAt(0),rating:selSt,text:t};
-  const sv=lUR();sv.push(nR);sUR(sv);mR();
-  allR.push(nR);clearInterval(aR);curR=allR.length-1;bRUI();sRv(curR);stAR();
+  if(!n)return shT('Please enter your name.',true);if(n.length<2)return shT('Name must be at least 2 characters.',true);if(selSt===0)return shT('Please select a star rating.',true);if(!t)return shT('Please write a review.',true);if(t.length<10)return shT('Review must be at least 10 characters.',true);if(hasBanned(n)||hasBanned(t))return shT('⚠ Your review contains inappropriate content.',true);if(isSpam(t)||isSpam(n))return shT('⚠ Your review looks like spam.',true);
+  const nR={name:n,initial:n.charAt(0),rating:selSt,text:t};const sv=lUR();sv.push(nR);sUR(sv);mR();allR.push(nR);clearInterval(aR);curR=allR.length-1;bRUI();sRv(curR);stAR();
   document.getElementById('review-name').value='';document.getElementById('review-text').value='';selSt=0;stSpans.forEach(s=>s.classList.remove('lit'));
   shT('✓ Review submitted! Thanks for your feedback.');chkAR();
 });
 
-/* ══════════════ GLOBE ══════════════ */
-(function(){
-  const cv=document.getElementById('globe-canvas'),sc=new THREE.Scene(),cm=new THREE.PerspectiveCamera(45,cv.offsetWidth/cv.offsetHeight,.1,1000),rd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
-  rd.setSize(cv.offsetWidth,cv.offsetHeight);rd.setPixelRatio(Math.min(window.devicePixelRatio,2));cm.position.z=350;
-  sc.add(new THREE.Mesh(new THREE.SphereGeometry(100,64,64),new THREE.MeshPhongMaterial({color:0x000000,transparent:true,opacity:.2,shininess:100})));
-  const dg=new THREE.SphereGeometry(1.2,8,8),ds=[];
-  for(let i=0;i<1500;i++){const ph=Math.acos(-1+(2*i)/1500),th=Math.sqrt(1500*Math.PI)*ph,dt=new THREE.Mesh(dg,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));dt.position.set(101*Math.cos(th)*Math.sin(ph),101*Math.sin(th)*Math.sin(ph),101*Math.cos(ph));dt.material.opacity=Math.random()*.6+.3;dt.userData={phase:Math.random()*Math.PI*2,fs:Math.random()*.02+.01};sc.add(dt);ds.push(dt);}
-  sc.add(new THREE.AmbientLight(0xffffff,.5));
-  const p1=new THREE.PointLight(0xffffff,1.5,600);p1.position.set(250,250,250);sc.add(p1);
-  const p2=new THREE.PointLight(0xffffff,.8,500);p2.position.set(-200,-150,250);sc.add(p2);
-  const p3=new THREE.PointLight(0xffffff,1.2,500);p3.position.set(0,0,300);sc.add(p3);
-  let t=0;(function an(){requestAnimationFrame(an);t+=.01;sc.rotation.x=Math.sin(t*.08)*.12;sc.rotation.y+=.003;ds.forEach(d=>{d.material.opacity+=(((Math.sin(d.userData.phase+t)+1)/2)*.7+.2-d.material.opacity)*d.userData.fs;});rd.render(sc,cm);})();
-  window.addEventListener('resize',()=>{const c=cv.parentElement;cm.aspect=c.offsetWidth/c.offsetHeight;cm.updateProjectionMatrix();rd.setSize(c.offsetWidth,c.offsetHeight);});
-})();
+/* globe */
+(function(){const cv=document.getElementById('globe-canvas'),sc=new THREE.Scene(),cm=new THREE.PerspectiveCamera(45,cv.offsetWidth/cv.offsetHeight,.1,1000),rd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});rd.setSize(cv.offsetWidth,cv.offsetHeight);rd.setPixelRatio(Math.min(window.devicePixelRatio,2));cm.position.z=350;sc.add(new THREE.Mesh(new THREE.SphereGeometry(100,64,64),new THREE.MeshPhongMaterial({color:0x000000,transparent:true,opacity:.2,shininess:100})));const dg=new THREE.SphereGeometry(1.2,8,8),ds=[];for(let i=0;i<1500;i++){const ph=Math.acos(-1+(2*i)/1500),th=Math.sqrt(1500*Math.PI)*ph,dt=new THREE.Mesh(dg,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));dt.position.set(101*Math.cos(th)*Math.sin(ph),101*Math.sin(th)*Math.sin(ph),101*Math.cos(ph));dt.material.opacity=Math.random()*.6+.3;dt.userData={phase:Math.random()*Math.PI*2,fs:Math.random()*.02+.01};sc.add(dt);ds.push(dt);}sc.add(new THREE.AmbientLight(0xffffff,.5));const p1=new THREE.PointLight(0xffffff,1.5,600);p1.position.set(250,250,250);sc.add(p1);const p2=new THREE.PointLight(0xffffff,.8,500);p2.position.set(-200,-150,250);sc.add(p2);const p3=new THREE.PointLight(0xffffff,1.2,500);p3.position.set(0,0,300);sc.add(p3);let t=0;(function an(){requestAnimationFrame(an);t+=.01;sc.rotation.x=Math.sin(t*.08)*.12;sc.rotation.y+=.003;ds.forEach(d=>{d.material.opacity+=(((Math.sin(d.userData.phase+t)+1)/2)*.7+.2-d.material.opacity)*d.userData.fs;});rd.render(sc,cm);})();window.addEventListener('resize',()=>{const c=cv.parentElement;cm.aspect=c.offsetWidth/c.offsetHeight;cm.updateProjectionMatrix();rd.setSize(c.offsetWidth,c.offsetHeight);});})();
 </script>
 </body>
 </html>
