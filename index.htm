@@ -136,8 +136,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 #dlOverlay.active{display:flex}
 .dl-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 @keyframes dlIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-/* Picker */
 .dl-picker{position:relative;z-index:1;width:min(420px,calc(100vw - 40px));border-radius:16px;background:#0d0d0d;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 80px rgba(0,0,0,.9);padding:32px 28px;animation:dlIn .25s cubic-bezier(.16,1,.3,1) forwards}
 .dl-picker-header{display:flex;align-items:center;gap:14px;margin-bottom:6px}
 .dl-picker-header img{width:38px;height:38px;border-radius:9px;filter:drop-shadow(0 0 10px rgba(255,255,255,.15))}
@@ -152,8 +150,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .dl-option-desc{font-size:11px;color:rgba(255,255,255,.35);font-weight:500}
 .dl-picker-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:6px;color:rgba(255,255,255,.4);font-size:14px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease;line-height:1}
 .dl-picker-close:hover{background:rgba(255,255,255,.12);color:#fff}
-
-/* Progress card */
 .dl-card{position:relative;z-index:1;width:min(320px,calc(100vw - 40px));border-radius:14px;background:#0d0d0d;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 70px rgba(0,0,0,.85);padding:32px 24px 24px;display:none;flex-direction:column;align-items:center;text-align:center;animation:dlIn .25s cubic-bezier(.16,1,.3,1) forwards}
 .dl-card.visible{display:flex}
 .dl-logo{width:52px;height:52px;border-radius:12px;margin-bottom:16px;filter:drop-shadow(0 0 10px rgba(255,255,255,.12))}
@@ -165,8 +161,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .dl-footer{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06);width:100%;font-size:12px;color:rgba(255,255,255,.28);line-height:1.7}
 .dl-footer a{color:rgba(255,255,255,.5);text-decoration:underline;text-underline-offset:2px}
 .dl-footer a:hover{color:#fff}
-
-/* counter */
 .dl-counter-pill{margin-top:16px}
 .dl-counter-inner{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:8px 20px;transition:all .3s ease}
 .dl-counter-inner:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
@@ -178,37 +172,65 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 @keyframes numFlip{0%{transform:translateY(-8px);opacity:0}100%{transform:translateY(0);opacity:1}}
 .num-flip{animation:numFlip .35s cubic-bezier(.4,0,.2,1) forwards}
 
-/* changelog */
+/* ══ CHANGELOG ══ */
 .changelog{padding:120px 40px;position:relative;z-index:2}
 .changelog-inner{max-width:720px;margin:0 auto}
-.changelog-scroll{max-height:520px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding-right:8px}
-.changelog-scroll::-webkit-scrollbar{width:4px}
-.changelog-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:99px}
-.changelog-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:99px}
+
+/* Latest entry - always visible, prominent */
+.cl-latest{background:var(--surface);border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden;position:relative;box-shadow:0 0 40px rgba(255,255,255,.04)}
+.cl-latest::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)}
+.cl-header-latest{display:flex;align-items:center;gap:12px;padding:18px 22px}
+.cl-header-latest .cl-version{font-size:16px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.cl-header-latest .cl-badge.latest{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.25);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 12px;border-radius:99px;border:1px solid}
+.cl-header-latest .cl-date{margin-left:auto;font-size:11px;color:rgba(255,255,255,.25);font-weight:500}
+.cl-latest .cl-body{display:block;padding:0 22px 20px;border-top:1px solid rgba(255,255,255,.06)}
+.cl-latest .cl-body ul{list-style:none;padding:12px 0 0;display:flex;flex-direction:column;gap:7px}
+.cl-latest .cl-body ul li{font-size:13px;color:var(--text-secondary);display:flex;gap:10px;line-height:1.5}
+.cl-latest .cl-body ul li::before{content:'[+]';color:rgba(255,255,255,.3);font-family:monospace;font-size:12px;flex-shrink:0;margin-top:1px}
+.cl-latest .cl-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.28);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;padding-top:14px}
+
+/* "View older updates" toggle button */
+.cl-older-toggle{width:100%;margin-top:10px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:13px 20px;cursor:pointer;transition:all .3s ease;color:rgba(255,255,255,.4);font-family:'Inter',sans-serif;font-size:13px;font-weight:600}
+.cl-older-toggle:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.7)}
+.cl-older-toggle-icon{font-size:10px;transition:transform .35s cubic-bezier(.4,0,.2,1);flex-shrink:0}
+.cl-older-toggle.open .cl-older-toggle-icon{transform:rotate(180deg)}
+.cl-older-toggle-text{flex:1;text-align:left}
+.cl-older-count{font-size:11px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:99px;padding:2px 10px;color:rgba(255,255,255,.35);font-weight:700;letter-spacing:.3px}
+
+/* Older entries wrapper with smooth slide animation */
+.cl-older-wrapper{overflow:hidden;max-height:0;transition:max-height .5s cubic-bezier(.4,0,.2,1),opacity .4s ease;opacity:0}
+.cl-older-wrapper.open{max-height:2000px;opacity:1}
+.cl-older-entries{display:flex;flex-direction:column;gap:8px;padding-top:8px}
+
+/* Individual older entries */
 .cl-entry{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .3s ease}
-.cl-entry:hover{border-color:rgba(255,255,255,.18)}
+.cl-entry:hover{border-color:rgba(255,255,255,.15)}
 .cl-header{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none}
 .cl-version{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px}
 .cl-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1)}
 .cl-badge.latest{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
-.cl-arrow{margin-left:auto;font-size:11px;color:rgba(255,255,255,.3);transition:transform .3s ease}
+.cl-date{margin-left:auto;font-size:11px;color:rgba(255,255,255,.22);font-weight:500}
+.cl-arrow{font-size:10px;color:rgba(255,255,255,.25);transition:transform .3s ease;flex-shrink:0}
 .cl-entry.open .cl-arrow{transform:rotate(180deg)}
+.cl-header:has(+ .cl-body) .cl-date{margin-right:10px}
 .cl-body{display:none;padding:0 20px 16px;border-top:1px solid rgba(255,255,255,.05)}
 .cl-entry.open .cl-body{display:block}
 .cl-body ul{list-style:none;padding:12px 0 0;display:flex;flex-direction:column;gap:7px}
 .cl-body ul li{font-size:13px;color:var(--text-secondary);display:flex;gap:10px;line-height:1.5}
 .cl-body ul li::before{content:'[+]';color:rgba(255,255,255,.25);font-family:monospace;font-size:12px;flex-shrink:0;margin-top:1px}
 .cl-body .cl-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;padding-top:12px}
+
+/* showcase */
 .showcase{padding:120px 40px;position:relative;z-index:2}
 .showcase-inner{max-width:960px;margin:0 auto}
 .showcase-title{font-size:clamp(32px,4.5vw,48px);font-weight:800;margin-bottom:12px;letter-spacing:-1px;text-shadow:0 0 40px rgba(255,255,255,.3)}
 .video-frame{position:relative;width:100%;padding-bottom:56.25%;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 40px 120px rgba(0,0,0,.9),0 0 80px rgba(255,255,255,.12)}
 .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
-
 .bootstrapper-section{padding:120px 40px;position:relative;z-index:2}
 .bootstrapper-container{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
 .bs-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 16px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:20px;width:fit-content}
 .bs-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.8);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
 .bootstrapper-content h2{font-size:clamp(34px,4.5vw,52px);font-weight:900;line-height:1.08;margin-bottom:20px;letter-spacing:-1.5px;text-shadow:0 0 40px rgba(255,255,255,.3)}
 .bootstrapper-content p{font-size:16px;color:var(--text-secondary);line-height:1.8;margin-bottom:32px}
 .bs-features{display:flex;flex-direction:column;gap:12px;margin-bottom:36px}
@@ -231,8 +253,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <!-- ══ DOWNLOAD OVERLAY ══ -->
 <div id="dlOverlay">
   <div class="dl-backdrop" onclick="closeDl()"></div>
-
-  <!-- Step 1: Picker -->
   <div class="dl-picker" id="dlPicker">
     <button class="dl-picker-close" onclick="closeDl()">✕</button>
     <div class="dl-picker-header">
@@ -257,8 +277,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
       </button>
     </div>
   </div>
-
-  <!-- Step 2: Progress -->
   <div class="dl-card" id="dlCard">
     <img src="Cylogo_png.png" alt="Cyclone X" class="dl-logo">
     <div id="dlStatus">Initializing...</div>
@@ -337,38 +355,169 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
   </div>
 </section>
 
+<!-- ══ UPDATED CHANGELOG ══ -->
 <section class="changelog reveal" id="changelog">
   <div class="changelog-inner">
     <h2 class="section-title" style="text-align:left;margin-bottom:32px">Changelog</h2>
-    <div class="changelog-scroll">
-      <div class="cl-entry open" id="cl-2-2-1">
-        <div class="cl-header" onclick="toggleCl('cl-2-2-1')"><span class="cl-version">V 2.2.1</span><span class="cl-badge latest">Latest</span><span class="cl-arrow">▼</span></div>
-        <div class="cl-body"><div class="cl-label">Update</div><ul><li>FULLY coded</li><li>Every thing you do console prints</li><li>ADDED API IT WORKS!!!</li><li>85 Unc</li><li>Added a status panel aswell</li><li>fixed some bugs</li><li>Releasing pretty soon.. Stay tuned!</li></ul></div>
+
+    <!-- V 2.2.3 — Always visible, newest -->
+    <div class="cl-latest" id="cl-2-2-3">
+      <div class="cl-header-latest">
+        <span class="cl-version">V 2.2.3</span>
+        <span class="cl-badge latest">Newest</span>
+        <span class="cl-date">March 11, 2026</span>
       </div>
-      <div class="cl-entry" id="cl-2-2-0">
-        <div class="cl-header" onclick="toggleCl('cl-2-2-0')"><span class="cl-version">V 2.2.0</span><span class="cl-badge">Update</span><span class="cl-arrow">▼</span></div>
-        <div class="cl-body"><div class="cl-label">Update</div><ul><li>Added console</li><li>Fixed some settings</li><li>Made some small ui aligning changes</li></ul></div>
+      <div class="cl-body" style="display:block">
+        <div class="cl-label">Tab Updates</div>
+        <ul>
+          <li>Coded some settings</li>
+          <li>Some UI tweaks</li>
+        </ul>
       </div>
-      <div class="cl-entry" id="cl-2-1-9">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-9')"><span class="cl-version">V 2.1.9</span><span class="cl-badge">Update</span><span class="cl-arrow">▼</span></div>
-        <div class="cl-body"><div class="cl-label">Update</div><ul><li>coded settings</li><li>added a loading screen toggle</li><li>ui updates</li><li>more modern animations</li><li>made ui slightly</li></ul></div>
-      </div>
-      <div class="cl-entry" id="cl-2-1-8">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-8')"><span class="cl-version">V 2.1.8</span><span class="cl-badge">Update</span><span class="cl-arrow">▼</span></div>
-        <div class="cl-body"><div class="cl-label">Update</div><ul><li>New icons</li><li>New loading screen</li><li>Fixed opacity bugs</li><li>Fixed fullscreening</li><li>also added some new animations</li></ul></div>
-      </div>
-      <div class="cl-entry" id="cl-2-1-7">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-7')"><span class="cl-version">V 2.1.7</span><span class="cl-badge">Huge Update</span><span class="cl-arrow">▼</span></div>
-        <div class="cl-body"><div class="cl-label">Huge Update</div><ul><li>Added brand new home screen</li><li>Brand new settings ui</li><li>lots of settings</li><li>scripthub works</li></ul></div>
-      </div>
-      <div class="cl-entry" id="cl-2-1-6">
-        <div class="cl-header" onclick="toggleCl('cl-2-1-6')"><span class="cl-version">V 2.1.6</span><span class="cl-badge">Huge Update</span><span class="cl-arrow">▼</span></div>
-        <div class="cl-body"><div class="cl-label">Huge Update!</div><ul><li>BRAND NEW UI</li><li>WORKING EVERYTHING!!!</li><li>not added api yet</li></ul></div>
+    </div>
+
+    <!-- Expand toggle -->
+    <button class="cl-older-toggle" id="cl-older-toggle" onclick="toggleOlder()">
+      <span class="cl-older-toggle-icon">▼</span>
+      <span class="cl-older-toggle-text">View older updates</span>
+      <span class="cl-older-count">7 versions</span>
+    </button>
+
+    <!-- Older entries, hidden until toggled -->
+    <div class="cl-older-wrapper" id="cl-older-wrapper">
+      <div class="cl-older-entries">
+
+        <div class="cl-entry" id="cl-2-2-2">
+          <div class="cl-header" onclick="toggleCl('cl-2-2-2')">
+            <span class="cl-version">V 2.2.2</span>
+            <span class="cl-badge">Last</span>
+            <span class="cl-date">March 10, 2026</span>
+            <span class="cl-arrow">▼</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Tab Updates</div>
+            <ul>
+              <li>Fixed scripthub — send to explorer now works</li>
+              <li>You can now rename files when you send</li>
+              <li>Added Explorer tab</li>
+              <li>Got rid of notifications, moved them to editor</li>
+              <li>Fixed the highlight being red, now gray</li>
+              <li>Removed minimap on the right</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cl-entry" id="cl-2-2-1">
+          <div class="cl-header" onclick="toggleCl('cl-2-2-1')">
+            <span class="cl-version">V 2.2.1</span>
+            <span class="cl-badge">Update</span>
+            <span class="cl-date">March 9, 2026</span>
+            <span class="cl-arrow">▼</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Update</div>
+            <ul>
+              <li>FULLY coded</li>
+              <li>Everything you do console prints</li>
+              <li>ADDED API IT WORKS!!!</li>
+              <li>85 UNC</li>
+              <li>Added a status panel as well</li>
+              <li>Fixed some bugs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cl-entry" id="cl-2-2-0">
+          <div class="cl-header" onclick="toggleCl('cl-2-2-0')">
+            <span class="cl-version">V 2.2.0</span>
+            <span class="cl-badge">Update</span>
+            <span class="cl-date">March 9, 2026</span>
+            <span class="cl-arrow">▼</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Update</div>
+            <ul>
+              <li>Added console</li>
+              <li>Fixed some settings</li>
+              <li>Made some small UI aligning changes</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cl-entry" id="cl-2-1-9">
+          <div class="cl-header" onclick="toggleCl('cl-2-1-9')">
+            <span class="cl-version">V 2.1.9</span>
+            <span class="cl-badge">Update</span>
+            <span class="cl-date">March 9, 2026</span>
+            <span class="cl-arrow">▼</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Update</div>
+            <ul>
+              <li>Coded settings</li>
+              <li>Added a loading screen toggle</li>
+              <li>UI updates</li>
+              <li>More modern animations</li>
+              <li>Made UI slightly bigger</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cl-entry" id="cl-2-1-8">
+          <div class="cl-header" onclick="toggleCl('cl-2-1-8')">
+            <span class="cl-version">V 2.1.8</span>
+            <span class="cl-badge">Update</span>
+            <span class="cl-arrow">▼</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Update</div>
+            <ul>
+              <li>New icons</li>
+              <li>New loading screen</li>
+              <li>Fixed opacity bugs</li>
+              <li>Fixed fullscreening</li>
+              <li>Added some new animations</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cl-entry" id="cl-2-1-7">
+          <div class="cl-header" onclick="toggleCl('cl-2-1-7')">
+            <span class="cl-version">V 2.1.7</span>
+            <span class="cl-badge">Huge Update</span>
+            <span class="cl-arrow">▼</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Huge Update</div>
+            <ul>
+              <li>Added brand new home screen</li>
+              <li>Brand new settings UI</li>
+              <li>Lots of settings</li>
+              <li>Scripthub works</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cl-entry" id="cl-2-1-6">
+          <div class="cl-header" onclick="toggleCl('cl-2-1-6')">
+            <span class="cl-version">V 2.1.6</span>
+            <span class="cl-badge">Huge Update</span>
+            <span class="cl-arrow">▼</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Huge Update!</div>
+            <ul>
+              <li>BRAND NEW UI</li>
+              <li>WORKING EVERYTHING!!!</li>
+              <li>API not added yet</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
-
 
 <section class="bootstrapper-section reveal" id="bootstrapper">
   <div class="bootstrapper-container">
@@ -497,7 +646,17 @@ document.addEventListener('DOMContentLoaded',()=>{
   setCountEls(getCount(),false);
 });
 
+/* changelog toggles */
 function toggleCl(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+function toggleOlder(){
+  const btn=document.getElementById('cl-older-toggle');
+  const wrapper=document.getElementById('cl-older-wrapper');
+  const isOpen=wrapper.classList.contains('open');
+  wrapper.classList.toggle('open',!isOpen);
+  btn.classList.toggle('open',!isOpen);
+  btn.querySelector('.cl-older-toggle-text').textContent=isOpen?'View older updates':'Hide older updates';
+}
 
 /* stars */
 (function(){const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function rng(s){let v=s>>>0;return()=>{v^=v<<13;v^=v>>17;v^=v<<5;return(v>>>0)/0xffffffff};}const r=rng(99999),dots=[];for(let i=0;i<40;i++)dots.push({x:r()*window.innerWidth,y:r()*window.innerHeight,rad:0.7+r()*1.1,o:0.3+r()*0.5,sp:0.2+r()*0.5});function tick(){const W=canvas.width,H=canvas.height;ctx.clearRect(0,0,W,H);for(const d of dots){d.y-=d.sp;if(d.y<-5){d.y=H+5;d.x=r()*W;}ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${d.o})`;ctx.fill();}requestAnimationFrame(tick);}tick();})();
