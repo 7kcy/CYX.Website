@@ -228,7 +228,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .bs-mockup img{width:100%;display:block}
 @media(max-width:1024px){.bootstrapper-container{grid-template-columns:1fr;gap:50px}}
 @media(max-width:768px){.bootstrapper-section{padding-left:20px;padding-right:20px}}
-/* ══ ALTERNATIVE LINKS ══ */
 .alt-links{padding:60px 40px;position:relative;z-index:2;border-top:1px solid var(--border)}
 .alt-links-inner{max-width:700px;margin:0 auto;text-align:center}
 .alt-links-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.25);margin-bottom:20px}
@@ -405,7 +404,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="dl-counter-pill"><div class="dl-counter-inner"><span class="dl-counter-num" id="footer-dl-count">&mdash;</span><span class="dl-counter-sep">&middot;</span><span class="dl-counter-lbl">downloads</span></div></div>
   </div>
 </section>
-<!-- ALTERNATIVE LINKS -->
 <section class="alt-links">
   <div class="alt-links-inner">
     <div class="alt-links-title">Alternative Links</div>
@@ -426,48 +424,224 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 </section>
 <footer id="credits"><p>&copy; 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 <script>
-const DOWNLOADS={executor:{url:'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',label:'Cyclone X Executor',file:'CycloneX.zip'},bootstrapper:{url:'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip',label:'Cyclone X Bootstrapper',file:'BootStrapper.exe'}};
-const DL_KEY='cyx_download_count';
-function getCount(){return parseInt(localStorage.getItem(DL_KEY)||'0',10);}
-function incrementCount(){const n=getCount()+1;localStorage.setItem(DL_KEY,n);setCountEls(n,true);}
-function fmtCount(n){if(!n||isNaN(n))return'0';if(n>=1e6)return(n/1e6).toFixed(1).replace(/\.0$/,'')+' M';if(n>=1000)return(n/1000).toFixed(1).replace(/\.0$/,'')+' K';return n.toLocaleString();}
-function setCountEls(v,animate){['dl-stat-value','footer-dl-count','active-users-count'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const txt=fmtCount(v);if(el.textContent===txt)return;if(animate){el.classList.remove('num-flip');void el.offsetWidth;el.classList.add('num-flip');}el.textContent=txt;});}
-let dlActive=false,dlTimers=[];
-function openPicker(e){if(e)e.preventDefault();document.getElementById('dlPicker').style.display='';document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlOverlay').classList.add('active');}
-function startDl(type){const info=DOWNLOADS[type];if(!info)return;document.getElementById('dlPicker').style.display='none';const card=document.getElementById('dlCard');card.classList.add('visible');if(dlActive)return;dlActive=true;dlTimers.forEach(clearTimeout);dlTimers=[];const bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus'),fileEl=document.getElementById('dlFileName');bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Starting download...';fileEl.textContent=info.file;const STAGES=[{text:'Starting download...',pct:0},{text:'Fetching file...',pct:25},{text:'Downloading '+info.label+'...',pct:60},{text:'Almost done...',pct:90},{text:'Complete!',pct:100}];let cur=0,target=0;const ticker=setInterval(()=>{if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},20);dlTimers.push(ticker);STAGES.forEach((s,i)=>{const t=setTimeout(()=>{statusEl.textContent=s.text;target=s.pct;if(i===STAGES.length-1){clearInterval(ticker);bar.style.width='100%';pctEl.textContent='100%';const a=document.createElement('a');a.href=info.url;a.setAttribute('download',info.file);a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);incrementCount();},500);dlTimers.push(setTimeout(()=>{closeDl();},3500));}},i*700);dlTimers.push(t);});}
-function closeDl(){document.getElementById('dlOverlay').classList.remove('active');dlTimers.forEach(clearTimeout);dlTimers=[];setTimeout(()=>{dlActive=false;document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlPicker').style.display='';},300);}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('dlOverlay').classList.contains('active'))closeDl();});
-document.addEventListener('DOMContentLoaded',()=>{document.getElementById('hero-download-btn').addEventListener('click',openPicker);document.getElementById('main-download-btn').addEventListener('click',openPicker);setCountEls(getCount(),false);});
-function toggleCl(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
-function toggleOlder(){const btn=document.getElementById('cl-older-toggle'),wrapper=document.getElementById('cl-older-wrapper');const isOpen=wrapper.classList.contains('open');wrapper.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);btn.querySelector('.cl-older-toggle-text').textContent=isOpen?'View older updates':'Hide older updates';}
-function toggleAltLinks(){const btn=document.getElementById('alt-toggle');const list=document.getElementById('alt-links-list');const isOpen=list.classList.contains('open');list.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);for(let n of btn.childNodes){if(n.nodeType===3){n.textContent=isOpen?' Show all links ':' Hide links ';break;}}}
-(function(){const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function rng(s){let v=s>>>0;return()=>{v^=v<<13;v^=v>>17;v^=v<<5;return(v>>>0)/0xffffffff;};}const r=rng(99999),dots=[];for(let i=0;i<40;i++)dots.push({x:r()*window.innerWidth,y:r()*window.innerHeight,rad:0.7+r()*1.1,o:0.3+r()*0.5,sp:0.2+r()*0.5});function tick(){const W=canvas.width,H=canvas.height;ctx.clearRect(0,0,W,H);for(const d of dots){d.y-=d.sp;if(d.y<-5){d.y=H+5;d.x=r()*W;}ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+d.o+')';ctx.fill();}requestAnimationFrame(tick);}tick();})();
-window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
-const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('active');});},{threshold:0.1,rootMargin:'0px 0px -100px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-document.querySelectorAll('.feature-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--mouse-y',((e.clientY-r.top)/r.height*100)+'%');});});
-const BW=['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
-function hasBanned(t){const l=t.toLowerCase().replace(/[^a-z0-9\s]/g,'');return BW.some(w=>l.includes(w.replace(/[^a-z0-9\s]/g,'')));}
-function isSpam(t){if(/(.)\1{6,}/.test(t))return true;if(t.length>10){const l=t.replace(/[^a-zA-Z]/g,'');if(l.length>6&&l.replace(/[a-z]/g,'').length/l.length>0.8)return true;}return(t.match(/[^a-zA-Z0-9\s.,!?'"\\-]/g)||[]).length/t.length>0.3;}
-const SR=[{name:'Cyclone',initial:'C',rating:5,text:'Leave your review here! No trolls please...',seed:true}];
+// ═══════════════════════════════════════════════════════════════════
+// GLOBAL DOWNLOAD COUNTER — powered by CountAPI (free, no auth)
+// Counter key: cyclonex-executor / downloads
+// This is shared across ALL domains and ALL devices automatically.
+// On page load: fetches the real count from the server.
+// On each download: sends a hit to increment the server counter.
+// ═══════════════════════════════════════════════════════════════════
+const COUNTAPI_BASE = 'https://api.countapi.xyz';
+const COUNTAPI_NS   = 'cyclonex-executor';
+const COUNTAPI_KEY  = 'downloads';
+
+function fmtCount(n) {
+  if (!n || isNaN(n)) return '0';
+  if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + ' M';
+  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + ' K';
+  return n.toLocaleString();
+}
+
+function setCountEls(v, animate) {
+  ['dl-stat-value', 'footer-dl-count', 'active-users-count'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var txt = fmtCount(v);
+    if (el.textContent === txt) return;
+    if (animate) {
+      el.classList.remove('num-flip');
+      void el.offsetWidth;
+      el.classList.add('num-flip');
+    }
+    el.textContent = txt;
+  });
+}
+
+// Read-only fetch of current global count
+function fetchGlobalCount() {
+  fetch(COUNTAPI_BASE + '/get/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (typeof d.value === 'number') setCountEls(d.value, false);
+    })
+    .catch(function(e) { console.warn('CountAPI fetch failed:', e); });
+}
+
+// Increment global counter by 1, then update display
+function incrementGlobalCount() {
+  fetch(COUNTAPI_BASE + '/hit/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (typeof d.value === 'number') setCountEls(d.value, true);
+    })
+    .catch(function(e) { console.warn('CountAPI increment failed:', e); });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// DOWNLOAD LOGIC
+// ═══════════════════════════════════════════════════════════════════
+var DOWNLOADS = {
+  executor:     { url: 'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',              label: 'Cyclone X Executor',     file: 'CycloneX.zip'    },
+  bootstrapper: { url: 'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip', label: 'Cyclone X Bootstrapper', file: 'BootStrapper.exe' }
+};
+
+var dlActive = false, dlTimers = [];
+
+function openPicker(e) {
+  if (e) e.preventDefault();
+  document.getElementById('dlPicker').style.display = '';
+  document.getElementById('dlCard').classList.remove('visible');
+  document.getElementById('dlOverlay').classList.add('active');
+}
+
+function startDl(type) {
+  var info = DOWNLOADS[type];
+  if (!info) return;
+  document.getElementById('dlPicker').style.display = 'none';
+  var card = document.getElementById('dlCard');
+  card.classList.add('visible');
+  if (dlActive) return;
+  dlActive = true;
+  dlTimers.forEach(clearTimeout);
+  dlTimers = [];
+
+  var bar      = document.getElementById('dlBar');
+  var pctEl    = document.getElementById('dlPct');
+  var statusEl = document.getElementById('dlStatus');
+  var fileEl   = document.getElementById('dlFileName');
+
+  bar.style.width = '0%';
+  pctEl.textContent = '0%';
+  statusEl.textContent = 'Starting download...';
+  fileEl.textContent = info.file;
+
+  var STAGES = [
+    { text: 'Starting download...',              pct: 0   },
+    { text: 'Fetching file...',                  pct: 25  },
+    { text: 'Downloading ' + info.label + '...', pct: 60  },
+    { text: 'Almost done...',                    pct: 90  },
+    { text: 'Complete!',                         pct: 100 }
+  ];
+
+  var cur = 0, target = 0;
+  var ticker = setInterval(function() {
+    if (cur < target) {
+      cur = Math.min(cur + 1, target);
+      bar.style.width = cur + '%';
+      pctEl.textContent = cur + '%';
+    }
+  }, 20);
+  dlTimers.push(ticker);
+
+  STAGES.forEach(function(s, i) {
+    var t = setTimeout(function() {
+      statusEl.textContent = s.text;
+      target = s.pct;
+      if (i === STAGES.length - 1) {
+        clearInterval(ticker);
+        bar.style.width = '100%';
+        pctEl.textContent = '100%';
+
+        // Trigger the actual file download
+        var a = document.createElement('a');
+        a.href = info.url;
+        a.setAttribute('download', info.file);
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function() { document.body.removeChild(a); }, 500);
+
+        // ★ INCREMENT GLOBAL COUNTER — works across all domains & devices
+        incrementGlobalCount();
+
+        dlTimers.push(setTimeout(function() { closeDl(); }, 3500));
+      }
+    }, i * 700);
+    dlTimers.push(t);
+  });
+}
+
+function closeDl() {
+  document.getElementById('dlOverlay').classList.remove('active');
+  dlTimers.forEach(clearTimeout);
+  dlTimers = [];
+  setTimeout(function() {
+    dlActive = false;
+    document.getElementById('dlCard').classList.remove('visible');
+    document.getElementById('dlPicker').style.display = '';
+  }, 300);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('dlOverlay').classList.contains('active')) closeDl();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('hero-download-btn').addEventListener('click', openPicker);
+  document.getElementById('main-download-btn').addEventListener('click', openPicker);
+  // Fetch real global count on every page load
+  fetchGlobalCount();
+});
+
+// ═══════════════════════════════════════════════════════════════════
+// CHANGELOG TOGGLES
+// ═══════════════════════════════════════════════════════════════════
+function toggleCl(id) { var el = document.getElementById(id); if (el) el.classList.toggle('open'); }
+function toggleOlder() {
+  var btn = document.getElementById('cl-older-toggle'), wrapper = document.getElementById('cl-older-wrapper');
+  var isOpen = wrapper.classList.contains('open');
+  wrapper.classList.toggle('open', !isOpen); btn.classList.toggle('open', !isOpen);
+  btn.querySelector('.cl-older-toggle-text').textContent = isOpen ? 'View older updates' : 'Hide older updates';
+}
+function toggleAltLinks() {
+  var btn = document.getElementById('alt-toggle'), list = document.getElementById('alt-links-list');
+  var isOpen = list.classList.contains('open');
+  list.classList.toggle('open', !isOpen); btn.classList.toggle('open', !isOpen);
+  for (var n of btn.childNodes) { if (n.nodeType === 3) { n.textContent = isOpen ? ' Show all links ' : ' Hide links '; break; } }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// STARFIELD
+// ═══════════════════════════════════════════════════════════════════
+(function(){var canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function rng(s){var v=s>>>0;return function(){v^=v<<13;v^=v>>17;v^=v<<5;return(v>>>0)/0xffffffff;};}var r=rng(99999),dots=[];for(var i=0;i<40;i++)dots.push({x:r()*window.innerWidth,y:r()*window.innerHeight,rad:0.7+r()*1.1,o:0.3+r()*0.5,sp:0.2+r()*0.5});function tick(){var W=canvas.width,H=canvas.height;ctx.clearRect(0,0,W,H);for(var d of dots){d.y-=d.sp;if(d.y<-5){d.y=H+5;d.x=r()*W;}ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+d.o+')';ctx.fill();}requestAnimationFrame(tick);}tick();})();
+
+// ═══════════════════════════════════════════════════════════════════
+// SCROLL & REVEAL
+// ═══════════════════════════════════════════════════════════════════
+window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
+var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('active');});},{threshold:0.1,rootMargin:'0px 0px -100px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
+document.querySelectorAll('.feature-card').forEach(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--mouse-y',((e.clientY-r.top)/r.height*100)+'%');});});
+
+// ═══════════════════════════════════════════════════════════════════
+// REVIEW SYSTEM
+// ═══════════════════════════════════════════════════════════════════
+var BW=['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
+function hasBanned(t){var l=t.toLowerCase().replace(/[^a-z0-9\s]/g,'');return BW.some(function(w){return l.includes(w.replace(/[^a-z0-9\s]/g,''));});}
+function isSpam(t){if(/(.)\1{6,}/.test(t))return true;if(t.length>10){var l=t.replace(/[^a-zA-Z]/g,'');if(l.length>6&&l.replace(/[a-z]/g,'').length/l.length>0.8)return true;}return(t.match(/[^a-zA-Z0-9\s.,!?'"\\-]/g)||[]).length/t.length>0.3;}
+var SR=[{name:'Cyclone',initial:'C',rating:5,text:'Leave your review here! No trolls please...',seed:true}];
 function lUR(){try{return JSON.parse(localStorage.getItem('cyx_reviews')||'[]');}catch{return[];}}
 function sUR(a){try{localStorage.setItem('cyx_reviews',JSON.stringify(a));}catch{}}
 function hAR(){return localStorage.getItem('cyx_has_reviewed')==='1';}
 function mR(){localStorage.setItem('cyx_has_reviewed','1');}
-let allR=[...SR,...lUR()],curR=0,aR;
-const rSlider=document.getElementById('reviews-slider'),rDots=document.getElementById('review-dots');
-function bRUI(){rSlider.innerHTML='';rDots.innerHTML='';allR.forEach((rv,i)=>{const c=document.createElement('div');c.className='review-card'+(i===curR?' active':'');c.innerHTML='<div class="review-header"><div class="review-avatar">'+rv.initial.toUpperCase()+'</div><div class="review-info"><h4>'+rv.name+'</h4><div class="review-stars">'+'\u2605'.repeat(rv.rating)+'\u2606'.repeat(5-rv.rating)+'</div></div></div><p class="review-text">&ldquo;'+rv.text+'&rdquo;</p>';rSlider.appendChild(c);const d=document.createElement('div');d.className='dot'+(i===curR?' active':'');d.addEventListener('click',()=>{clearInterval(aR);sRv(i);stAR();});rDots.appendChild(d);});}
-function sRv(i){const cs=rSlider.querySelectorAll('.review-card'),ds=rDots.querySelectorAll('.dot');if(!cs[curR])return;cs[curR].classList.remove('active');ds[curR].classList.remove('active');curR=i;cs[curR].classList.add('active');ds[curR].classList.add('active');}
-function stAR(){clearInterval(aR);aR=setInterval(()=>sRv((curR+1)%allR.length),3000);}
+var allR=[...SR,...lUR()],curR=0,aR;
+var rSlider=document.getElementById('reviews-slider'),rDots=document.getElementById('review-dots');
+function bRUI(){rSlider.innerHTML='';rDots.innerHTML='';allR.forEach(function(rv,i){var c=document.createElement('div');c.className='review-card'+(i===curR?' active':'');c.innerHTML='<div class="review-header"><div class="review-avatar">'+rv.initial.toUpperCase()+'</div><div class="review-info"><h4>'+rv.name+'</h4><div class="review-stars">'+'\u2605'.repeat(rv.rating)+'\u2606'.repeat(5-rv.rating)+'</div></div></div><p class="review-text">&ldquo;'+rv.text+'&rdquo;</p>';rSlider.appendChild(c);var d=document.createElement('div');d.className='dot'+(i===curR?' active':'');d.addEventListener('click',function(){clearInterval(aR);sRv(i);stAR();});rDots.appendChild(d);});}
+function sRv(i){var cs=rSlider.querySelectorAll('.review-card'),ds=rDots.querySelectorAll('.dot');if(!cs[curR])return;cs[curR].classList.remove('active');ds[curR].classList.remove('active');curR=i;cs[curR].classList.add('active');ds[curR].classList.add('active');}
+function stAR(){clearInterval(aR);aR=setInterval(function(){sRv((curR+1)%allR.length);},3000);}
 bRUI();stAR();
-function chkAR(){if(hAR()){const b=document.getElementById('submit-review-btn');b.disabled=true;b.textContent='You have already left a review';const m=document.createElement('div');m.className='already-reviewed-msg';m.textContent="\u2713 You've already submitted a review. Thanks for the feedback!";document.getElementById('review-form-wrapper').appendChild(m);}}
+function chkAR(){if(hAR()){var b=document.getElementById('submit-review-btn');b.disabled=true;b.textContent='You have already left a review';var m=document.createElement('div');m.className='already-reviewed-msg';m.textContent="\u2713 You've already submitted a review. Thanks for the feedback!";document.getElementById('review-form-wrapper').appendChild(m);}}
 chkAR();
-let selSt=0;
-const stSpans=document.querySelectorAll('#star-picker span');
-stSpans.forEach(s=>{s.addEventListener('mouseenter',()=>{const v=+s.dataset.v;stSpans.forEach(x=>x.classList.toggle('lit',+x.dataset.v<=v));});s.addEventListener('mouseleave',()=>{stSpans.forEach(x=>x.classList.toggle('lit',+x.dataset.v<=selSt));});s.addEventListener('click',()=>{selSt=+s.dataset.v;stSpans.forEach(x=>x.classList.toggle('lit',+x.dataset.v<=selSt));});});
-function shT(m,e){const t=document.getElementById('submit-toast');t.textContent=m;t.className='submit-toast visible'+(e?' error':'');setTimeout(()=>{t.className='submit-toast';},3500);}
-document.getElementById('submit-review-btn').addEventListener('click',()=>{if(hAR())return;const n=document.getElementById('review-name').value.trim(),t=document.getElementById('review-text').value.trim();if(!n)return shT('Please enter your name.',true);if(n.length<2)return shT('Name must be at least 2 characters.',true);if(selSt===0)return shT('Please select a star rating.',true);if(!t)return shT('Please write a review.',true);if(t.length<10)return shT('Review must be at least 10 characters.',true);if(hasBanned(n)||hasBanned(t))return shT('\u26A0 Your review contains inappropriate content.',true);if(isSpam(t)||isSpam(n))return shT('\u26A0 Your review looks like spam.',true);const nR={name:n,initial:n.charAt(0),rating:selSt,text:t};const sv=lUR();sv.push(nR);sUR(sv);mR();allR.push(nR);clearInterval(aR);curR=allR.length-1;bRUI();sRv(curR);stAR();document.getElementById('review-name').value='';document.getElementById('review-text').value='';selSt=0;stSpans.forEach(s=>s.classList.remove('lit'));shT('\u2713 Review submitted! Thanks for your feedback.');chkAR();});
-(function(){const cv=document.getElementById('globe-canvas'),sc=new THREE.Scene(),cm=new THREE.PerspectiveCamera(45,cv.offsetWidth/cv.offsetHeight,.1,1000),rd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});rd.setSize(cv.offsetWidth,cv.offsetHeight);rd.setPixelRatio(Math.min(window.devicePixelRatio,2));cm.position.z=350;sc.add(new THREE.Mesh(new THREE.SphereGeometry(100,64,64),new THREE.MeshPhongMaterial({color:0x000000,transparent:true,opacity:.2,shininess:100})));const dg=new THREE.SphereGeometry(1.2,8,8),ds=[];for(let i=0;i<1500;i++){const ph=Math.acos(-1+(2*i)/1500),th=Math.sqrt(1500*Math.PI)*ph,dt=new THREE.Mesh(dg,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));dt.position.set(101*Math.cos(th)*Math.sin(ph),101*Math.sin(th)*Math.sin(ph),101*Math.cos(ph));dt.material.opacity=Math.random()*.6+.3;dt.userData={phase:Math.random()*Math.PI*2,fs:Math.random()*.02+.01};sc.add(dt);ds.push(dt);}sc.add(new THREE.AmbientLight(0xffffff,.5));const p1=new THREE.PointLight(0xffffff,1.5,600);p1.position.set(250,250,250);sc.add(p1);const p2=new THREE.PointLight(0xffffff,.8,500);p2.position.set(-200,-150,250);sc.add(p2);const p3=new THREE.PointLight(0xffffff,1.2,500);p3.position.set(0,0,300);sc.add(p3);let t=0;(function an(){requestAnimationFrame(an);t+=.01;sc.rotation.x=Math.sin(t*.08)*.12;sc.rotation.y+=.003;ds.forEach(d=>{d.material.opacity+=(((Math.sin(d.userData.phase+t)+1)/2)*.7+.2-d.material.opacity)*d.userData.fs;});rd.render(sc,cm);})();window.addEventListener('resize',()=>{const c=cv.parentElement;cm.aspect=c.offsetWidth/c.offsetHeight;cm.updateProjectionMatrix();rd.setSize(c.offsetWidth,c.offsetHeight);});})();
+var selSt=0;
+var stSpans=document.querySelectorAll('#star-picker span');
+stSpans.forEach(function(s){s.addEventListener('mouseenter',function(){var v=+s.dataset.v;stSpans.forEach(function(x){x.classList.toggle('lit',+x.dataset.v<=v);});});s.addEventListener('mouseleave',function(){stSpans.forEach(function(x){x.classList.toggle('lit',+x.dataset.v<=selSt);});});s.addEventListener('click',function(){selSt=+s.dataset.v;stSpans.forEach(function(x){x.classList.toggle('lit',+x.dataset.v<=selSt);});});});
+function shT(m,e){var t=document.getElementById('submit-toast');t.textContent=m;t.className='submit-toast visible'+(e?' error':'');setTimeout(function(){t.className='submit-toast';},3500);}
+document.getElementById('submit-review-btn').addEventListener('click',function(){if(hAR())return;var n=document.getElementById('review-name').value.trim(),t=document.getElementById('review-text').value.trim();if(!n)return shT('Please enter your name.',true);if(n.length<2)return shT('Name must be at least 2 characters.',true);if(selSt===0)return shT('Please select a star rating.',true);if(!t)return shT('Please write a review.',true);if(t.length<10)return shT('Review must be at least 10 characters.',true);if(hasBanned(n)||hasBanned(t))return shT('\u26A0 Your review contains inappropriate content.',true);if(isSpam(t)||isSpam(n))return shT('\u26A0 Your review looks like spam.',true);var nR={name:n,initial:n.charAt(0),rating:selSt,text:t};var sv=lUR();sv.push(nR);sUR(sv);mR();allR.push(nR);clearInterval(aR);curR=allR.length-1;bRUI();sRv(curR);stAR();document.getElementById('review-name').value='';document.getElementById('review-text').value='';selSt=0;stSpans.forEach(function(s){s.classList.remove('lit');});shT('\u2713 Review submitted! Thanks for your feedback.');chkAR();});
+
+// ═══════════════════════════════════════════════════════════════════
+// 3D GLOBE
+// ═══════════════════════════════════════════════════════════════════
+(function(){var cv=document.getElementById('globe-canvas'),sc=new THREE.Scene(),cm=new THREE.PerspectiveCamera(45,cv.offsetWidth/cv.offsetHeight,.1,1000),rd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});rd.setSize(cv.offsetWidth,cv.offsetHeight);rd.setPixelRatio(Math.min(window.devicePixelRatio,2));cm.position.z=350;sc.add(new THREE.Mesh(new THREE.SphereGeometry(100,64,64),new THREE.MeshPhongMaterial({color:0x000000,transparent:true,opacity:.2,shininess:100})));var dg=new THREE.SphereGeometry(1.2,8,8),ds=[];for(var i=0;i<1500;i++){var ph=Math.acos(-1+(2*i)/1500),th=Math.sqrt(1500*Math.PI)*ph,dt=new THREE.Mesh(dg,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));dt.position.set(101*Math.cos(th)*Math.sin(ph),101*Math.sin(th)*Math.sin(ph),101*Math.cos(ph));dt.material.opacity=Math.random()*.6+.3;dt.userData={phase:Math.random()*Math.PI*2,fs:Math.random()*.02+.01};sc.add(dt);ds.push(dt);}sc.add(new THREE.AmbientLight(0xffffff,.5));var p1=new THREE.PointLight(0xffffff,1.5,600);p1.position.set(250,250,250);sc.add(p1);var p2=new THREE.PointLight(0xffffff,.8,500);p2.position.set(-200,-150,250);sc.add(p2);var p3=new THREE.PointLight(0xffffff,1.2,500);p3.position.set(0,0,300);sc.add(p3);var t=0;(function an(){requestAnimationFrame(an);t+=.01;sc.rotation.x=Math.sin(t*.08)*.12;sc.rotation.y+=.003;ds.forEach(function(d){d.material.opacity+=(((Math.sin(d.userData.phase+t)+1)/2)*.7+.2-d.material.opacity)*d.userData.fs;});rd.render(sc,cm);})();window.addEventListener('resize',function(){var c=cv.parentElement;cm.aspect=c.offsetWidth/c.offsetHeight;cm.updateProjectionMatrix();rd.setSize(c.offsetWidth,c.offsetHeight);});})();
 </script>
 </body>
 </html>
