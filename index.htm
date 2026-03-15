@@ -425,12 +425,12 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <footer id="credits"><p>&copy; 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// GLOBAL DOWNLOAD COUNTER — powered by CountAPI (free, no auth)
-// Auto-creates the key on first use. Shared across all domains/devices.
+// GLOBAL DOWNLOAD COUNTER — reads real download counts from GitHub Releases
+// No API key needed. Sums all release asset downloads across both repos.
+// GitHub public API: 60 requests/hour unauthenticated — more than enough.
 // ═══════════════════════════════════════════════════════════════════
-var COUNTAPI_BASE = 'https://api.countapi.xyz';
-var COUNTAPI_NS   = 'cyclonex-executor';
-var COUNTAPI_KEY  = 'downloads';
+var GH_OWNER = '7kcy';
+var GH_REPOS = ['CYX.Website', 'CYX.Bootstrapper'];
 
 function fmtCount(n) {
   if (!n || isNaN(n)) return '0';
@@ -454,50 +454,39 @@ function setCountEls(v, animate) {
   });
 }
 
-// Create the key if it doesn't exist yet, then run a callback
-function ensureKey(cb) {
-  fetch(COUNTAPI_BASE + '/get/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (d.value === null || d.value === undefined) {
-        // Key doesn't exist — create it starting at 0
-        return fetch(COUNTAPI_BASE + '/create?namespace=' + COUNTAPI_NS + '&key=' + COUNTAPI_KEY + '&value=0&enable_reset=0')
-          .then(function(r) { return r.json(); })
-          .then(function() { cb(); });
-      } else {
-        setCountEls(d.value, false);
-        cb();
-      }
+function fetchRepoDownloads(repo) {
+  return fetch('https://api.github.com/repos/' + GH_OWNER + '/' + repo + '/releases', {
+    headers: { 'Accept': 'application/vnd.github.v3+json' }
+  })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
     })
-    .catch(function(e) { console.warn('CountAPI init failed:', e); cb(); });
+    .then(function(releases) {
+      if (!Array.isArray(releases)) return 0;
+      return releases.reduce(function(total, release) {
+        return total + (release.assets || []).reduce(function(sum, asset) {
+          return sum + (asset.download_count || 0);
+        }, 0);
+      }, 0);
+    })
+    .catch(function(e) {
+      console.warn('GitHub API fetch failed for ' + repo + ':', e);
+      return 0;
+    });
 }
 
-// Read-only fetch of current global count
 function fetchGlobalCount() {
-  ensureKey(function() {});
+  Promise.all(GH_REPOS.map(fetchRepoDownloads))
+    .then(function(counts) {
+      var total = counts.reduce(function(a, b) { return a + b; }, 0);
+      setCountEls(total, false);
+    });
 }
 
-// Increment global counter by 1, then update display
+// Re-fetches after a short delay so GitHub's count has time to register
 function incrementGlobalCount() {
-  fetch(COUNTAPI_BASE + '/hit/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
-    .then(function(r) { return r.json(); })
-    .then(function(d) {
-      if (typeof d.value === 'number' && d.value !== null) {
-        setCountEls(d.value, true);
-      } else {
-        // Key might not exist yet — create it and hit again
-        fetch(COUNTAPI_BASE + '/create?namespace=' + COUNTAPI_NS + '&key=' + COUNTAPI_KEY + '&value=0&enable_reset=0')
-          .then(function() {
-            return fetch(COUNTAPI_BASE + '/hit/' + COUNTAPI_NS + '/' + COUNTAPI_KEY);
-          })
-          .then(function(r) { return r.json(); })
-          .then(function(d2) {
-            if (typeof d2.value === 'number') setCountEls(d2.value, true);
-          })
-          .catch(function(e) { console.warn('CountAPI create+hit failed:', e); });
-      }
-    })
-    .catch(function(e) { console.warn('CountAPI increment failed:', e); });
+  setTimeout(fetchGlobalCount, 2500);
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -539,11 +528,11 @@ function startDl(type) {
   fileEl.textContent = info.file;
 
   var STAGES = [
-    { text: 'Starting download...',              pct: 0   },
-    { text: 'Fetching file...',                  pct: 25  },
+    { text: 'Starting download...',               pct: 0   },
+    { text: 'Fetching file...',                   pct: 25  },
     { text: 'Downloading ' + info.label + '...', pct: 60  },
-    { text: 'Almost done...',                    pct: 90  },
-    { text: 'Complete!',                         pct: 100 }
+    { text: 'Almost done...',                     pct: 90  },
+    { text: 'Complete!',                          pct: 100 }
   ];
 
   var cur = 0, target = 0;
@@ -574,7 +563,7 @@ function startDl(type) {
         a.click();
         setTimeout(function() { document.body.removeChild(a); }, 500);
 
-        // ★ INCREMENT GLOBAL COUNTER — works across all domains & devices
+        // Re-fetch GitHub download count after a short delay
         incrementGlobalCount();
 
         dlTimers.push(setTimeout(function() { closeDl(); }, 3500));
@@ -602,7 +591,7 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('hero-download-btn').addEventListener('click', openPicker);
   document.getElementById('main-download-btn').addEventListener('click', openPicker);
-  // Fetch real global count on every page load
+  // Fetch real GitHub download count on every page load
   fetchGlobalCount();
 });
 
