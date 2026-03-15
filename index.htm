@@ -426,14 +426,11 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <script>
 // ═══════════════════════════════════════════════════════════════════
 // GLOBAL DOWNLOAD COUNTER — powered by CountAPI (free, no auth)
-// Counter key: cyclonex-executor / downloads
-// This is shared across ALL domains and ALL devices automatically.
-// On page load: fetches the real count from the server.
-// On each download: sends a hit to increment the server counter.
+// Auto-creates the key on first use. Shared across all domains/devices.
 // ═══════════════════════════════════════════════════════════════════
-const COUNTAPI_BASE = 'https://api.countapi.xyz';
-const COUNTAPI_NS   = 'cyclonex-executor';
-const COUNTAPI_KEY  = 'downloads';
+var COUNTAPI_BASE = 'https://api.countapi.xyz';
+var COUNTAPI_NS   = 'cyclonex-executor';
+var COUNTAPI_KEY  = 'downloads';
 
 function fmtCount(n) {
   if (!n || isNaN(n)) return '0';
@@ -457,14 +454,27 @@ function setCountEls(v, animate) {
   });
 }
 
-// Read-only fetch of current global count
-function fetchGlobalCount() {
+// Create the key if it doesn't exist yet, then run a callback
+function ensureKey(cb) {
   fetch(COUNTAPI_BASE + '/get/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
     .then(function(r) { return r.json(); })
     .then(function(d) {
-      if (typeof d.value === 'number') setCountEls(d.value, false);
+      if (d.value === null || d.value === undefined) {
+        // Key doesn't exist — create it starting at 0
+        return fetch(COUNTAPI_BASE + '/create?namespace=' + COUNTAPI_NS + '&key=' + COUNTAPI_KEY + '&value=0&enable_reset=0')
+          .then(function(r) { return r.json(); })
+          .then(function() { cb(); });
+      } else {
+        setCountEls(d.value, false);
+        cb();
+      }
     })
-    .catch(function(e) { console.warn('CountAPI fetch failed:', e); });
+    .catch(function(e) { console.warn('CountAPI init failed:', e); cb(); });
+}
+
+// Read-only fetch of current global count
+function fetchGlobalCount() {
+  ensureKey(function() {});
 }
 
 // Increment global counter by 1, then update display
@@ -472,7 +482,20 @@ function incrementGlobalCount() {
   fetch(COUNTAPI_BASE + '/hit/' + COUNTAPI_NS + '/' + COUNTAPI_KEY)
     .then(function(r) { return r.json(); })
     .then(function(d) {
-      if (typeof d.value === 'number') setCountEls(d.value, true);
+      if (typeof d.value === 'number' && d.value !== null) {
+        setCountEls(d.value, true);
+      } else {
+        // Key might not exist yet — create it and hit again
+        fetch(COUNTAPI_BASE + '/create?namespace=' + COUNTAPI_NS + '&key=' + COUNTAPI_KEY + '&value=0&enable_reset=0')
+          .then(function() {
+            return fetch(COUNTAPI_BASE + '/hit/' + COUNTAPI_NS + '/' + COUNTAPI_KEY);
+          })
+          .then(function(r) { return r.json(); })
+          .then(function(d2) {
+            if (typeof d2.value === 'number') setCountEls(d2.value, true);
+          })
+          .catch(function(e) { console.warn('CountAPI create+hit failed:', e); });
+      }
     })
     .catch(function(e) { console.warn('CountAPI increment failed:', e); });
 }
