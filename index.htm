@@ -201,6 +201,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .cl-version{font-size:15px;font-weight:800;color:#fff;letter-spacing:-.3px}
 .cl-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1)}
 .cl-badge.latest{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.2)}
+.cl-badge.last{background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.12)}
 .cl-date{margin-left:auto;font-size:11px;color:rgba(255,255,255,.22);font-weight:500}
 .cl-arrow{font-size:10px;color:rgba(255,255,255,.25);transition:transform .3s ease;flex-shrink:0}
 .cl-entry.open .cl-arrow{transform:rotate(180deg)}
@@ -246,7 +247,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <div id="dlOverlay">
   <div class="dl-backdrop" onclick="closeDl()"></div>
   <div class="dl-picker" id="dlPicker">
-    <button class="dl-picker-close" onclick="closeDl()">✕</button>
+    <button class="dl-picker-close" onclick="closeDl()">&#x2715;</button>
     <div class="dl-picker-header">
       <img src="Cylogo_png.png" alt="Cyclone X">
       <h3>Choose your download</h3>
@@ -254,14 +255,14 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <p class="dl-picker-sub">Select the version you want</p>
     <div class="dl-options">
       <button class="dl-option" onclick="startDl('executor')">
-        <div class="dl-option-icon">⚡</div>
+        <div class="dl-option-icon">&#x26A1;</div>
         <div class="dl-option-text">
           <span class="dl-option-name">Cyclone X Executor</span>
-          <span class="dl-option-desc">The full executor — run scripts instantly</span>
+          <span class="dl-option-desc">The full executor &mdash; run scripts instantly</span>
         </div>
       </button>
       <button class="dl-option" onclick="startDl('bootstrapper')">
-        <div class="dl-option-icon">🚀</div>
+        <div class="dl-option-icon">&#x1F680;</div>
         <div class="dl-option-text">
           <span class="dl-option-name">Cyclone X Bootstrapper</span>
           <span class="dl-option-desc">Auto-installer that sets everything up for you</span>
@@ -311,24 +312,24 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <section class="features reveal" id="executor">
   <h2 class="section-title">Advanced Features</h2>
   <div class="features-grid">
-    <div class="feature-card"><div class="feature-icon">⚡</div><h3>Fast Execution</h3><p>Super quick for your desire.</p></div>
-    <div class="feature-card"><div class="feature-icon">🛡️</div><h3>Undetected</h3><p>Super safe, keeps you safe and secure.</p></div>
-    <div class="feature-card"><div class="feature-icon">🚀</div><h3>UNC Support</h3><p>85+ UNC compatibility with all major scripts and functions.</p></div>
-    <div class="feature-card"><div class="feature-icon">💎</div><h3>Premium Quality</h3><p>Professional-grade executor trusted by pros.</p></div>
-    <div class="feature-card"><div class="feature-icon">🔓</div><h3>No Keys Required</h3><p>Completely keyless system for instant access.</p></div>
-    <div class="feature-card"><div class="feature-icon">🎯</div><h3>User Friendly</h3><p>Intuitive interface designed for all skill levels.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#x26A1;</div><h3>Fast Execution</h3><p>Super quick for your desire.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#x1F6E1;&#xFE0F;</div><h3>Undetected</h3><p>Super safe, keeps you safe and secure.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#x1F680;</div><h3>UNC Support</h3><p>85+ UNC compatibility with all major scripts and functions.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#x1F48E;</div><h3>Premium Quality</h3><p>Professional-grade executor trusted by pros.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#x1F513;</div><h3>No Keys Required</h3><p>Completely keyless system for instant access.</p></div>
+    <div class="feature-card"><div class="feature-icon">&#x1F3AF;</div><h3>User Friendly</h3><p>Intuitive interface designed for all skill levels.</p></div>
   </div>
 </section>
 
 <section class="stats-section reveal">
   <h2 class="section-title">Performance Metrics</h2>
   <div class="stats-grid">
-    <div class="stat-card"><div class="stat-icon">⚡</div><div class="stat-value">Fast</div><div class="stat-label">Execution Speed</div></div>
-    <div class="stat-card"><div class="stat-icon">📊</div><div class="stat-value">85% +</div><div class="stat-label">UNC Rate</div></div>
-    <div class="stat-card"><div class="stat-icon">🛡️</div><div class="stat-value">100%</div><div class="stat-label">Secure</div></div>
+    <div class="stat-card"><div class="stat-icon">&#x26A1;</div><div class="stat-value">Fast</div><div class="stat-label">Execution Speed</div></div>
+    <div class="stat-card"><div class="stat-icon">&#x1F4CA;</div><div class="stat-value">85% +</div><div class="stat-label">UNC Rate</div></div>
+    <div class="stat-card"><div class="stat-icon">&#x1F6E1;&#xFE0F;</div><div class="stat-value">100%</div><div class="stat-label">Secure</div></div>
     <div class="stat-card downloads-card" id="dl-stat-card">
-      <div class="stat-icon">⬇️</div>
-      <div class="stat-value" id="dl-stat-value">—</div>
+      <div class="stat-icon">&#x2B07;&#xFE0F;</div>
+      <div class="stat-value" id="dl-stat-value">&mdash;</div>
       <div class="stat-label">Total Downloads</div>
       <div class="live-badge">Live</div>
     </div>
@@ -340,7 +341,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="worldwide-content">
       <h2>Users Worldwide</h2>
       <p>Join our rapidly growing community of users who trust Cyclone X daily. Experience unparalleled execution backed by a global network of scripters.</p>
-      <div class="user-count" id="active-users-count">—</div>
+      <div class="user-count" id="active-users-count">&mdash;</div>
       <div class="user-count-label">Active Users</div>
     </div>
     <div class="globe-container"><canvas id="globe-canvas"></canvas></div>
@@ -351,35 +352,74 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <section class="changelog reveal" id="changelog">
   <div class="changelog-inner">
     <h2 class="section-title" style="text-align:left;margin-bottom:32px">Changelog</h2>
-    <div class="cl-latest" id="cl-2-2-3">
+
+    <!-- V 2.2.5 — Current -->
+    <div class="cl-latest" id="cl-2-2-5">
       <div class="cl-header-latest">
-        <span class="cl-version">V 2.2.3</span>
+        <span class="cl-version">V 2.2.5</span>
         <span class="cl-badge latest">Newest</span>
-        <span class="cl-date">March 11, 2026</span>
+        <span class="cl-date">March 14, 2026</span>
       </div>
       <div class="cl-body" style="display:block">
-        <div class="cl-label">Tab Updates</div>
+        <div class="cl-label">Update</div>
         <ul>
-          <li>Coded some settings</li>
-          <li>Some UI tweaks</li>
+          <li>Latest release</li>
         </ul>
       </div>
     </div>
+
     <button class="cl-older-toggle" id="cl-older-toggle" onclick="toggleOlder()">
-      <span class="cl-older-toggle-icon">▼</span>
+      <span class="cl-older-toggle-icon">&#x25BC;</span>
       <span class="cl-older-toggle-text">View older updates</span>
-      <span class="cl-older-count">7 versions</span>
+      <span class="cl-older-count">8 versions</span>
     </button>
+
     <div class="cl-older-wrapper" id="cl-older-wrapper">
       <div class="cl-older-entries">
-        <div class="cl-entry" id="cl-2-2-2">
-          <div class="cl-header" onclick="toggleCl('cl-2-2-2')">
-            <span class="cl-version">V 2.2.2</span><span class="cl-badge">Last</span><span class="cl-date">March 10, 2026</span><span class="cl-arrow">▼</span>
+
+        <!-- V 2.2.4 — Last -->
+        <div class="cl-entry" id="cl-2-2-4">
+          <div class="cl-header" onclick="toggleCl('cl-2-2-4')">
+            <span class="cl-version">V 2.2.4</span>
+            <span class="cl-badge last">Last</span>
+            <span class="cl-date">March 12, 2026</span>
+            <span class="cl-arrow">&#x25BC;</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Update</div>
+            <ul>
+              <li>Previous stable release</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- V 2.2.3 -->
+        <div class="cl-entry" id="cl-2-2-3">
+          <div class="cl-header" onclick="toggleCl('cl-2-2-3')">
+            <span class="cl-version">V 2.2.3</span>
+            <span class="cl-date">March 11, 2026</span>
+            <span class="cl-arrow">&#x25BC;</span>
           </div>
           <div class="cl-body">
             <div class="cl-label">Tab Updates</div>
             <ul>
-              <li>Fixed scripthub — send to explorer now works</li>
+              <li>Coded some settings</li>
+              <li>Some UI tweaks</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- V 2.2.2 -->
+        <div class="cl-entry" id="cl-2-2-2">
+          <div class="cl-header" onclick="toggleCl('cl-2-2-2')">
+            <span class="cl-version">V 2.2.2</span>
+            <span class="cl-date">March 10, 2026</span>
+            <span class="cl-arrow">&#x25BC;</span>
+          </div>
+          <div class="cl-body">
+            <div class="cl-label">Tab Updates</div>
+            <ul>
+              <li>Fixed scripthub &mdash; send to explorer now works</li>
               <li>You can now rename files when you send</li>
               <li>Added Explorer tab</li>
               <li>Got rid of notifications, moved them to editor</li>
@@ -388,9 +428,13 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
             </ul>
           </div>
         </div>
+
+        <!-- V 2.2.1 -->
         <div class="cl-entry" id="cl-2-2-1">
           <div class="cl-header" onclick="toggleCl('cl-2-2-1')">
-            <span class="cl-version">V 2.2.1</span><span class="cl-badge">Update</span><span class="cl-date">March 9, 2026</span><span class="cl-arrow">▼</span>
+            <span class="cl-version">V 2.2.1</span>
+            <span class="cl-date">March 9, 2026</span>
+            <span class="cl-arrow">&#x25BC;</span>
           </div>
           <div class="cl-body">
             <div class="cl-label">Update</div>
@@ -404,9 +448,13 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
             </ul>
           </div>
         </div>
+
+        <!-- V 2.2.0 -->
         <div class="cl-entry" id="cl-2-2-0">
           <div class="cl-header" onclick="toggleCl('cl-2-2-0')">
-            <span class="cl-version">V 2.2.0</span><span class="cl-badge">Update</span><span class="cl-date">March 9, 2026</span><span class="cl-arrow">▼</span>
+            <span class="cl-version">V 2.2.0</span>
+            <span class="cl-date">March 9, 2026</span>
+            <span class="cl-arrow">&#x25BC;</span>
           </div>
           <div class="cl-body">
             <div class="cl-label">Update</div>
@@ -417,9 +465,13 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
             </ul>
           </div>
         </div>
+
+        <!-- V 2.1.9 -->
         <div class="cl-entry" id="cl-2-1-9">
           <div class="cl-header" onclick="toggleCl('cl-2-1-9')">
-            <span class="cl-version">V 2.1.9</span><span class="cl-badge">Update</span><span class="cl-date">March 9, 2026</span><span class="cl-arrow">▼</span>
+            <span class="cl-version">V 2.1.9</span>
+            <span class="cl-date">March 9, 2026</span>
+            <span class="cl-arrow">&#x25BC;</span>
           </div>
           <div class="cl-body">
             <div class="cl-label">Update</div>
@@ -432,9 +484,12 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
             </ul>
           </div>
         </div>
+
+        <!-- V 2.1.8 -->
         <div class="cl-entry" id="cl-2-1-8">
           <div class="cl-header" onclick="toggleCl('cl-2-1-8')">
-            <span class="cl-version">V 2.1.8</span><span class="cl-badge">Update</span><span class="cl-arrow">▼</span>
+            <span class="cl-version">V 2.1.8</span>
+            <span class="cl-arrow">&#x25BC;</span>
           </div>
           <div class="cl-body">
             <div class="cl-label">Update</div>
@@ -447,12 +502,15 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
             </ul>
           </div>
         </div>
+
+        <!-- V 2.1.7 -->
         <div class="cl-entry" id="cl-2-1-7">
           <div class="cl-header" onclick="toggleCl('cl-2-1-7')">
-            <span class="cl-version">V 2.1.7</span><span class="cl-badge">Huge Update</span><span class="cl-arrow">▼</span>
+            <span class="cl-version">V 2.1.7</span>
+            <span class="cl-arrow">&#x25BC;</span>
           </div>
           <div class="cl-body">
-            <div class="cl-label">Huge Update</div>
+            <div class="cl-label">Update</div>
             <ul>
               <li>Added brand new home screen</li>
               <li>Brand new settings UI</li>
@@ -461,12 +519,15 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
             </ul>
           </div>
         </div>
+
+        <!-- V 2.1.6 -->
         <div class="cl-entry" id="cl-2-1-6">
           <div class="cl-header" onclick="toggleCl('cl-2-1-6')">
-            <span class="cl-version">V 2.1.6</span><span class="cl-badge">Huge Update</span><span class="cl-arrow">▼</span>
+            <span class="cl-version">V 2.1.6</span>
+            <span class="cl-arrow">&#x25BC;</span>
           </div>
           <div class="cl-body">
-            <div class="cl-label">Huge Update!</div>
+            <div class="cl-label">Update</div>
             <ul>
               <li>BRAND NEW UI</li>
               <li>WORKING EVERYTHING!!!</li>
@@ -474,6 +535,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
             </ul>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -484,14 +546,14 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="bootstrapper-content">
       <div class="bs-tag">New</div>
       <h2>Meet the<br>BootStrapper</h2>
-      <p>No manual setup, no confusion. The Cyclone X BootStrapper automatically downloads and installs everything you need in one click. Just run it and you're ready to execute — it handles the rest.</p>
+      <p>No manual setup, no confusion. The Cyclone X BootStrapper automatically downloads and installs everything you need in one click. Just run it and you're ready to execute &mdash; it handles the rest.</p>
       <div class="bs-features">
-        <div class="bs-feature"><div class="bs-feature-icon">✓</div>One-click automatic install</div>
-        <div class="bs-feature"><div class="bs-feature-icon">✓</div>Always installs the latest version</div>
-        <div class="bs-feature"><div class="bs-feature-icon">✓</div>No Python or dependencies required</div>
-        <div class="bs-feature"><div class="bs-feature-icon">✓</div>Built-in update checker</div>
+        <div class="bs-feature"><div class="bs-feature-icon">&#x2713;</div>One-click automatic install</div>
+        <div class="bs-feature"><div class="bs-feature-icon">&#x2713;</div>Always installs the latest version</div>
+        <div class="bs-feature"><div class="bs-feature-icon">&#x2713;</div>No Python or dependencies required</div>
+        <div class="bs-feature"><div class="bs-feature-icon">&#x2713;</div>Built-in update checker</div>
       </div>
-      <a href="#" class="btn btn-primary" onclick="openPicker(event)" style="width:fit-content">⬇ Download BootStrapper</a>
+      <a href="#" class="btn btn-primary" onclick="openPicker(event)" style="width:fit-content">&#x2B07; Download BootStrapper</a>
     </div>
     <div class="bs-mockup">
       <img src="BootstrapperUi.png" alt="Cyclone X BootStrapper Interface">
@@ -522,7 +584,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div id="review-form-wrapper">
       <div class="form-row">
         <div class="form-group"><label>Your Name</label><input type="text" id="review-name" placeholder="e.g. CoolUser123" maxlength="32"></div>
-        <div class="form-group"><label>Rating</label><div class="star-picker" id="star-picker"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div></div>
+        <div class="form-group"><label>Rating</label><div class="star-picker" id="star-picker"><span data-v="1">&#x2605;</span><span data-v="2">&#x2605;</span><span data-v="3">&#x2605;</span><span data-v="4">&#x2605;</span><span data-v="5">&#x2605;</span></div></div>
       </div>
       <div class="form-group"><label>Your Review</label><textarea id="review-text" placeholder="Share your experience with Cyclone X..." maxlength="300"></textarea></div>
       <button class="submit-review-btn" id="submit-review-btn">Submit Review</button>
@@ -534,24 +596,20 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <section class="features reveal" id="download">
   <h2 class="section-title">Ready to Execute?</h2>
   <div style="text-align:center;margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:16px">
-    <a id="main-download-btn" href="#" class="btn btn-primary" style="font-size:18px;padding:18px 40px">⬇ Download Latest Release</a>
+    <a id="main-download-btn" href="#" class="btn btn-primary" style="font-size:18px;padding:18px 40px">&#x2B07; Download Latest Release</a>
     <div class="dl-counter-pill">
       <div class="dl-counter-inner">
-        <span class="dl-counter-num" id="footer-dl-count">—</span>
-        <span class="dl-counter-sep">·</span>
+        <span class="dl-counter-num" id="footer-dl-count">&mdash;</span>
+        <span class="dl-counter-sep">&middot;</span>
         <span class="dl-counter-lbl">downloads</span>
       </div>
     </div>
   </div>
 </section>
 
-<footer id="credits"><p>© 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
+<footer id="credits"><p>&copy; 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 
 <script>
-// ── Download URLs ─────────────────────────────────────────────────────────────
-// IMPORTANT: Update these URLs whenever you push a new release.
-// Use the direct GitHub Releases asset URL, NOT user-attachments (those expire).
-// Format: https://github.com/USER/REPO/releases/download/TAG/FILENAME
 const DOWNLOADS = {
   executor: {
     url: 'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',
@@ -565,20 +623,9 @@ const DOWNLOADS = {
   }
 };
 
-// ── Download counter ──────────────────────────────────────────────────────────
-// Uses localStorage — counts downloads on this browser only.
-// For a real global counter you need a backend (e.g. a Vercel serverless function
-// writing to a KV store or a free Supabase table).
 const DL_KEY = 'cyx_download_count';
-
-function getCount() {
-  return parseInt(localStorage.getItem(DL_KEY) || '0', 10);
-}
-function incrementCount() {
-  const n = getCount() + 1;
-  localStorage.setItem(DL_KEY, n);
-  setCountEls(n, true);
-}
+function getCount() { return parseInt(localStorage.getItem(DL_KEY) || '0', 10); }
+function incrementCount() { const n = getCount() + 1; localStorage.setItem(DL_KEY, n); setCountEls(n, true); }
 function fmtCount(n) {
   if (!n || isNaN(n)) return '0';
   if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
@@ -596,7 +643,6 @@ function setCountEls(v, animate) {
   });
 }
 
-// ── Download overlay ──────────────────────────────────────────────────────────
 let dlActive = false, dlTimers = [];
 
 function openPicker(e) {
@@ -609,28 +655,17 @@ function openPicker(e) {
 function startDl(type) {
   const info = DOWNLOADS[type];
   if (!info) return;
-
-  // Hide picker, show progress card
   document.getElementById('dlPicker').style.display = 'none';
   const card = document.getElementById('dlCard');
   card.classList.add('visible');
-
   if (dlActive) return;
   dlActive = true;
   dlTimers.forEach(clearTimeout);
   dlTimers = [];
-
-  const bar      = document.getElementById('dlBar');
-  const pctEl    = document.getElementById('dlPct');
-  const statusEl = document.getElementById('dlStatus');
-  const fileEl   = document.getElementById('dlFileName');
-
-  bar.style.width = '0%';
-  pctEl.textContent = '0%';
-  statusEl.textContent = 'Starting download...';
-  fileEl.textContent = info.file;
-
-  // Animate the progress bar while the browser handles the actual download
+  const bar = document.getElementById('dlBar'), pctEl = document.getElementById('dlPct'),
+    statusEl = document.getElementById('dlStatus'), fileEl = document.getElementById('dlFileName');
+  bar.style.width = '0%'; pctEl.textContent = '0%';
+  statusEl.textContent = 'Starting download...'; fileEl.textContent = info.file;
   const STAGES = [
     { text: 'Starting download...', pct: 0 },
     { text: 'Fetching file...', pct: 25 },
@@ -638,42 +673,20 @@ function startDl(type) {
     { text: 'Almost done...', pct: 90 },
     { text: 'Complete!', pct: 100 }
   ];
-
   let cur = 0, target = 0;
   const ticker = setInterval(() => {
-    if (cur < target) {
-      cur = Math.min(cur + 1, target);
-      bar.style.width = cur + '%';
-      pctEl.textContent = cur + '%';
-    }
+    if (cur < target) { cur = Math.min(cur + 1, target); bar.style.width = cur + '%'; pctEl.textContent = cur + '%'; }
   }, 20);
   dlTimers.push(ticker);
-
   STAGES.forEach((s, i) => {
     const t = setTimeout(() => {
-      statusEl.textContent = s.text;
-      target = s.pct;
-
+      statusEl.textContent = s.text; target = s.pct;
       if (i === STAGES.length - 1) {
-        // Trigger the actual download via a hidden <a> click — most reliable cross-browser method
-        clearInterval(ticker);
-        bar.style.width = '100%';
-        pctEl.textContent = '100%';
-
+        clearInterval(ticker); bar.style.width = '100%'; pctEl.textContent = '100%';
         const a = document.createElement('a');
-        a.href = info.url;
-        a.setAttribute('download', info.file);
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-
-        // Small delay then remove the element
-        setTimeout(() => {
-          document.body.removeChild(a);
-          incrementCount();
-        }, 500);
-
-        // Close overlay after a moment
+        a.href = info.url; a.setAttribute('download', info.file); a.style.display = 'none';
+        document.body.appendChild(a); a.click();
+        setTimeout(() => { document.body.removeChild(a); incrementCount(); }, 500);
         dlTimers.push(setTimeout(() => { closeDl(); }, 3500));
       }
     }, i * 700);
@@ -683,76 +696,46 @@ function startDl(type) {
 
 function closeDl() {
   document.getElementById('dlOverlay').classList.remove('active');
-  dlTimers.forEach(clearTimeout);
-  dlTimers = [];
-  setTimeout(() => {
-    dlActive = false;
-    document.getElementById('dlCard').classList.remove('visible');
-    document.getElementById('dlPicker').style.display = '';
-  }, 300);
+  dlTimers.forEach(clearTimeout); dlTimers = [];
+  setTimeout(() => { dlActive = false; document.getElementById('dlCard').classList.remove('visible'); document.getElementById('dlPicker').style.display = ''; }, 300);
 }
 
-// Close on Escape key
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('dlOverlay').classList.contains('active')) {
-    closeDl();
-  }
+  if (e.key === 'Escape' && document.getElementById('dlOverlay').classList.contains('active')) closeDl();
 });
 
-// ── Init ──────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('hero-download-btn').addEventListener('click', openPicker);
   document.getElementById('main-download-btn').addEventListener('click', openPicker);
   setCountEls(getCount(), false);
 });
 
-// ── Changelog toggles ─────────────────────────────────────────────────────────
-function toggleCl(id) {
-  const el = document.getElementById(id);
-  if (el) el.classList.toggle('open');
-}
+function toggleCl(id) { const el = document.getElementById(id); if (el) el.classList.toggle('open'); }
 
 function toggleOlder() {
-  const btn     = document.getElementById('cl-older-toggle');
-  const wrapper = document.getElementById('cl-older-wrapper');
-  const isOpen  = wrapper.classList.contains('open');
-  wrapper.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
+  const btn = document.getElementById('cl-older-toggle'), wrapper = document.getElementById('cl-older-wrapper');
+  const isOpen = wrapper.classList.contains('open');
+  wrapper.classList.toggle('open', !isOpen); btn.classList.toggle('open', !isOpen);
   btn.querySelector('.cl-older-toggle-text').textContent = isOpen ? 'View older updates' : 'Hide older updates';
 }
 
-// ── Stars canvas ──────────────────────────────────────────────────────────────
 (function () {
   const canvas = document.getElementById('stars-canvas'), ctx = canvas.getContext('2d');
   function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize();
-  window.addEventListener('resize', resize);
+  resize(); window.addEventListener('resize', resize);
   function rng(s) { let v = s >>> 0; return () => { v ^= v << 13; v ^= v >> 17; v ^= v << 5; return (v >>> 0) / 0xffffffff; }; }
   const r = rng(99999), dots = [];
   for (let i = 0; i < 40; i++) dots.push({ x: r() * window.innerWidth, y: r() * window.innerHeight, rad: 0.7 + r() * 1.1, o: 0.3 + r() * 0.5, sp: 0.2 + r() * 0.5 });
   function tick() {
-    const W = canvas.width, H = canvas.height;
-    ctx.clearRect(0, 0, W, H);
-    for (const d of dots) {
-      d.y -= d.sp;
-      if (d.y < -5) { d.y = H + 5; d.x = r() * W; }
-      ctx.beginPath();
-      ctx.arc(d.x, d.y, d.rad, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${d.o})`;
-      ctx.fill();
-    }
+    const W = canvas.width, H = canvas.height; ctx.clearRect(0, 0, W, H);
+    for (const d of dots) { d.y -= d.sp; if (d.y < -5) { d.y = H + 5; d.x = r() * W; } ctx.beginPath(); ctx.arc(d.x, d.y, d.rad, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,' + d.o + ')'; ctx.fill(); }
     requestAnimationFrame(tick);
   }
   tick();
 })();
 
-// ── Scroll effects ────────────────────────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-});
-const ro = new IntersectionObserver(e => {
-  e.forEach(x => { if (x.isIntersecting) x.target.classList.add('active'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
+const ro = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) x.target.classList.add('active'); }); }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 document.querySelectorAll('.feature-card').forEach(card => {
   card.addEventListener('mousemove', e => {
@@ -762,17 +745,16 @@ document.querySelectorAll('.feature-card').forEach(card => {
   });
 });
 
-// ── Reviews ───────────────────────────────────────────────────────────────────
 const BW = ['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
 function hasBanned(t) { const l = t.toLowerCase().replace(/[^a-z0-9\s]/g, ''); return BW.some(w => l.includes(w.replace(/[^a-z0-9\s]/g, ''))); }
 function isSpam(t) {
   if (/(.)\1{6,}/.test(t)) return true;
   if (t.length > 10) { const l = t.replace(/[^a-zA-Z]/g, ''); if (l.length > 6 && l.replace(/[a-z]/g, '').length / l.length > 0.8) return true; }
-  return (t.match(/[^a-zA-Z0-9\s.,!?'"-]/g) || []).length / t.length > 0.3;
+  return (t.match(/[^a-zA-Z0-9\s.,!?'"\\-]/g) || []).length / t.length > 0.3;
 }
 const SR = [{ name: 'Cyclone', initial: 'C', rating: 5, text: 'Leave your review here! No trolls please...', seed: true }];
 function lUR() { try { return JSON.parse(localStorage.getItem('cyx_reviews') || '[]'); } catch { return []; } }
-function sUR(a) { try { localStorage.setItem('cyx_reviews', JSON.stringify(a)); } catch { } }
+function sUR(a) { try { localStorage.setItem('cyx_reviews', JSON.stringify(a)); } catch {} }
 function hAR() { return localStorage.getItem('cyx_has_reviewed') === '1'; }
 function mR() { localStorage.setItem('cyx_has_reviewed', '1'); }
 let allR = [...SR, ...lUR()], curR = 0, aR;
@@ -782,7 +764,7 @@ function bRUI() {
   allR.forEach((rv, i) => {
     const c = document.createElement('div');
     c.className = 'review-card' + (i === curR ? ' active' : '');
-    c.innerHTML = `<div class="review-header"><div class="review-avatar">${rv.initial.toUpperCase()}</div><div class="review-info"><h4>${rv.name}</h4><div class="review-stars">${'★'.repeat(rv.rating)}${'☆'.repeat(5 - rv.rating)}</div></div></div><p class="review-text">"${rv.text}"</p>`;
+    c.innerHTML = '<div class="review-header"><div class="review-avatar">' + rv.initial.toUpperCase() + '</div><div class="review-info"><h4>' + rv.name + '</h4><div class="review-stars">' + '\u2605'.repeat(rv.rating) + '\u2606'.repeat(5 - rv.rating) + '</div></div></div><p class="review-text">&ldquo;' + rv.text + '&rdquo;</p>';
     rSlider.appendChild(c);
     const d = document.createElement('div');
     d.className = 'dot' + (i === curR ? ' active' : '');
@@ -804,7 +786,7 @@ function chkAR() {
     b.disabled = true; b.textContent = 'You have already left a review';
     const m = document.createElement('div');
     m.className = 'already-reviewed-msg';
-    m.textContent = "✓ You've already submitted a review. Thanks for the feedback!";
+    m.textContent = "\u2713 You've already submitted a review. Thanks for the feedback!";
     document.getElementById('review-form-wrapper').appendChild(m);
   }
 }
@@ -816,10 +798,10 @@ stSpans.forEach(s => {
   s.addEventListener('mouseleave', () => { stSpans.forEach(x => x.classList.toggle('lit', +x.dataset.v <= selSt)); });
   s.addEventListener('click', () => { selSt = +s.dataset.v; stSpans.forEach(x => x.classList.toggle('lit', +x.dataset.v <= selSt)); });
 });
-function shT(m, e = false) {
+function shT(m, e) {
   const t = document.getElementById('submit-toast');
   t.textContent = m; t.className = 'submit-toast visible' + (e ? ' error' : '');
-  setTimeout(() => t.className = 'submit-toast', 3500);
+  setTimeout(() => { t.className = 'submit-toast'; }, 3500);
 }
 document.getElementById('submit-review-btn').addEventListener('click', () => {
   if (hAR()) return;
@@ -829,19 +811,18 @@ document.getElementById('submit-review-btn').addEventListener('click', () => {
   if (selSt === 0) return shT('Please select a star rating.', true);
   if (!t) return shT('Please write a review.', true);
   if (t.length < 10) return shT('Review must be at least 10 characters.', true);
-  if (hasBanned(n) || hasBanned(t)) return shT('⚠ Your review contains inappropriate content.', true);
-  if (isSpam(t) || isSpam(n)) return shT('⚠ Your review looks like spam.', true);
+  if (hasBanned(n) || hasBanned(t)) return shT('\u26A0 Your review contains inappropriate content.', true);
+  if (isSpam(t) || isSpam(n)) return shT('\u26A0 Your review looks like spam.', true);
   const nR = { name: n, initial: n.charAt(0), rating: selSt, text: t };
   const sv = lUR(); sv.push(nR); sUR(sv); mR();
   allR.push(nR); clearInterval(aR); curR = allR.length - 1; bRUI(); sRv(curR); stAR();
   document.getElementById('review-name').value = '';
   document.getElementById('review-text').value = '';
   selSt = 0; stSpans.forEach(s => s.classList.remove('lit'));
-  shT('✓ Review submitted! Thanks for your feedback.');
+  shT('\u2713 Review submitted! Thanks for your feedback.');
   chkAR();
 });
 
-// ── Globe ─────────────────────────────────────────────────────────────────────
 (function () {
   const cv = document.getElementById('globe-canvas'),
     sc = new THREE.Scene(),
@@ -867,15 +848,13 @@ document.getElementById('submit-review-btn').addEventListener('click', () => {
   let t = 0;
   (function an() {
     requestAnimationFrame(an); t += .01;
-    sc.rotation.x = Math.sin(t * .08) * .12;
-    sc.rotation.y += .003;
+    sc.rotation.x = Math.sin(t * .08) * .12; sc.rotation.y += .003;
     ds.forEach(d => { d.material.opacity += (((Math.sin(d.userData.phase + t) + 1) / 2) * .7 + .2 - d.material.opacity) * d.userData.fs; });
     rd.render(sc, cm);
   })();
   window.addEventListener('resize', () => {
     const c = cv.parentElement;
-    cm.aspect = c.offsetWidth / c.offsetHeight;
-    cm.updateProjectionMatrix();
+    cm.aspect = c.offsetWidth / c.offsetHeight; cm.updateProjectionMatrix();
     rd.setSize(c.offsetWidth, c.offsetHeight);
   });
 })();
