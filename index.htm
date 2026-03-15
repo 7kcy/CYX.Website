@@ -130,8 +130,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .reveal.active{opacity:1;transform:translateY(0)}
 @media(max-width:1024px){.hero-container,.worldwide-container{grid-template-columns:1fr;gap:60px}.executor-mockup{max-width:600px;margin:0 auto}.globe-container{height:450px}}
 @media(max-width:768px){.nav-links a:not(.discord-btn){display:none}.features-grid,.stats-grid{grid-template-columns:1fr}.hero,.features,.stats-section,.worldwide,.reviews,.review-submit-section{padding-left:20px;padding-right:20px}.review-card{padding:28px}.form-row{grid-template-columns:1fr}.review-submit-box{padding:32px 24px}}
-
-/* ══ DOWNLOAD OVERLAY ══ */
 #dlOverlay{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center}
 #dlOverlay.active{display:flex}
 .dl-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
@@ -171,8 +169,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .stat-card.downloads-card .live-badge{display:inline-flex;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:99px;padding:3px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;margin-top:8px}
 @keyframes numFlip{0%{transform:translateY(-8px);opacity:0}100%{transform:translateY(0);opacity:1}}
 .num-flip{animation:numFlip .35s cubic-bezier(.4,0,.2,1) forwards}
-
-/* ══ CHANGELOG ══ */
 .changelog{padding:120px 40px;position:relative;z-index:2}
 .changelog-inner{max-width:720px;margin:0 auto}
 .cl-latest{background:var(--surface);border:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden;position:relative;box-shadow:0 0 40px rgba(255,255,255,.04)}
@@ -212,8 +208,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .cl-body ul li{font-size:13px;color:var(--text-secondary);display:flex;gap:10px;line-height:1.5}
 .cl-body ul li::before{content:'[+]';color:rgba(255,255,255,.25);font-family:monospace;font-size:12px;flex-shrink:0;margin-top:1px}
 .cl-body .cl-label{font-size:12px;font-weight:700;color:rgba(255,255,255,.25);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;padding-top:12px}
-
-/* showcase */
 .showcase{padding:120px 40px;position:relative;z-index:2}
 .showcase-inner{max-width:960px;margin:0 auto}
 .showcase-title{font-size:clamp(32px,4.5vw,48px);font-weight:800;margin-bottom:12px;letter-spacing:-1px;text-shadow:0 0 40px rgba(255,255,255,.3)}
@@ -234,40 +228,37 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 .bs-mockup img{width:100%;display:block}
 @media(max-width:1024px){.bootstrapper-container{grid-template-columns:1fr;gap:50px}}
 @media(max-width:768px){.bootstrapper-section{padding-left:20px;padding-right:20px}}
+/* ══ ALTERNATIVE LINKS ══ */
+.alt-links{padding:60px 40px;position:relative;z-index:2;border-top:1px solid var(--border)}
+.alt-links-inner{max-width:700px;margin:0 auto;text-align:center}
+.alt-links-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.25);margin-bottom:20px}
+.alt-links-toggle{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 20px;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.4);transition:all .3s ease}
+.alt-links-toggle:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.7)}
+.alt-links-toggle-icon{font-size:9px;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.alt-links-toggle.open .alt-links-toggle-icon{transform:rotate(180deg)}
+.alt-links-list{overflow:hidden;max-height:0;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0;margin-top:0}
+.alt-links-list.open{max-height:200px;opacity:1;margin-top:16px}
+.alt-links-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.alt-link-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px 18px;text-decoration:none;color:rgba(255,255,255,.5);font-size:13px;font-weight:600;transition:all .3s ease}
+.alt-link-pill:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);color:#fff;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.alt-link-pill span{font-size:15px}
+@media(max-width:768px){.alt-links{padding:40px 20px}}
 </style>
 </head>
 <body>
-
 <canvas id="stars-canvas"></canvas>
 <div class="shooting-stars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <div class="radial-glow"></div>
 <div class="radial-glow"></div>
-
-<!-- ══ DOWNLOAD OVERLAY ══ -->
 <div id="dlOverlay">
   <div class="dl-backdrop" onclick="closeDl()"></div>
   <div class="dl-picker" id="dlPicker">
     <button class="dl-picker-close" onclick="closeDl()">&#x2715;</button>
-    <div class="dl-picker-header">
-      <img src="Cylogo_png.png" alt="Cyclone X">
-      <h3>Choose your download</h3>
-    </div>
+    <div class="dl-picker-header"><img src="Cylogo_png.png" alt="Cyclone X"><h3>Choose your download</h3></div>
     <p class="dl-picker-sub">Select the version you want</p>
     <div class="dl-options">
-      <button class="dl-option" onclick="startDl('executor')">
-        <div class="dl-option-icon">&#x26A1;</div>
-        <div class="dl-option-text">
-          <span class="dl-option-name">Cyclone X Executor</span>
-          <span class="dl-option-desc">The full executor &mdash; run scripts instantly</span>
-        </div>
-      </button>
-      <button class="dl-option" onclick="startDl('bootstrapper')">
-        <div class="dl-option-icon">&#x1F680;</div>
-        <div class="dl-option-text">
-          <span class="dl-option-name">Cyclone X Bootstrapper</span>
-          <span class="dl-option-desc">Auto-installer that sets everything up for you</span>
-        </div>
-      </button>
+      <button class="dl-option" onclick="startDl('executor')"><div class="dl-option-icon">&#x26A1;</div><div class="dl-option-text"><span class="dl-option-name">Cyclone X Executor</span><span class="dl-option-desc">The full executor &mdash; run scripts instantly</span></div></button>
+      <button class="dl-option" onclick="startDl('bootstrapper')"><div class="dl-option-icon">&#x1F680;</div><div class="dl-option-text"><span class="dl-option-name">Cyclone X Bootstrapper</span><span class="dl-option-desc">Auto-installer that sets everything up for you</span></div></button>
     </div>
   </div>
   <div class="dl-card" id="dlCard">
@@ -276,13 +267,9 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div id="dlFileName"></div>
     <div class="dl-bar-wrap"><div class="dl-bar-fill" id="dlBar"></div></div>
     <div id="dlPct">0%</div>
-    <div class="dl-footer">
-      <p>Thanks for downloading Cyclone X.</p>
-      <p>Need help? <a href="https://discord.gg/KH7PBhVYr7" target="_blank">Join Discord</a></p>
-    </div>
+    <div class="dl-footer"><p>Thanks for downloading Cyclone X.</p><p>Need help? <a href="https://discord.gg/KH7PBhVYr7" target="_blank">Join Discord</a></p></div>
   </div>
 </div>
-
 <nav id="navbar">
   <div class="nav-pill">
     <a href="#home" class="nav-logo"><img src="Cylogo_png.png" alt="Cyclone X"><span>Cyclone X</span></a>
@@ -294,7 +281,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     </ul>
   </div>
 </nav>
-
 <section class="hero" id="home">
   <div class="hero-container">
     <div class="hero-content">
@@ -308,7 +294,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="executor-mockup"><img src="CyUI_png.png" alt="Cyclone X Executor Interface"></div>
   </div>
 </section>
-
 <section class="features reveal" id="executor">
   <h2 class="section-title">Advanced Features</h2>
   <div class="features-grid">
@@ -320,22 +305,15 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="feature-card"><div class="feature-icon">&#x1F3AF;</div><h3>User Friendly</h3><p>Intuitive interface designed for all skill levels.</p></div>
   </div>
 </section>
-
 <section class="stats-section reveal">
   <h2 class="section-title">Performance Metrics</h2>
   <div class="stats-grid">
     <div class="stat-card"><div class="stat-icon">&#x26A1;</div><div class="stat-value">Fast</div><div class="stat-label">Execution Speed</div></div>
     <div class="stat-card"><div class="stat-icon">&#x1F4CA;</div><div class="stat-value">85% +</div><div class="stat-label">UNC Rate</div></div>
     <div class="stat-card"><div class="stat-icon">&#x1F6E1;&#xFE0F;</div><div class="stat-value">100%</div><div class="stat-label">Secure</div></div>
-    <div class="stat-card downloads-card" id="dl-stat-card">
-      <div class="stat-icon">&#x2B07;&#xFE0F;</div>
-      <div class="stat-value" id="dl-stat-value">&mdash;</div>
-      <div class="stat-label">Total Downloads</div>
-      <div class="live-badge">Live</div>
-    </div>
+    <div class="stat-card downloads-card" id="dl-stat-card"><div class="stat-icon">&#x2B07;&#xFE0F;</div><div class="stat-value" id="dl-stat-value">&mdash;</div><div class="stat-label">Total Downloads</div><div class="live-badge">Live</div></div>
   </div>
 </section>
-
 <section class="worldwide reveal" id="about">
   <div class="worldwide-container">
     <div class="worldwide-content">
@@ -347,200 +325,33 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="globe-container"><canvas id="globe-canvas"></canvas></div>
   </div>
 </section>
-
-<!-- ══ CHANGELOG ══ -->
 <section class="changelog reveal" id="changelog">
   <div class="changelog-inner">
     <h2 class="section-title" style="text-align:left;margin-bottom:32px">Changelog</h2>
-
-    <!-- V 2.2.5 — Current -->
     <div class="cl-latest" id="cl-2-2-5">
-      <div class="cl-header-latest">
-        <span class="cl-version">V 2.2.5</span>
-        <span class="cl-badge latest">Newest</span>
-        <span class="cl-date">March 14, 2026</span>
-      </div>
-      <div class="cl-body" style="display:block">
-        <div class="cl-label">Update</div>
-        <ul>
-          <li>Latest release</li>
-        </ul>
-      </div>
+      <div class="cl-header-latest"><span class="cl-version">V 2.2.5</span><span class="cl-badge latest">Newest</span><span class="cl-date">March 14, 2026</span></div>
+      <div class="cl-body" style="display:block"><div class="cl-label">Update</div><ul><li>Latest release</li></ul></div>
     </div>
-
     <button class="cl-older-toggle" id="cl-older-toggle" onclick="toggleOlder()">
       <span class="cl-older-toggle-icon">&#x25BC;</span>
       <span class="cl-older-toggle-text">View older updates</span>
       <span class="cl-older-count">8 versions</span>
     </button>
-
     <div class="cl-older-wrapper" id="cl-older-wrapper">
       <div class="cl-older-entries">
-
-        <!-- V 2.2.4 — Last -->
-        <div class="cl-entry" id="cl-2-2-4">
-          <div class="cl-header" onclick="toggleCl('cl-2-2-4')">
-            <span class="cl-version">V 2.2.4</span>
-            <span class="cl-badge last">Last</span>
-            <span class="cl-date">March 12, 2026</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Update</div>
-            <ul>
-              <li>Previous stable release</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.2.3 -->
-        <div class="cl-entry" id="cl-2-2-3">
-          <div class="cl-header" onclick="toggleCl('cl-2-2-3')">
-            <span class="cl-version">V 2.2.3</span>
-            <span class="cl-date">March 11, 2026</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Tab Updates</div>
-            <ul>
-              <li>Coded some settings</li>
-              <li>Some UI tweaks</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.2.2 -->
-        <div class="cl-entry" id="cl-2-2-2">
-          <div class="cl-header" onclick="toggleCl('cl-2-2-2')">
-            <span class="cl-version">V 2.2.2</span>
-            <span class="cl-date">March 10, 2026</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Tab Updates</div>
-            <ul>
-              <li>Fixed scripthub &mdash; send to explorer now works</li>
-              <li>You can now rename files when you send</li>
-              <li>Added Explorer tab</li>
-              <li>Got rid of notifications, moved them to editor</li>
-              <li>Fixed the highlight being red, now gray</li>
-              <li>Removed minimap on the right</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.2.1 -->
-        <div class="cl-entry" id="cl-2-2-1">
-          <div class="cl-header" onclick="toggleCl('cl-2-2-1')">
-            <span class="cl-version">V 2.2.1</span>
-            <span class="cl-date">March 9, 2026</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Update</div>
-            <ul>
-              <li>FULLY coded</li>
-              <li>Everything you do console prints</li>
-              <li>ADDED API IT WORKS!!!</li>
-              <li>85 UNC</li>
-              <li>Added a status panel as well</li>
-              <li>Fixed some bugs</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.2.0 -->
-        <div class="cl-entry" id="cl-2-2-0">
-          <div class="cl-header" onclick="toggleCl('cl-2-2-0')">
-            <span class="cl-version">V 2.2.0</span>
-            <span class="cl-date">March 9, 2026</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Update</div>
-            <ul>
-              <li>Added console</li>
-              <li>Fixed some settings</li>
-              <li>Made some small UI aligning changes</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.1.9 -->
-        <div class="cl-entry" id="cl-2-1-9">
-          <div class="cl-header" onclick="toggleCl('cl-2-1-9')">
-            <span class="cl-version">V 2.1.9</span>
-            <span class="cl-date">March 9, 2026</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Update</div>
-            <ul>
-              <li>Coded settings</li>
-              <li>Added a loading screen toggle</li>
-              <li>UI updates</li>
-              <li>More modern animations</li>
-              <li>Made UI slightly bigger</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.1.8 -->
-        <div class="cl-entry" id="cl-2-1-8">
-          <div class="cl-header" onclick="toggleCl('cl-2-1-8')">
-            <span class="cl-version">V 2.1.8</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Update</div>
-            <ul>
-              <li>New icons</li>
-              <li>New loading screen</li>
-              <li>Fixed opacity bugs</li>
-              <li>Fixed fullscreening</li>
-              <li>Added some new animations</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.1.7 -->
-        <div class="cl-entry" id="cl-2-1-7">
-          <div class="cl-header" onclick="toggleCl('cl-2-1-7')">
-            <span class="cl-version">V 2.1.7</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Update</div>
-            <ul>
-              <li>Added brand new home screen</li>
-              <li>Brand new settings UI</li>
-              <li>Lots of settings</li>
-              <li>Scripthub works</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- V 2.1.6 -->
-        <div class="cl-entry" id="cl-2-1-6">
-          <div class="cl-header" onclick="toggleCl('cl-2-1-6')">
-            <span class="cl-version">V 2.1.6</span>
-            <span class="cl-arrow">&#x25BC;</span>
-          </div>
-          <div class="cl-body">
-            <div class="cl-label">Update</div>
-            <ul>
-              <li>BRAND NEW UI</li>
-              <li>WORKING EVERYTHING!!!</li>
-              <li>API not added yet</li>
-            </ul>
-          </div>
-        </div>
-
+        <div class="cl-entry" id="cl-2-2-4"><div class="cl-header" onclick="toggleCl('cl-2-2-4')"><span class="cl-version">V 2.2.4</span><span class="cl-badge last">Last</span><span class="cl-date">March 12, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Previous stable release</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-2-3"><div class="cl-header" onclick="toggleCl('cl-2-2-3')"><span class="cl-version">V 2.2.3</span><span class="cl-date">March 11, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Tab Updates</div><ul><li>Coded some settings</li><li>Some UI tweaks</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-2-2"><div class="cl-header" onclick="toggleCl('cl-2-2-2')"><span class="cl-version">V 2.2.2</span><span class="cl-date">March 10, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Tab Updates</div><ul><li>Fixed scripthub &mdash; send to explorer now works</li><li>You can now rename files when you send</li><li>Added Explorer tab</li><li>Got rid of notifications, moved them to editor</li><li>Fixed the highlight being red, now gray</li><li>Removed minimap on the right</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-2-1"><div class="cl-header" onclick="toggleCl('cl-2-2-1')"><span class="cl-version">V 2.2.1</span><span class="cl-date">March 9, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>FULLY coded</li><li>Everything you do console prints</li><li>ADDED API IT WORKS!!!</li><li>85 UNC</li><li>Added a status panel as well</li><li>Fixed some bugs</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-2-0"><div class="cl-header" onclick="toggleCl('cl-2-2-0')"><span class="cl-version">V 2.2.0</span><span class="cl-date">March 9, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Added console</li><li>Fixed some settings</li><li>Made some small UI aligning changes</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-1-9"><div class="cl-header" onclick="toggleCl('cl-2-1-9')"><span class="cl-version">V 2.1.9</span><span class="cl-date">March 9, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Coded settings</li><li>Added a loading screen toggle</li><li>UI updates</li><li>More modern animations</li><li>Made UI slightly bigger</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-1-8"><div class="cl-header" onclick="toggleCl('cl-2-1-8')"><span class="cl-version">V 2.1.8</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>New icons</li><li>New loading screen</li><li>Fixed opacity bugs</li><li>Fixed fullscreening</li><li>Added some new animations</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-1-7"><div class="cl-header" onclick="toggleCl('cl-2-1-7')"><span class="cl-version">V 2.1.7</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Added brand new home screen</li><li>Brand new settings UI</li><li>Lots of settings</li><li>Scripthub works</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-1-6"><div class="cl-header" onclick="toggleCl('cl-2-1-6')"><span class="cl-version">V 2.1.6</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>BRAND NEW UI</li><li>WORKING EVERYTHING!!!</li><li>API not added yet</li></ul></div></div>
       </div>
     </div>
   </div>
 </section>
-
 <section class="bootstrapper-section reveal" id="bootstrapper">
   <div class="bootstrapper-container">
     <div class="bootstrapper-content">
@@ -555,12 +366,9 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
       </div>
       <a href="#" class="btn btn-primary" onclick="openPicker(event)" style="width:fit-content">&#x2B07; Download BootStrapper</a>
     </div>
-    <div class="bs-mockup">
-      <img src="BootstrapperUi.png" alt="Cyclone X BootStrapper Interface">
-    </div>
+    <div class="bs-mockup"><img src="BootstrapperUi.png" alt="Cyclone X BootStrapper Interface"></div>
   </div>
 </section>
-
 <section class="showcase reveal" id="showcase">
   <div class="showcase-inner">
     <h2 class="showcase-title">Cyclone X Showcase</h2>
@@ -569,7 +377,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     </div>
   </div>
 </section>
-
 <section class="reviews reveal" id="reviews-section">
   <h2 class="section-title">User Reviews</h2>
   <div class="reviews-container">
@@ -577,7 +384,6 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="review-dots" id="review-dots"></div>
   </div>
 </section>
-
 <section class="review-submit-section reveal">
   <div class="review-submit-box">
     <h3>Leave a Review</h3>
@@ -592,272 +398,76 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     </div>
   </div>
 </section>
-
 <section class="features reveal" id="download">
   <h2 class="section-title">Ready to Execute?</h2>
   <div style="text-align:center;margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:16px">
     <a id="main-download-btn" href="#" class="btn btn-primary" style="font-size:18px;padding:18px 40px">&#x2B07; Download Latest Release</a>
-    <div class="dl-counter-pill">
-      <div class="dl-counter-inner">
-        <span class="dl-counter-num" id="footer-dl-count">&mdash;</span>
-        <span class="dl-counter-sep">&middot;</span>
-        <span class="dl-counter-lbl">downloads</span>
+    <div class="dl-counter-pill"><div class="dl-counter-inner"><span class="dl-counter-num" id="footer-dl-count">&mdash;</span><span class="dl-counter-sep">&middot;</span><span class="dl-counter-lbl">downloads</span></div></div>
+  </div>
+</section>
+<!-- ALTERNATIVE LINKS -->
+<section class="alt-links">
+  <div class="alt-links-inner">
+    <div class="alt-links-title">Alternative Links</div>
+    <button class="alt-links-toggle" id="alt-toggle" onclick="toggleAltLinks()">
+      <span class="alt-links-toggle-icon">&#x25BC;</span>
+      Show all links
+    </button>
+    <div class="alt-links-list" id="alt-links-list">
+      <div class="alt-links-grid">
+        <a href="https://cyclonex.lol" target="_blank" class="alt-link-pill"><span>&#x1F310;</span> cyclonex.lol</a>
+        <a href="https://cyclonx.wtf" target="_blank" class="alt-link-pill"><span>&#x1F310;</span> cyclonx.wtf</a>
+        <a href="https://cyclone-x.vercel.app" target="_blank" class="alt-link-pill"><span>&#x1F310;</span> cyclone-x.vercel.app</a>
+        <a href="https://discord.gg/KH7PBhVYr7" target="_blank" class="alt-link-pill"><span>&#x1F4AC;</span> Discord</a>
+        <a href="https://github.com/7kcy/CYX.Website" target="_blank" class="alt-link-pill"><span>&#x1F4E6;</span> GitHub</a>
       </div>
     </div>
   </div>
 </section>
-
 <footer id="credits"><p>&copy; 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
-
 <script>
-const DOWNLOADS = {
-  executor: {
-    url: 'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',
-    label: 'Cyclone X Executor',
-    file: 'CycloneX.zip'
-  },
-  bootstrapper: {
-    url: 'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip',
-    label: 'Cyclone X Bootstrapper',
-    file: 'BootStrapper.exe'
-  }
-};
-
-const DL_KEY = 'cyx_download_count';
-function getCount() { return parseInt(localStorage.getItem(DL_KEY) || '0', 10); }
-function incrementCount() { const n = getCount() + 1; localStorage.setItem(DL_KEY, n); setCountEls(n, true); }
-function fmtCount(n) {
-  if (!n || isNaN(n)) return '0';
-  if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
-  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-  return n.toLocaleString();
-}
-function setCountEls(v, animate) {
-  ['dl-stat-value', 'footer-dl-count', 'active-users-count'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const txt = fmtCount(v);
-    if (el.textContent === txt) return;
-    if (animate) { el.classList.remove('num-flip'); void el.offsetWidth; el.classList.add('num-flip'); }
-    el.textContent = txt;
-  });
-}
-
-let dlActive = false, dlTimers = [];
-
-function openPicker(e) {
-  if (e) e.preventDefault();
-  document.getElementById('dlPicker').style.display = '';
-  document.getElementById('dlCard').classList.remove('visible');
-  document.getElementById('dlOverlay').classList.add('active');
-}
-
-function startDl(type) {
-  const info = DOWNLOADS[type];
-  if (!info) return;
-  document.getElementById('dlPicker').style.display = 'none';
-  const card = document.getElementById('dlCard');
-  card.classList.add('visible');
-  if (dlActive) return;
-  dlActive = true;
-  dlTimers.forEach(clearTimeout);
-  dlTimers = [];
-  const bar = document.getElementById('dlBar'), pctEl = document.getElementById('dlPct'),
-    statusEl = document.getElementById('dlStatus'), fileEl = document.getElementById('dlFileName');
-  bar.style.width = '0%'; pctEl.textContent = '0%';
-  statusEl.textContent = 'Starting download...'; fileEl.textContent = info.file;
-  const STAGES = [
-    { text: 'Starting download...', pct: 0 },
-    { text: 'Fetching file...', pct: 25 },
-    { text: 'Downloading ' + info.label + '...', pct: 60 },
-    { text: 'Almost done...', pct: 90 },
-    { text: 'Complete!', pct: 100 }
-  ];
-  let cur = 0, target = 0;
-  const ticker = setInterval(() => {
-    if (cur < target) { cur = Math.min(cur + 1, target); bar.style.width = cur + '%'; pctEl.textContent = cur + '%'; }
-  }, 20);
-  dlTimers.push(ticker);
-  STAGES.forEach((s, i) => {
-    const t = setTimeout(() => {
-      statusEl.textContent = s.text; target = s.pct;
-      if (i === STAGES.length - 1) {
-        clearInterval(ticker); bar.style.width = '100%'; pctEl.textContent = '100%';
-        const a = document.createElement('a');
-        a.href = info.url; a.setAttribute('download', info.file); a.style.display = 'none';
-        document.body.appendChild(a); a.click();
-        setTimeout(() => { document.body.removeChild(a); incrementCount(); }, 500);
-        dlTimers.push(setTimeout(() => { closeDl(); }, 3500));
-      }
-    }, i * 700);
-    dlTimers.push(t);
-  });
-}
-
-function closeDl() {
-  document.getElementById('dlOverlay').classList.remove('active');
-  dlTimers.forEach(clearTimeout); dlTimers = [];
-  setTimeout(() => { dlActive = false; document.getElementById('dlCard').classList.remove('visible'); document.getElementById('dlPicker').style.display = ''; }, 300);
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('dlOverlay').classList.contains('active')) closeDl();
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('hero-download-btn').addEventListener('click', openPicker);
-  document.getElementById('main-download-btn').addEventListener('click', openPicker);
-  setCountEls(getCount(), false);
-});
-
-function toggleCl(id) { const el = document.getElementById(id); if (el) el.classList.toggle('open'); }
-
-function toggleOlder() {
-  const btn = document.getElementById('cl-older-toggle'), wrapper = document.getElementById('cl-older-wrapper');
-  const isOpen = wrapper.classList.contains('open');
-  wrapper.classList.toggle('open', !isOpen); btn.classList.toggle('open', !isOpen);
-  btn.querySelector('.cl-older-toggle-text').textContent = isOpen ? 'View older updates' : 'Hide older updates';
-}
-
-(function () {
-  const canvas = document.getElementById('stars-canvas'), ctx = canvas.getContext('2d');
-  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  function rng(s) { let v = s >>> 0; return () => { v ^= v << 13; v ^= v >> 17; v ^= v << 5; return (v >>> 0) / 0xffffffff; }; }
-  const r = rng(99999), dots = [];
-  for (let i = 0; i < 40; i++) dots.push({ x: r() * window.innerWidth, y: r() * window.innerHeight, rad: 0.7 + r() * 1.1, o: 0.3 + r() * 0.5, sp: 0.2 + r() * 0.5 });
-  function tick() {
-    const W = canvas.width, H = canvas.height; ctx.clearRect(0, 0, W, H);
-    for (const d of dots) { d.y -= d.sp; if (d.y < -5) { d.y = H + 5; d.x = r() * W; } ctx.beginPath(); ctx.arc(d.x, d.y, d.rad, 0, Math.PI * 2); ctx.fillStyle = 'rgba(255,255,255,' + d.o + ')'; ctx.fill(); }
-    requestAnimationFrame(tick);
-  }
-  tick();
-})();
-
-window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50); });
-const ro = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) x.target.classList.add('active'); }); }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-document.querySelectorAll('.feature-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mouse-x', ((e.clientX - r.left) / r.width * 100) + '%');
-    card.style.setProperty('--mouse-y', ((e.clientY - r.top) / r.height * 100) + '%');
-  });
-});
-
-const BW = ['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
-function hasBanned(t) { const l = t.toLowerCase().replace(/[^a-z0-9\s]/g, ''); return BW.some(w => l.includes(w.replace(/[^a-z0-9\s]/g, ''))); }
-function isSpam(t) {
-  if (/(.)\1{6,}/.test(t)) return true;
-  if (t.length > 10) { const l = t.replace(/[^a-zA-Z]/g, ''); if (l.length > 6 && l.replace(/[a-z]/g, '').length / l.length > 0.8) return true; }
-  return (t.match(/[^a-zA-Z0-9\s.,!?'"\\-]/g) || []).length / t.length > 0.3;
-}
-const SR = [{ name: 'Cyclone', initial: 'C', rating: 5, text: 'Leave your review here! No trolls please...', seed: true }];
-function lUR() { try { return JSON.parse(localStorage.getItem('cyx_reviews') || '[]'); } catch { return []; } }
-function sUR(a) { try { localStorage.setItem('cyx_reviews', JSON.stringify(a)); } catch {} }
-function hAR() { return localStorage.getItem('cyx_has_reviewed') === '1'; }
-function mR() { localStorage.setItem('cyx_has_reviewed', '1'); }
-let allR = [...SR, ...lUR()], curR = 0, aR;
-const rSlider = document.getElementById('reviews-slider'), rDots = document.getElementById('review-dots');
-function bRUI() {
-  rSlider.innerHTML = ''; rDots.innerHTML = '';
-  allR.forEach((rv, i) => {
-    const c = document.createElement('div');
-    c.className = 'review-card' + (i === curR ? ' active' : '');
-    c.innerHTML = '<div class="review-header"><div class="review-avatar">' + rv.initial.toUpperCase() + '</div><div class="review-info"><h4>' + rv.name + '</h4><div class="review-stars">' + '\u2605'.repeat(rv.rating) + '\u2606'.repeat(5 - rv.rating) + '</div></div></div><p class="review-text">&ldquo;' + rv.text + '&rdquo;</p>';
-    rSlider.appendChild(c);
-    const d = document.createElement('div');
-    d.className = 'dot' + (i === curR ? ' active' : '');
-    d.addEventListener('click', () => { clearInterval(aR); sRv(i); stAR(); });
-    rDots.appendChild(d);
-  });
-}
-function sRv(i) {
-  const cs = rSlider.querySelectorAll('.review-card'), ds = rDots.querySelectorAll('.dot');
-  if (!cs[curR]) return;
-  cs[curR].classList.remove('active'); ds[curR].classList.remove('active');
-  curR = i; cs[curR].classList.add('active'); ds[curR].classList.add('active');
-}
-function stAR() { clearInterval(aR); aR = setInterval(() => sRv((curR + 1) % allR.length), 3000); }
-bRUI(); stAR();
-function chkAR() {
-  if (hAR()) {
-    const b = document.getElementById('submit-review-btn');
-    b.disabled = true; b.textContent = 'You have already left a review';
-    const m = document.createElement('div');
-    m.className = 'already-reviewed-msg';
-    m.textContent = "\u2713 You've already submitted a review. Thanks for the feedback!";
-    document.getElementById('review-form-wrapper').appendChild(m);
-  }
-}
+const DOWNLOADS={executor:{url:'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',label:'Cyclone X Executor',file:'CycloneX.zip'},bootstrapper:{url:'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip',label:'Cyclone X Bootstrapper',file:'BootStrapper.exe'}};
+const DL_KEY='cyx_download_count';
+function getCount(){return parseInt(localStorage.getItem(DL_KEY)||'0',10);}
+function incrementCount(){const n=getCount()+1;localStorage.setItem(DL_KEY,n);setCountEls(n,true);}
+function fmtCount(n){if(!n||isNaN(n))return'0';if(n>=1e6)return(n/1e6).toFixed(1).replace(/\.0$/,'')+' M';if(n>=1000)return(n/1000).toFixed(1).replace(/\.0$/,'')+' K';return n.toLocaleString();}
+function setCountEls(v,animate){['dl-stat-value','footer-dl-count','active-users-count'].forEach(id=>{const el=document.getElementById(id);if(!el)return;const txt=fmtCount(v);if(el.textContent===txt)return;if(animate){el.classList.remove('num-flip');void el.offsetWidth;el.classList.add('num-flip');}el.textContent=txt;});}
+let dlActive=false,dlTimers=[];
+function openPicker(e){if(e)e.preventDefault();document.getElementById('dlPicker').style.display='';document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlOverlay').classList.add('active');}
+function startDl(type){const info=DOWNLOADS[type];if(!info)return;document.getElementById('dlPicker').style.display='none';const card=document.getElementById('dlCard');card.classList.add('visible');if(dlActive)return;dlActive=true;dlTimers.forEach(clearTimeout);dlTimers=[];const bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus'),fileEl=document.getElementById('dlFileName');bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Starting download...';fileEl.textContent=info.file;const STAGES=[{text:'Starting download...',pct:0},{text:'Fetching file...',pct:25},{text:'Downloading '+info.label+'...',pct:60},{text:'Almost done...',pct:90},{text:'Complete!',pct:100}];let cur=0,target=0;const ticker=setInterval(()=>{if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},20);dlTimers.push(ticker);STAGES.forEach((s,i)=>{const t=setTimeout(()=>{statusEl.textContent=s.text;target=s.pct;if(i===STAGES.length-1){clearInterval(ticker);bar.style.width='100%';pctEl.textContent='100%';const a=document.createElement('a');a.href=info.url;a.setAttribute('download',info.file);a.style.display='none';document.body.appendChild(a);a.click();setTimeout(()=>{document.body.removeChild(a);incrementCount();},500);dlTimers.push(setTimeout(()=>{closeDl();},3500));}},i*700);dlTimers.push(t);});}
+function closeDl(){document.getElementById('dlOverlay').classList.remove('active');dlTimers.forEach(clearTimeout);dlTimers=[];setTimeout(()=>{dlActive=false;document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlPicker').style.display='';},300);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('dlOverlay').classList.contains('active'))closeDl();});
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('hero-download-btn').addEventListener('click',openPicker);document.getElementById('main-download-btn').addEventListener('click',openPicker);setCountEls(getCount(),false);});
+function toggleCl(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+function toggleOlder(){const btn=document.getElementById('cl-older-toggle'),wrapper=document.getElementById('cl-older-wrapper');const isOpen=wrapper.classList.contains('open');wrapper.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);btn.querySelector('.cl-older-toggle-text').textContent=isOpen?'View older updates':'Hide older updates';}
+function toggleAltLinks(){const btn=document.getElementById('alt-toggle');const list=document.getElementById('alt-links-list');const isOpen=list.classList.contains('open');list.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);for(let n of btn.childNodes){if(n.nodeType===3){n.textContent=isOpen?' Show all links ':' Hide links ';break;}}}
+(function(){const canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function rng(s){let v=s>>>0;return()=>{v^=v<<13;v^=v>>17;v^=v<<5;return(v>>>0)/0xffffffff;};}const r=rng(99999),dots=[];for(let i=0;i<40;i++)dots.push({x:r()*window.innerWidth,y:r()*window.innerHeight,rad:0.7+r()*1.1,o:0.3+r()*0.5,sp:0.2+r()*0.5});function tick(){const W=canvas.width,H=canvas.height;ctx.clearRect(0,0,W,H);for(const d of dots){d.y-=d.sp;if(d.y<-5){d.y=H+5;d.x=r()*W;}ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+d.o+')';ctx.fill();}requestAnimationFrame(tick);}tick();})();
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('active');});},{threshold:0.1,rootMargin:'0px 0px -100px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+document.querySelectorAll('.feature-card').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--mouse-y',((e.clientY-r.top)/r.height*100)+'%');});});
+const BW=['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
+function hasBanned(t){const l=t.toLowerCase().replace(/[^a-z0-9\s]/g,'');return BW.some(w=>l.includes(w.replace(/[^a-z0-9\s]/g,'')));}
+function isSpam(t){if(/(.)\1{6,}/.test(t))return true;if(t.length>10){const l=t.replace(/[^a-zA-Z]/g,'');if(l.length>6&&l.replace(/[a-z]/g,'').length/l.length>0.8)return true;}return(t.match(/[^a-zA-Z0-9\s.,!?'"\\-]/g)||[]).length/t.length>0.3;}
+const SR=[{name:'Cyclone',initial:'C',rating:5,text:'Leave your review here! No trolls please...',seed:true}];
+function lUR(){try{return JSON.parse(localStorage.getItem('cyx_reviews')||'[]');}catch{return[];}}
+function sUR(a){try{localStorage.setItem('cyx_reviews',JSON.stringify(a));}catch{}}
+function hAR(){return localStorage.getItem('cyx_has_reviewed')==='1';}
+function mR(){localStorage.setItem('cyx_has_reviewed','1');}
+let allR=[...SR,...lUR()],curR=0,aR;
+const rSlider=document.getElementById('reviews-slider'),rDots=document.getElementById('review-dots');
+function bRUI(){rSlider.innerHTML='';rDots.innerHTML='';allR.forEach((rv,i)=>{const c=document.createElement('div');c.className='review-card'+(i===curR?' active':'');c.innerHTML='<div class="review-header"><div class="review-avatar">'+rv.initial.toUpperCase()+'</div><div class="review-info"><h4>'+rv.name+'</h4><div class="review-stars">'+'\u2605'.repeat(rv.rating)+'\u2606'.repeat(5-rv.rating)+'</div></div></div><p class="review-text">&ldquo;'+rv.text+'&rdquo;</p>';rSlider.appendChild(c);const d=document.createElement('div');d.className='dot'+(i===curR?' active':'');d.addEventListener('click',()=>{clearInterval(aR);sRv(i);stAR();});rDots.appendChild(d);});}
+function sRv(i){const cs=rSlider.querySelectorAll('.review-card'),ds=rDots.querySelectorAll('.dot');if(!cs[curR])return;cs[curR].classList.remove('active');ds[curR].classList.remove('active');curR=i;cs[curR].classList.add('active');ds[curR].classList.add('active');}
+function stAR(){clearInterval(aR);aR=setInterval(()=>sRv((curR+1)%allR.length),3000);}
+bRUI();stAR();
+function chkAR(){if(hAR()){const b=document.getElementById('submit-review-btn');b.disabled=true;b.textContent='You have already left a review';const m=document.createElement('div');m.className='already-reviewed-msg';m.textContent="\u2713 You've already submitted a review. Thanks for the feedback!";document.getElementById('review-form-wrapper').appendChild(m);}}
 chkAR();
-let selSt = 0;
-const stSpans = document.querySelectorAll('#star-picker span');
-stSpans.forEach(s => {
-  s.addEventListener('mouseenter', () => { const v = +s.dataset.v; stSpans.forEach(x => x.classList.toggle('lit', +x.dataset.v <= v)); });
-  s.addEventListener('mouseleave', () => { stSpans.forEach(x => x.classList.toggle('lit', +x.dataset.v <= selSt)); });
-  s.addEventListener('click', () => { selSt = +s.dataset.v; stSpans.forEach(x => x.classList.toggle('lit', +x.dataset.v <= selSt)); });
-});
-function shT(m, e) {
-  const t = document.getElementById('submit-toast');
-  t.textContent = m; t.className = 'submit-toast visible' + (e ? ' error' : '');
-  setTimeout(() => { t.className = 'submit-toast'; }, 3500);
-}
-document.getElementById('submit-review-btn').addEventListener('click', () => {
-  if (hAR()) return;
-  const n = document.getElementById('review-name').value.trim(), t = document.getElementById('review-text').value.trim();
-  if (!n) return shT('Please enter your name.', true);
-  if (n.length < 2) return shT('Name must be at least 2 characters.', true);
-  if (selSt === 0) return shT('Please select a star rating.', true);
-  if (!t) return shT('Please write a review.', true);
-  if (t.length < 10) return shT('Review must be at least 10 characters.', true);
-  if (hasBanned(n) || hasBanned(t)) return shT('\u26A0 Your review contains inappropriate content.', true);
-  if (isSpam(t) || isSpam(n)) return shT('\u26A0 Your review looks like spam.', true);
-  const nR = { name: n, initial: n.charAt(0), rating: selSt, text: t };
-  const sv = lUR(); sv.push(nR); sUR(sv); mR();
-  allR.push(nR); clearInterval(aR); curR = allR.length - 1; bRUI(); sRv(curR); stAR();
-  document.getElementById('review-name').value = '';
-  document.getElementById('review-text').value = '';
-  selSt = 0; stSpans.forEach(s => s.classList.remove('lit'));
-  shT('\u2713 Review submitted! Thanks for your feedback.');
-  chkAR();
-});
-
-(function () {
-  const cv = document.getElementById('globe-canvas'),
-    sc = new THREE.Scene(),
-    cm = new THREE.PerspectiveCamera(45, cv.offsetWidth / cv.offsetHeight, .1, 1000),
-    rd = new THREE.WebGLRenderer({ canvas: cv, alpha: true, antialias: true });
-  rd.setSize(cv.offsetWidth, cv.offsetHeight);
-  rd.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  cm.position.z = 350;
-  sc.add(new THREE.Mesh(new THREE.SphereGeometry(100, 64, 64), new THREE.MeshPhongMaterial({ color: 0x000000, transparent: true, opacity: .2, shininess: 100 })));
-  const dg = new THREE.SphereGeometry(1.2, 8, 8), ds = [];
-  for (let i = 0; i < 1500; i++) {
-    const ph = Math.acos(-1 + (2 * i) / 1500), th = Math.sqrt(1500 * Math.PI) * ph,
-      dt = new THREE.Mesh(dg, new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true }));
-    dt.position.set(101 * Math.cos(th) * Math.sin(ph), 101 * Math.sin(th) * Math.sin(ph), 101 * Math.cos(ph));
-    dt.material.opacity = Math.random() * .6 + .3;
-    dt.userData = { phase: Math.random() * Math.PI * 2, fs: Math.random() * .02 + .01 };
-    sc.add(dt); ds.push(dt);
-  }
-  sc.add(new THREE.AmbientLight(0xffffff, .5));
-  const p1 = new THREE.PointLight(0xffffff, 1.5, 600); p1.position.set(250, 250, 250); sc.add(p1);
-  const p2 = new THREE.PointLight(0xffffff, .8, 500); p2.position.set(-200, -150, 250); sc.add(p2);
-  const p3 = new THREE.PointLight(0xffffff, 1.2, 500); p3.position.set(0, 0, 300); sc.add(p3);
-  let t = 0;
-  (function an() {
-    requestAnimationFrame(an); t += .01;
-    sc.rotation.x = Math.sin(t * .08) * .12; sc.rotation.y += .003;
-    ds.forEach(d => { d.material.opacity += (((Math.sin(d.userData.phase + t) + 1) / 2) * .7 + .2 - d.material.opacity) * d.userData.fs; });
-    rd.render(sc, cm);
-  })();
-  window.addEventListener('resize', () => {
-    const c = cv.parentElement;
-    cm.aspect = c.offsetWidth / c.offsetHeight; cm.updateProjectionMatrix();
-    rd.setSize(c.offsetWidth, c.offsetHeight);
-  });
-})();
+let selSt=0;
+const stSpans=document.querySelectorAll('#star-picker span');
+stSpans.forEach(s=>{s.addEventListener('mouseenter',()=>{const v=+s.dataset.v;stSpans.forEach(x=>x.classList.toggle('lit',+x.dataset.v<=v));});s.addEventListener('mouseleave',()=>{stSpans.forEach(x=>x.classList.toggle('lit',+x.dataset.v<=selSt));});s.addEventListener('click',()=>{selSt=+s.dataset.v;stSpans.forEach(x=>x.classList.toggle('lit',+x.dataset.v<=selSt));});});
+function shT(m,e){const t=document.getElementById('submit-toast');t.textContent=m;t.className='submit-toast visible'+(e?' error':'');setTimeout(()=>{t.className='submit-toast';},3500);}
+document.getElementById('submit-review-btn').addEventListener('click',()=>{if(hAR())return;const n=document.getElementById('review-name').value.trim(),t=document.getElementById('review-text').value.trim();if(!n)return shT('Please enter your name.',true);if(n.length<2)return shT('Name must be at least 2 characters.',true);if(selSt===0)return shT('Please select a star rating.',true);if(!t)return shT('Please write a review.',true);if(t.length<10)return shT('Review must be at least 10 characters.',true);if(hasBanned(n)||hasBanned(t))return shT('\u26A0 Your review contains inappropriate content.',true);if(isSpam(t)||isSpam(n))return shT('\u26A0 Your review looks like spam.',true);const nR={name:n,initial:n.charAt(0),rating:selSt,text:t};const sv=lUR();sv.push(nR);sUR(sv);mR();allR.push(nR);clearInterval(aR);curR=allR.length-1;bRUI();sRv(curR);stAR();document.getElementById('review-name').value='';document.getElementById('review-text').value='';selSt=0;stSpans.forEach(s=>s.classList.remove('lit'));shT('\u2713 Review submitted! Thanks for your feedback.');chkAR();});
+(function(){const cv=document.getElementById('globe-canvas'),sc=new THREE.Scene(),cm=new THREE.PerspectiveCamera(45,cv.offsetWidth/cv.offsetHeight,.1,1000),rd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});rd.setSize(cv.offsetWidth,cv.offsetHeight);rd.setPixelRatio(Math.min(window.devicePixelRatio,2));cm.position.z=350;sc.add(new THREE.Mesh(new THREE.SphereGeometry(100,64,64),new THREE.MeshPhongMaterial({color:0x000000,transparent:true,opacity:.2,shininess:100})));const dg=new THREE.SphereGeometry(1.2,8,8),ds=[];for(let i=0;i<1500;i++){const ph=Math.acos(-1+(2*i)/1500),th=Math.sqrt(1500*Math.PI)*ph,dt=new THREE.Mesh(dg,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));dt.position.set(101*Math.cos(th)*Math.sin(ph),101*Math.sin(th)*Math.sin(ph),101*Math.cos(ph));dt.material.opacity=Math.random()*.6+.3;dt.userData={phase:Math.random()*Math.PI*2,fs:Math.random()*.02+.01};sc.add(dt);ds.push(dt);}sc.add(new THREE.AmbientLight(0xffffff,.5));const p1=new THREE.PointLight(0xffffff,1.5,600);p1.position.set(250,250,250);sc.add(p1);const p2=new THREE.PointLight(0xffffff,.8,500);p2.position.set(-200,-150,250);sc.add(p2);const p3=new THREE.PointLight(0xffffff,1.2,500);p3.position.set(0,0,300);sc.add(p3);let t=0;(function an(){requestAnimationFrame(an);t+=.01;sc.rotation.x=Math.sin(t*.08)*.12;sc.rotation.y+=.003;ds.forEach(d=>{d.material.opacity+=(((Math.sin(d.userData.phase+t)+1)/2)*.7+.2-d.material.opacity)*d.userData.fs;});rd.render(sc,cm);})();window.addEventListener('resize',()=>{const c=cv.parentElement;cm.aspect=c.offsetWidth/c.offsetHeight;cm.updateProjectionMatrix();rd.setSize(c.offsetWidth,c.offsetHeight);});})();
 </script>
 </body>
 </html>
