@@ -310,7 +310,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
     <div class="stat-card"><div class="stat-icon">&#x26A1;</div><div class="stat-value">Fast</div><div class="stat-label">Execution Speed</div></div>
     <div class="stat-card"><div class="stat-icon">&#x1F4CA;</div><div class="stat-value">85% +</div><div class="stat-label">UNC Rate</div></div>
     <div class="stat-card"><div class="stat-icon">&#x1F6E1;&#xFE0F;</div><div class="stat-value">100%</div><div class="stat-label">Secure</div></div>
-    <div class="stat-card downloads-card" id="dl-stat-card"><div class="stat-icon">&#x2B07;&#xFE0F;</div><div class="stat-value" id="dl-stat-value">&mdash;</div><div class="stat-label">Total Downloads</div><div class="live-badge">Live</div></div>
+    <div class="stat-card downloads-card"><div class="stat-icon">&#x2B07;&#xFE0F;</div><div class="stat-value" id="dl-stat-value">&mdash;</div><div class="stat-label">Total Downloads</div><div class="live-badge">Live</div></div>
   </div>
 </section>
 <section class="worldwide reveal" id="about">
@@ -327,7 +327,7 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <section class="changelog reveal" id="changelog">
   <div class="changelog-inner">
     <h2 class="section-title" style="text-align:left;margin-bottom:32px">Changelog</h2>
-    <div class="cl-latest" id="cl-2-2-5">
+    <div class="cl-latest">
       <div class="cl-header-latest"><span class="cl-version">V 2.2.5</span><span class="cl-badge latest">Newest</span><span class="cl-date">March 14, 2026</span></div>
       <div class="cl-body" style="display:block"><div class="cl-label">Update</div><ul><li>Latest release</li></ul></div>
     </div>
@@ -425,10 +425,10 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <footer id="credits"><p>&copy; 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// SUPABASE DOWNLOAD COUNTER — shared across ALL domains in real time
+// DOWNLOAD COUNTER — Cloudflare Worker proxy (bypasses ad blockers,
+// works across ALL domains, single shared count via Supabase)
 // ═══════════════════════════════════════════════════════════════════
-var SB_URL='https://uxwheqphbfkwsizylwwy.supabase.co';
-var SB_KEY='sb_publishable_cL7ERf4fJJBa04oyuLM2cw_K7r9Xj6K';
+var COUNTER = 'https://cyclonexwebsite.cycloneiscom1n.workers.dev';
 
 function fmtCount(n){if(!n||isNaN(n))return'0';if(n>=1e6)return(n/1e6).toFixed(1).replace(/\.0$/,'')+' M';if(n>=1000)return(n/1000).toFixed(1).replace(/\.0$/,'')+' K';return n.toLocaleString();}
 
@@ -441,27 +441,18 @@ function setCountEls(v,animate){
   });
 }
 
-function sbH(extra){return Object.assign({'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},extra||{});}
-
 function fetchGlobalCount(){
-  fetch(SB_URL+'/rest/v1/counter?id=eq.downloads&select=value',{headers:sbH()})
+  fetch(COUNTER)
     .then(function(r){return r.json();})
-    .then(function(d){if(d&&d[0]&&typeof d[0].value==='number')setCountEls(d[0].value,false);})
+    .then(function(d){if(typeof d.count==='number')setCountEls(d.count,false);})
     .catch(function(e){console.warn('Counter read failed:',e);});
 }
 
 function incrementGlobalCount(){
-  fetch(SB_URL+'/rest/v1/rpc/increment_downloads',{
-    method:'POST',
-    headers:sbH({'Prefer':'return=representation'}),
-    body:'{}'
-  })
-  .then(function(r){return r.json();})
-  .then(function(d){
-    var v=typeof d==='number'?d:(d&&d[0]&&d[0].value);
-    if(typeof v==='number')setCountEls(v,true);else fetchGlobalCount();
-  })
-  .catch(function(){fetchGlobalCount();});
+  fetch(COUNTER,{method:'POST'})
+    .then(function(r){return r.json();})
+    .then(function(d){if(typeof d.count==='number')setCountEls(d.count,true);})
+    .catch(function(e){console.warn('Counter increment failed:',e);});
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -502,7 +493,11 @@ function startDl(type){
 
 function closeDl(){document.getElementById('dlOverlay').classList.remove('active');dlTimers.forEach(clearTimeout);dlTimers=[];setTimeout(function(){dlActive=false;document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlPicker').style.display='';},300);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('dlOverlay').classList.contains('active'))closeDl();});
-document.addEventListener('DOMContentLoaded',function(){document.getElementById('hero-download-btn').addEventListener('click',openPicker);document.getElementById('main-download-btn').addEventListener('click',openPicker);fetchGlobalCount();});
+document.addEventListener('DOMContentLoaded',function(){
+  document.getElementById('hero-download-btn').addEventListener('click',openPicker);
+  document.getElementById('main-download-btn').addEventListener('click',openPicker);
+  fetchGlobalCount();
+});
 
 // ═══════════════════════════════════════════════════════════════════
 // CHANGELOG TOGGLES
