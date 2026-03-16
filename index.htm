@@ -425,192 +425,91 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 <footer id="credits"><p>&copy; 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 <script>
 // ═══════════════════════════════════════════════════════════════════
-// GLOBAL DOWNLOAD COUNTER — reads real download counts from GitHub Releases
-// No API key needed. Sums all release asset downloads across both repos.
-// GitHub public API: 60 requests/hour unauthenticated — more than enough.
+// SUPABASE DOWNLOAD COUNTER — shared across ALL domains in real time
 // ═══════════════════════════════════════════════════════════════════
-var GH_OWNER = '7kcy';
-var GH_REPOS = ['CYX.Website', 'CYX.Bootstrapper'];
+var SB_URL='https://uxwheqphbfkwsizylwwy.supabase.co';
+var SB_KEY='sb_publishable_cL7ERf4fJJBa04oyuLM2cw_K7r9Xj6K';
 
-function fmtCount(n) {
-  if (!n || isNaN(n)) return '0';
-  if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + ' M';
-  if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + ' K';
-  return n.toLocaleString();
-}
+function fmtCount(n){if(!n||isNaN(n))return'0';if(n>=1e6)return(n/1e6).toFixed(1).replace(/\.0$/,'')+' M';if(n>=1000)return(n/1000).toFixed(1).replace(/\.0$/,'')+' K';return n.toLocaleString();}
 
-function setCountEls(v, animate) {
-  ['dl-stat-value', 'footer-dl-count', 'active-users-count'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var txt = fmtCount(v);
-    if (el.textContent === txt) return;
-    if (animate) {
-      el.classList.remove('num-flip');
-      void el.offsetWidth;
-      el.classList.add('num-flip');
-    }
-    el.textContent = txt;
+function setCountEls(v,animate){
+  ['dl-stat-value','footer-dl-count','active-users-count'].forEach(function(id){
+    var el=document.getElementById(id);if(!el)return;
+    var txt=fmtCount(v);if(el.textContent===txt)return;
+    if(animate){el.classList.remove('num-flip');void el.offsetWidth;el.classList.add('num-flip');}
+    el.textContent=txt;
   });
 }
 
-function fetchRepoDownloads(repo) {
-  return fetch('https://api.github.com/repos/' + GH_OWNER + '/' + repo + '/releases', {
-    headers: { 'Accept': 'application/vnd.github.v3+json' }
+function sbH(extra){return Object.assign({'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'},extra||{});}
+
+function fetchGlobalCount(){
+  fetch(SB_URL+'/rest/v1/counter?id=eq.downloads&select=value',{headers:sbH()})
+    .then(function(r){return r.json();})
+    .then(function(d){if(d&&d[0]&&typeof d[0].value==='number')setCountEls(d[0].value,false);})
+    .catch(function(e){console.warn('Counter read failed:',e);});
+}
+
+function incrementGlobalCount(){
+  fetch(SB_URL+'/rest/v1/rpc/increment_downloads',{
+    method:'POST',
+    headers:sbH({'Prefer':'return=representation'}),
+    body:'{}'
   })
-    .then(function(r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(function(releases) {
-      if (!Array.isArray(releases)) return 0;
-      return releases.reduce(function(total, release) {
-        return total + (release.assets || []).reduce(function(sum, asset) {
-          return sum + (asset.download_count || 0);
-        }, 0);
-      }, 0);
-    })
-    .catch(function(e) {
-      console.warn('GitHub API fetch failed for ' + repo + ':', e);
-      return 0;
-    });
-}
-
-function fetchGlobalCount() {
-  Promise.all(GH_REPOS.map(fetchRepoDownloads))
-    .then(function(counts) {
-      var total = counts.reduce(function(a, b) { return a + b; }, 0);
-      setCountEls(total, false);
-    });
-}
-
-// Re-fetches after a short delay so GitHub's count has time to register
-function incrementGlobalCount() {
-  setTimeout(fetchGlobalCount, 2500);
+  .then(function(r){return r.json();})
+  .then(function(d){
+    var v=typeof d==='number'?d:(d&&d[0]&&d[0].value);
+    if(typeof v==='number')setCountEls(v,true);else fetchGlobalCount();
+  })
+  .catch(function(){fetchGlobalCount();});
 }
 
 // ═══════════════════════════════════════════════════════════════════
 // DOWNLOAD LOGIC
 // ═══════════════════════════════════════════════════════════════════
-var DOWNLOADS = {
-  executor:     { url: 'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',              label: 'Cyclone X Executor',     file: 'CycloneX.zip'    },
-  bootstrapper: { url: 'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip', label: 'Cyclone X Bootstrapper', file: 'BootStrapper.exe' }
+var DOWNLOADS={
+  executor:    {url:'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',             label:'Cyclone X Executor',    file:'CycloneX.zip'   },
+  bootstrapper:{url:'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip',label:'Cyclone X Bootstrapper',file:'BootStrapper.exe'}
 };
+var dlActive=false,dlTimers=[];
 
-var dlActive = false, dlTimers = [];
+function openPicker(e){if(e)e.preventDefault();document.getElementById('dlPicker').style.display='';document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlOverlay').classList.add('active');}
 
-function openPicker(e) {
-  if (e) e.preventDefault();
-  document.getElementById('dlPicker').style.display = '';
-  document.getElementById('dlCard').classList.remove('visible');
-  document.getElementById('dlOverlay').classList.add('active');
-}
-
-function startDl(type) {
-  var info = DOWNLOADS[type];
-  if (!info) return;
-  document.getElementById('dlPicker').style.display = 'none';
-  var card = document.getElementById('dlCard');
-  card.classList.add('visible');
-  if (dlActive) return;
-  dlActive = true;
-  dlTimers.forEach(clearTimeout);
-  dlTimers = [];
-
-  var bar      = document.getElementById('dlBar');
-  var pctEl    = document.getElementById('dlPct');
-  var statusEl = document.getElementById('dlStatus');
-  var fileEl   = document.getElementById('dlFileName');
-
-  bar.style.width = '0%';
-  pctEl.textContent = '0%';
-  statusEl.textContent = 'Starting download...';
-  fileEl.textContent = info.file;
-
-  var STAGES = [
-    { text: 'Starting download...',               pct: 0   },
-    { text: 'Fetching file...',                   pct: 25  },
-    { text: 'Downloading ' + info.label + '...', pct: 60  },
-    { text: 'Almost done...',                     pct: 90  },
-    { text: 'Complete!',                          pct: 100 }
-  ];
-
-  var cur = 0, target = 0;
-  var ticker = setInterval(function() {
-    if (cur < target) {
-      cur = Math.min(cur + 1, target);
-      bar.style.width = cur + '%';
-      pctEl.textContent = cur + '%';
-    }
-  }, 20);
+function startDl(type){
+  var info=DOWNLOADS[type];if(!info)return;
+  document.getElementById('dlPicker').style.display='none';
+  var card=document.getElementById('dlCard');card.classList.add('visible');
+  if(dlActive)return;dlActive=true;dlTimers.forEach(clearTimeout);dlTimers=[];
+  var bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus'),fileEl=document.getElementById('dlFileName');
+  bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Starting download...';fileEl.textContent=info.file;
+  var STAGES=[{text:'Starting download...',pct:0},{text:'Fetching file...',pct:25},{text:'Downloading '+info.label+'...',pct:60},{text:'Almost done...',pct:90},{text:'Complete!',pct:100}];
+  var cur=0,target=0;
+  var ticker=setInterval(function(){if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},20);
   dlTimers.push(ticker);
-
-  STAGES.forEach(function(s, i) {
-    var t = setTimeout(function() {
-      statusEl.textContent = s.text;
-      target = s.pct;
-      if (i === STAGES.length - 1) {
-        clearInterval(ticker);
-        bar.style.width = '100%';
-        pctEl.textContent = '100%';
-
-        // Trigger the actual file download
-        var a = document.createElement('a');
-        a.href = info.url;
-        a.setAttribute('download', info.file);
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function() { document.body.removeChild(a); }, 500);
-
-        // Re-fetch GitHub download count after a short delay
+  STAGES.forEach(function(s,i){
+    var t=setTimeout(function(){
+      statusEl.textContent=s.text;target=s.pct;
+      if(i===STAGES.length-1){
+        clearInterval(ticker);bar.style.width='100%';pctEl.textContent='100%';
+        var a=document.createElement('a');a.href=info.url;a.setAttribute('download',info.file);a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);},500);
         incrementGlobalCount();
-
-        dlTimers.push(setTimeout(function() { closeDl(); }, 3500));
+        dlTimers.push(setTimeout(function(){closeDl();},3500));
       }
-    }, i * 700);
+    },i*700);
     dlTimers.push(t);
   });
 }
 
-function closeDl() {
-  document.getElementById('dlOverlay').classList.remove('active');
-  dlTimers.forEach(clearTimeout);
-  dlTimers = [];
-  setTimeout(function() {
-    dlActive = false;
-    document.getElementById('dlCard').classList.remove('visible');
-    document.getElementById('dlPicker').style.display = '';
-  }, 300);
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape' && document.getElementById('dlOverlay').classList.contains('active')) closeDl();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('hero-download-btn').addEventListener('click', openPicker);
-  document.getElementById('main-download-btn').addEventListener('click', openPicker);
-  // Fetch real GitHub download count on every page load
-  fetchGlobalCount();
-});
+function closeDl(){document.getElementById('dlOverlay').classList.remove('active');dlTimers.forEach(clearTimeout);dlTimers=[];setTimeout(function(){dlActive=false;document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlPicker').style.display='';},300);}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('dlOverlay').classList.contains('active'))closeDl();});
+document.addEventListener('DOMContentLoaded',function(){document.getElementById('hero-download-btn').addEventListener('click',openPicker);document.getElementById('main-download-btn').addEventListener('click',openPicker);fetchGlobalCount();});
 
 // ═══════════════════════════════════════════════════════════════════
 // CHANGELOG TOGGLES
 // ═══════════════════════════════════════════════════════════════════
-function toggleCl(id) { var el = document.getElementById(id); if (el) el.classList.toggle('open'); }
-function toggleOlder() {
-  var btn = document.getElementById('cl-older-toggle'), wrapper = document.getElementById('cl-older-wrapper');
-  var isOpen = wrapper.classList.contains('open');
-  wrapper.classList.toggle('open', !isOpen); btn.classList.toggle('open', !isOpen);
-  btn.querySelector('.cl-older-toggle-text').textContent = isOpen ? 'View older updates' : 'Hide older updates';
-}
-function toggleAltLinks() {
-  var btn = document.getElementById('alt-toggle'), list = document.getElementById('alt-links-list');
-  var isOpen = list.classList.contains('open');
-  list.classList.toggle('open', !isOpen); btn.classList.toggle('open', !isOpen);
-  for (var n of btn.childNodes) { if (n.nodeType === 3) { n.textContent = isOpen ? ' Show all links ' : ' Hide links '; break; } }
-}
+function toggleCl(id){var el=document.getElementById(id);if(el)el.classList.toggle('open');}
+function toggleOlder(){var btn=document.getElementById('cl-older-toggle'),wrapper=document.getElementById('cl-older-wrapper');var isOpen=wrapper.classList.contains('open');wrapper.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);btn.querySelector('.cl-older-toggle-text').textContent=isOpen?'View older updates':'Hide older updates';}
+function toggleAltLinks(){var btn=document.getElementById('alt-toggle'),list=document.getElementById('alt-links-list');var isOpen=list.classList.contains('open');list.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);for(var n of btn.childNodes){if(n.nodeType===3){n.textContent=isOpen?' Show all links ':' Hide links ';break;}}}
 
 // ═══════════════════════════════════════════════════════════════════
 // STARFIELD
