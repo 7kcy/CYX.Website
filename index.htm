@@ -328,19 +328,18 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
   <div class="changelog-inner">
     <h2 class="section-title" style="text-align:left;margin-bottom:32px">Changelog</h2>
     <div class="cl-latest">
-      <div class="cl-header-latest"><span class="cl-version">V 2.2.6</span><span class="cl-badge latest">Newest</span><span class="cl-date">March 19, 2026</span></div>
-      <div class="cl-body" style="display:block"><div class="cl-label">Update</div><ul><li>Actually installs and runs if you click it</li><li>Added some other new settings</li><li>Made fullscreen scale buttons</li><li>Added some new animations</li><li>Customizeable Size</li><li>New injection Toasts + Notifications</li><li>New roblox version downloader</li><li>New UI Tweaks</li><li>Can choose what version to launch roblox with</li><li>Execution Toasts</li><li>Adapted Version: ae421f0582e54718</li></ul></div>
-      
-      
+      <div class="cl-header-latest"><span class="cl-version">V 2.2.7</span><span class="cl-badge latest">Newest</span><span class="cl-date">March 28, 2026</span></div>
+      <div class="cl-body" style="display:block"><div class="cl-label">Update</div><ul><li>Adapted to version 6776addb8fbc4d17</li><li>Some QOLF changes</li></ul></div>
     </div>
     <button class="cl-older-toggle" id="cl-older-toggle" onclick="toggleOlder()">
       <span class="cl-older-toggle-icon">&#x25BC;</span>
       <span class="cl-older-toggle-text">View older updates</span>
-      <span class="cl-older-count">9 versions</span>
+      <span class="cl-older-count">10 versions</span>
     </button>
     <div class="cl-older-wrapper" id="cl-older-wrapper">
       <div class="cl-older-entries">
-        <div class="cl-entry" id="cl-2-2-5"><div class="cl-header" onclick="toggleCl('cl-2-2-5')"><span class="cl-version">V 2.2.5</span><span class="cl-badge last">Last</span><span class="cl-date">March 14, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Adapted to version b130242ed064436f</li><li>Added Injection Toasts</li><li>Added New Settings</li><li>Updated bootstrapper</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-2-6"><div class="cl-header" onclick="toggleCl('cl-2-2-6')"><span class="cl-version">V 2.2.6</span><span class="cl-badge last">Last</span><span class="cl-date">March 19, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Actually installs and runs if you click it</li><li>Added some other new settings</li><li>Made fullscreen scale buttons</li><li>Added some new animations</li><li>Customizeable Size</li><li>New injection Toasts + Notifications</li><li>New roblox version downloader</li><li>New UI Tweaks</li><li>Can choose what version to launch roblox with</li><li>Execution Toasts</li><li>Adapted Version: ae421f0582e54718</li></ul></div></div>
+        <div class="cl-entry" id="cl-2-2-5"><div class="cl-header" onclick="toggleCl('cl-2-2-5')"><span class="cl-version">V 2.2.5</span><span class="cl-date">March 14, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Adapted to version b130242ed064436f</li><li>Added Injection Toasts</li><li>Added New Settings</li><li>Updated bootstrapper</li></ul></div></div>
         <div class="cl-entry" id="cl-2-2-4"><div class="cl-header" onclick="toggleCl('cl-2-2-4')"><span class="cl-version">V 2.2.4</span><span class="cl-date">March 12, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Update</div><ul><li>Previous stable release</li></ul></div></div>
         <div class="cl-entry" id="cl-2-2-3"><div class="cl-header" onclick="toggleCl('cl-2-2-3')"><span class="cl-version">V 2.2.3</span><span class="cl-date">March 11, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Tab Updates</div><ul><li>Coded some settings</li><li>Some UI tweaks</li></ul></div></div>
         <div class="cl-entry" id="cl-2-2-2"><div class="cl-header" onclick="toggleCl('cl-2-2-2')"><span class="cl-version">V 2.2.2</span><span class="cl-date">March 10, 2026</span><span class="cl-arrow">&#x25BC;</span></div><div class="cl-body"><div class="cl-label">Tab Updates</div><ul><li>Fixed scripthub &mdash; send to explorer now works</li><li>You can now rename files when you send</li><li>Added Explorer tab</li><li>Got rid of notifications, moved them to editor</li><li>Fixed the highlight being red, now gray</li><li>Removed minimap on the right</li></ul></div></div>
@@ -427,104 +426,26 @@ footer{padding:40px;border-top:1px solid var(--border);text-align:center;color:v
 </section>
 <footer id="credits"><p>&copy; 2026 Cyclone X Executor. Free, Keyless, Powerful.</p></footer>
 <script>
-// ═══════════════════════════════════════════════════════════════════
-// DOWNLOAD COUNTER — Cloudflare Worker proxy (bypasses ad blockers,
-// works across ALL domains, single shared count via Supabase)
-// ═══════════════════════════════════════════════════════════════════
-var COUNTER = 'https://lucky-night-5cb8.cycloneiscom1n.workers.dev';
-
+var COUNTER='https://lucky-night-5cb8.cycloneiscom1n.workers.dev';
 function fmtCount(n){if(!n||isNaN(n))return'0';if(n>=1e6)return(n/1e6).toFixed(1).replace(/\.0$/,'')+' M';if(n>=1000)return(n/1000).toFixed(1).replace(/\.0$/,'')+' K';return n.toLocaleString();}
-
-function setCountEls(v,animate){
-  ['dl-stat-value','footer-dl-count','active-users-count'].forEach(function(id){
-    var el=document.getElementById(id);if(!el)return;
-    var txt=fmtCount(v);if(el.textContent===txt)return;
-    if(animate){el.classList.remove('num-flip');void el.offsetWidth;el.classList.add('num-flip');}
-    el.textContent=txt;
-  });
-}
-
-function fetchGlobalCount(){
-  fetch(COUNTER)
-    .then(function(r){return r.json();})
-    .then(function(d){if(typeof d.count==='number')setCountEls(d.count,false);})
-    .catch(function(e){console.warn('Counter read failed:',e);});
-}
-
-function incrementGlobalCount(){
-  fetch(COUNTER,{method:'POST'})
-    .then(function(r){return r.json();})
-    .then(function(d){if(typeof d.count==='number')setCountEls(d.count,true);})
-    .catch(function(e){console.warn('Counter increment failed:',e);});
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// DOWNLOAD LOGIC
-// ═══════════════════════════════════════════════════════════════════
-var DOWNLOADS={
-  executor:    {url:'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',             label:'Cyclone X Executor',    file:'CycloneX.zip'   },
-  bootstrapper:{url:'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip',label:'Cyclone X Bootstrapper',file:'BootStrapper.exe'}
-};
+function setCountEls(v,animate){['dl-stat-value','footer-dl-count','active-users-count'].forEach(function(id){var el=document.getElementById(id);if(!el)return;var txt=fmtCount(v);if(el.textContent===txt)return;if(animate){el.classList.remove('num-flip');void el.offsetWidth;el.classList.add('num-flip');}el.textContent=txt;});}
+function fetchGlobalCount(){fetch(COUNTER).then(function(r){return r.json();}).then(function(d){if(typeof d.count==='number')setCountEls(d.count,false);}).catch(function(e){console.warn('Counter read failed:',e);});}
+function incrementGlobalCount(){fetch(COUNTER,{method:'POST'}).then(function(r){return r.json();}).then(function(d){if(typeof d.count==='number')setCountEls(d.count,true);}).catch(function(e){console.warn('Counter increment failed:',e);});}
+var DOWNLOADS={executor:{url:'https://github.com/7kcy/CYX.Website/releases/download/Executor/CycloneX.zip',label:'Cyclone X Executor',file:'CycloneX.zip'},bootstrapper:{url:'https://github.com/7kcy/CYX.Bootstrapper/releases/download/BootStrapper/BootStrapper.zip',label:'Cyclone X Bootstrapper',file:'BootStrapper.exe'}};
 var dlActive=false,dlTimers=[];
-
 function openPicker(e){if(e)e.preventDefault();document.getElementById('dlPicker').style.display='';document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlOverlay').classList.add('active');}
-
-function startDl(type){
-  var info=DOWNLOADS[type];if(!info)return;
-  document.getElementById('dlPicker').style.display='none';
-  var card=document.getElementById('dlCard');card.classList.add('visible');
-  if(dlActive)return;dlActive=true;dlTimers.forEach(clearTimeout);dlTimers=[];
-  var bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus'),fileEl=document.getElementById('dlFileName');
-  bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Starting download...';fileEl.textContent=info.file;
-  var STAGES=[{text:'Starting download...',pct:0},{text:'Fetching file...',pct:25},{text:'Downloading '+info.label+'...',pct:60},{text:'Almost done...',pct:90},{text:'Complete!',pct:100}];
-  var cur=0,target=0;
-  var ticker=setInterval(function(){if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},20);
-  dlTimers.push(ticker);
-  STAGES.forEach(function(s,i){
-    var t=setTimeout(function(){
-      statusEl.textContent=s.text;target=s.pct;
-      if(i===STAGES.length-1){
-        clearInterval(ticker);bar.style.width='100%';pctEl.textContent='100%';
-        var a=document.createElement('a');a.href=info.url;a.setAttribute('download',info.file);a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);},500);
-        incrementGlobalCount();
-        dlTimers.push(setTimeout(function(){closeDl();},3500));
-      }
-    },i*700);
-    dlTimers.push(t);
-  });
-}
-
+function startDl(type){var info=DOWNLOADS[type];if(!info)return;document.getElementById('dlPicker').style.display='none';var card=document.getElementById('dlCard');card.classList.add('visible');if(dlActive)return;dlActive=true;dlTimers.forEach(clearTimeout);dlTimers=[];var bar=document.getElementById('dlBar'),pctEl=document.getElementById('dlPct'),statusEl=document.getElementById('dlStatus'),fileEl=document.getElementById('dlFileName');bar.style.width='0%';pctEl.textContent='0%';statusEl.textContent='Starting download...';fileEl.textContent=info.file;var STAGES=[{text:'Starting download...',pct:0},{text:'Fetching file...',pct:25},{text:'Downloading '+info.label+'...',pct:60},{text:'Almost done...',pct:90},{text:'Complete!',pct:100}];var cur=0,target=0;var ticker=setInterval(function(){if(cur<target){cur=Math.min(cur+1,target);bar.style.width=cur+'%';pctEl.textContent=cur+'%';}},20);dlTimers.push(ticker);STAGES.forEach(function(s,i){var t=setTimeout(function(){statusEl.textContent=s.text;target=s.pct;if(i===STAGES.length-1){clearInterval(ticker);bar.style.width='100%';pctEl.textContent='100%';var a=document.createElement('a');a.href=info.url;a.setAttribute('download',info.file);a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);},500);incrementGlobalCount();dlTimers.push(setTimeout(function(){closeDl();},3500));}},i*700);dlTimers.push(t);});}
 function closeDl(){document.getElementById('dlOverlay').classList.remove('active');dlTimers.forEach(clearTimeout);dlTimers=[];setTimeout(function(){dlActive=false;document.getElementById('dlCard').classList.remove('visible');document.getElementById('dlPicker').style.display='';},300);}
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('dlOverlay').classList.contains('active'))closeDl();});
-document.addEventListener('DOMContentLoaded',function(){
-  document.getElementById('hero-download-btn').addEventListener('click',openPicker);
-  document.getElementById('main-download-btn').addEventListener('click',openPicker);
-  fetchGlobalCount();
-});
-
-// ═══════════════════════════════════════════════════════════════════
-// CHANGELOG TOGGLES
-// ═══════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',function(){document.getElementById('hero-download-btn').addEventListener('click',openPicker);document.getElementById('main-download-btn').addEventListener('click',openPicker);fetchGlobalCount();});
 function toggleCl(id){var el=document.getElementById(id);if(el)el.classList.toggle('open');}
 function toggleOlder(){var btn=document.getElementById('cl-older-toggle'),wrapper=document.getElementById('cl-older-wrapper');var isOpen=wrapper.classList.contains('open');wrapper.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);btn.querySelector('.cl-older-toggle-text').textContent=isOpen?'View older updates':'Hide older updates';}
 function toggleAltLinks(){var btn=document.getElementById('alt-toggle'),list=document.getElementById('alt-links-list');var isOpen=list.classList.contains('open');list.classList.toggle('open',!isOpen);btn.classList.toggle('open',!isOpen);for(var n of btn.childNodes){if(n.nodeType===3){n.textContent=isOpen?' Show all links ':' Hide links ';break;}}}
-
-// ═══════════════════════════════════════════════════════════════════
-// STARFIELD
-// ═══════════════════════════════════════════════════════════════════
 (function(){var canvas=document.getElementById('stars-canvas'),ctx=canvas.getContext('2d');function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}resize();window.addEventListener('resize',resize);function rng(s){var v=s>>>0;return function(){v^=v<<13;v^=v>>17;v^=v<<5;return(v>>>0)/0xffffffff;};}var r=rng(99999),dots=[];for(var i=0;i<40;i++)dots.push({x:r()*window.innerWidth,y:r()*window.innerHeight,rad:0.7+r()*1.1,o:0.3+r()*0.5,sp:0.2+r()*0.5});function tick(){var W=canvas.width,H=canvas.height;ctx.clearRect(0,0,W,H);for(var d of dots){d.y-=d.sp;if(d.y<-5){d.y=H+5;d.x=r()*W;}ctx.beginPath();ctx.arc(d.x,d.y,d.rad,0,Math.PI*2);ctx.fillStyle='rgba(255,255,255,'+d.o+')';ctx.fill();}requestAnimationFrame(tick);}tick();})();
-
-// ═══════════════════════════════════════════════════════════════════
-// SCROLL & REVEAL
-// ═══════════════════════════════════════════════════════════════════
 window.addEventListener('scroll',function(){document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);});
 var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('active');});},{threshold:0.1,rootMargin:'0px 0px -100px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
 document.querySelectorAll('.feature-card').forEach(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();card.style.setProperty('--mouse-x',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--mouse-y',((e.clientY-r.top)/r.height*100)+'%');});});
-
-// ═══════════════════════════════════════════════════════════════════
-// REVIEW SYSTEM
-// ═══════════════════════════════════════════════════════════════════
 var BW=['fuck','shit','ass','bitch','cunt','dick','cock','pussy','fag','nigger','nigga','bastard','damn','hell','crap','piss','slut','whore','retard','kys','rape','chink','spic','wetback','tranny','faggot','dyke','gook','beaner','cracker','discord.gg','t.me','telegram','http://','https://','www.','.com','.gg','.net','.xyz','free robux','free nitro','click here','join now','visit','giveaway','porn','xxx','nude','naked','suicide','kill yourself','die bitch'];
 function hasBanned(t){var l=t.toLowerCase().replace(/[^a-z0-9\s]/g,'');return BW.some(function(w){return l.includes(w.replace(/[^a-z0-9\s]/g,''));});}
 function isSpam(t){if(/(.)\1{6,}/.test(t))return true;if(t.length>10){var l=t.replace(/[^a-zA-Z]/g,'');if(l.length>6&&l.replace(/[a-z]/g,'').length/l.length>0.8)return true;}return(t.match(/[^a-zA-Z0-9\s.,!?'"\\-]/g)||[]).length/t.length>0.3;}
@@ -546,7 +467,6 @@ var stSpans=document.querySelectorAll('#star-picker span');
 stSpans.forEach(function(s){s.addEventListener('mouseenter',function(){var v=+s.dataset.v;stSpans.forEach(function(x){x.classList.toggle('lit',+x.dataset.v<=v);});});s.addEventListener('mouseleave',function(){stSpans.forEach(function(x){x.classList.toggle('lit',+x.dataset.v<=selSt);});});s.addEventListener('click',function(){selSt=+s.dataset.v;stSpans.forEach(function(x){x.classList.toggle('lit',+x.dataset.v<=selSt);});});});
 function shT(m,e){var t=document.getElementById('submit-toast');t.textContent=m;t.className='submit-toast visible'+(e?' error':'');setTimeout(function(){t.className='submit-toast';},3500);}
 document.getElementById('submit-review-btn').addEventListener('click',function(){if(hAR())return;var n=document.getElementById('review-name').value.trim(),t=document.getElementById('review-text').value.trim();if(!n)return shT('Please enter your name.',true);if(n.length<2)return shT('Name must be at least 2 characters.',true);if(selSt===0)return shT('Please select a star rating.',true);if(!t)return shT('Please write a review.',true);if(t.length<10)return shT('Review must be at least 10 characters.',true);if(hasBanned(n)||hasBanned(t))return shT('\u26A0 Your review contains inappropriate content.',true);if(isSpam(t)||isSpam(n))return shT('\u26A0 Your review looks like spam.',true);var nR={name:n,initial:n.charAt(0),rating:selSt,text:t};var sv=lUR();sv.push(nR);sUR(sv);mR();allR.push(nR);clearInterval(aR);curR=allR.length-1;bRUI();sRv(curR);stAR();document.getElementById('review-name').value='';document.getElementById('review-text').value='';selSt=0;stSpans.forEach(function(s){s.classList.remove('lit');});shT('\u2713 Review submitted! Thanks for your feedback.');chkAR();});
-
 (function(){var cv=document.getElementById('globe-canvas'),sc=new THREE.Scene(),cm=new THREE.PerspectiveCamera(45,cv.offsetWidth/cv.offsetHeight,.1,1000),rd=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});rd.setSize(cv.offsetWidth,cv.offsetHeight);rd.setPixelRatio(Math.min(window.devicePixelRatio,2));cm.position.z=350;sc.add(new THREE.Mesh(new THREE.SphereGeometry(100,64,64),new THREE.MeshPhongMaterial({color:0x000000,transparent:true,opacity:.2,shininess:100})));var dg=new THREE.SphereGeometry(1.2,8,8),ds=[];for(var i=0;i<1500;i++){var ph=Math.acos(-1+(2*i)/1500),th=Math.sqrt(1500*Math.PI)*ph,dt=new THREE.Mesh(dg,new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));dt.position.set(101*Math.cos(th)*Math.sin(ph),101*Math.sin(th)*Math.sin(ph),101*Math.cos(ph));dt.material.opacity=Math.random()*.6+.3;dt.userData={phase:Math.random()*Math.PI*2,fs:Math.random()*.02+.01};sc.add(dt);ds.push(dt);}sc.add(new THREE.AmbientLight(0xffffff,.5));var p1=new THREE.PointLight(0xffffff,1.5,600);p1.position.set(250,250,250);sc.add(p1);var p2=new THREE.PointLight(0xffffff,.8,500);p2.position.set(-200,-150,250);sc.add(p2);var p3=new THREE.PointLight(0xffffff,1.2,500);p3.position.set(0,0,300);sc.add(p3);var t=0;(function an(){requestAnimationFrame(an);t+=.01;sc.rotation.x=Math.sin(t*.08)*.12;sc.rotation.y+=.003;ds.forEach(function(d){d.material.opacity+=(((Math.sin(d.userData.phase+t)+1)/2)*.7+.2-d.material.opacity)*d.userData.fs;});rd.render(sc,cm);})();window.addEventListener('resize',function(){var c=cv.parentElement;cm.aspect=c.offsetWidth/c.offsetHeight;cm.updateProjectionMatrix();rd.setSize(c.offsetWidth,c.offsetHeight);});})();
 </script>
 </body>
